@@ -171,7 +171,8 @@ $sql1="INSERT INTO  sequents (id, seqcode, question, answer, nexttype, nextseqco
 (21, '0019', 'คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ', NULL, 2, '1001', NULL, NULL),
 
 (22, '1001', 'ขอบคุณสำหรับข้อมูลนะคะ', NULL, 2, '1002', NULL, NULL),
-(22, '1002', 'หากอยากให้ทางเราช่วยอะไร ท่านสามารถเลือกได้ตามหัวข้อด้านล่างเลยค่ะ', NULL, 2, NULL, NULL, NULL)
+
+(23, '1002', 'หากอยากให้ทางเราช่วยอะไร ท่านสามารถเลือกได้ตามหัวข้อด้านล่างเลยค่ะ', NULL, 2, NULL, NULL, NULL)
 ";
 
 pg_exec($dbconn, $sql1) or die(pg_errormessage());
