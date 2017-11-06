@@ -21,18 +21,18 @@ if (!$dbconn) {
 // pg_exec($dbconn, $sql1) or die(pg_errormessage());
 
 
-$sql="CREATE TABLE sequents(
-id SERIAL,
-seqcode varchar(255),
-question varchar(255),
-answer varchar(255),
-nexttype integer,
-nextseqcode varchar(255),
-created_at timestamp,
-updated_at timestamp,
-PRIMARY KEY(id)
-)";   
-pg_exec($dbconn, $sql) or die(pg_errormessage());
+// $sql="CREATE TABLE sequents(
+// id SERIAL,
+// seqcode varchar(255),
+// question varchar(255),
+// answer varchar(255),
+// nexttype integer,
+// nextseqcode varchar(255),
+// created_at timestamp,
+// updated_at timestamp,
+// PRIMARY KEY(id)
+// )";   
+// pg_exec($dbconn, $sql) or die(pg_errormessage());
 
 
 // $sql2="CREATE TABLE sequentsteps(
