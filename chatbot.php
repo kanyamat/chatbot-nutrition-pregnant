@@ -140,7 +140,7 @@ if (!is_null($events['events'])) {
                       ];
 
 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007','{$u}','0008','0',NOW(),NOW())") or die(pg_errormessage());
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007','','0008','0',NOW(),NOW())") or die(pg_errormessage());
  // }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
  //                 $replyToken = $event['replyToken'];
  //                 $messages = [
@@ -177,11 +177,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           ]
                       ]
                   ];     
-                    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007',$_msg,'0008','0',NOW(),NOW())") or die(pg_errormessage());
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007',$_msg,'0008','0',NOW(),NOW())") or die(pg_errormessage());
 
                     
 
- }elseif ($event['message']['text'] == "อายุถูกต้อง" && $seqcode == "0007"  ) {
+ }elseif ($event['message']['text'] == "อายุถูกต้อง" && $seqcode == "0008"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
