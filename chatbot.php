@@ -781,7 +781,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       ];
 
 
-}elseif ($event['message']['text'] == "ไม่มี" && $seqcode == "0023"  ) {
+}elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" && $seqcode == "0023"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
