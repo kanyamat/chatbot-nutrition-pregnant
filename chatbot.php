@@ -112,7 +112,7 @@ if (!is_null($events['events'])) {
                 [
                     'type' => 'message',
                     'label' => 'ไม่ใช่',
-                    'text' => 'ชื่อไม่ถูกต้อง'
+                    'text' => 'ไม่ถูกต้อง'
                 ],
             ]
         ]
@@ -141,11 +141,11 @@ if (!is_null($events['events'])) {
 
 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
 
- }elseif ($event['message']['text'] == "ชื่อไม่ถูกต้อง" ) {
+ }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => 'กรุณาพิมพ์ชื่อของคุณใหม่ค่ะ'
+                        'text' => 'กรุณาพิมพ์ใหม่ค่ะ'
                       ];     
 
 
