@@ -15,7 +15,7 @@ $events = json_decode($content, true);
 $_msg = $events['events'][0]['message']['text'];
 $user = $events['events'][0]['source']['userId'];
 $user_id = pg_escape_string($user);
-  
+$u = pg_escape_string($_msg);  
 $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at  FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
                   echo $seqcode =  $row[0];
@@ -93,8 +93,8 @@ if (!is_null($events['events'])) {
   
 
   }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
-    $u = pg_escape_string($_msg);
-  
+    
+  $u = pg_escape_string($_msg);
     $ans = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
     $replyToken = $event['replyToken'];
     $messages = [
@@ -106,12 +106,12 @@ if (!is_null($events['events'])) {
             'actions' => [
                 [
                     'type' => 'message',
-                    'label' => 'ชื่อถูกต้อง',
+                    'label' => 'ใช่',
                     'text' => 'ชื่อถูกต้อง'
                 ],
                 [
                     'type' => 'message',
-                    'label' => 'ชื่อไม่ถูกต้อง',
+                    'label' => 'ไม่ใช่',
                     'text' => 'ชื่อไม่ถูกต้อง'
                 ],
             ]
@@ -131,14 +131,15 @@ if (!is_null($events['events'])) {
                   $pieces = explode("", $answer);
                   $name =str_replace("","",$pieces[0]);
                   $surname =str_replace("","",$pieces[1]);
-
+                  $u = pg_escape_string($name);
+                  $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
                         'text' =>  "aaaa"
                       ];
 
-                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_surname,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}',$name,$surname,'','','','','','','','','','','','')") or die(pg_errormessage());
+                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_surname,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}','{$name}','{$surname}','','','','','','','','','','','','')") or die(pg_errormessage());
 
 
 
