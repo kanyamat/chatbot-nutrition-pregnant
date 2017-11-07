@@ -585,11 +585,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
             ]
         ]
     ];     
-      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0018','{$u}','0019','0',NOW(),NOW())") or die(pg_errormessage());
+      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0020','{$u}','0021','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
- }elseif ($event['message']['text'] == "ชื่อโรงพยาบาลที่คุณแม่ไปฝากครรภ์ถูกต้อง" && $seqcode == "0018"  ) {
+ }elseif ($event['message']['text'] == "ชื่อโรงพยาบาลที่คุณแม่ไปฝากครรภ์ถูกต้อง" && $seqcode == "0020"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
@@ -609,7 +609,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_name = '{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 // $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,hospital_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0019','','0020','0',NOW(),NOW())") or die(pg_errormessage());
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0021','','0022','0',NOW(),NOW())") or die(pg_errormessage());
  // }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
  //                 $replyToken = $event['replyToken'];
  //                 $messages = [
