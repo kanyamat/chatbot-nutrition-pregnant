@@ -140,7 +140,7 @@ if (!is_null($events['events'])) {
                       ];
 
 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
-
+ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007','{$u}','0008','0',NOW(),NOW())") or die(pg_errormessage());
  // }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
  //                 $replyToken = $event['replyToken'];
  //                 $messages = [
