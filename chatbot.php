@@ -210,7 +210,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
  //                      ];     
 
 ###########################################################################################################
-}elseif (is_numeric($_msg) !== false && $seqcode == "0009"){
+}elseif (is_numeric($_msg) !== false && $seqcode == "0008"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
