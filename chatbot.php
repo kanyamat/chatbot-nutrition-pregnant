@@ -92,7 +92,7 @@ if (!is_null($events['events'])) {
                       ];          
   
 
-  }elseif (strpos($_msg) !== false && $seqcode == "0006" ) {
+  }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
 
    
     $ans = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
@@ -117,7 +117,7 @@ if (!is_null($events['events'])) {
             ]
         ]
     ];     
-      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0006', $_msg ,'0007','0',NOW(),NOW())") or die(pg_errormessage());
+      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005', $_msg ,'0006','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
