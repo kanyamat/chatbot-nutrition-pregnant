@@ -148,7 +148,7 @@ $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updat
  //                        'text' => 'กรุณาพิมพ์ใหม่ค่ะ'
  //                      ];     
 
-}elseif (is_numeric($_msg) !== false && $seqcode == "0007"{
+}elseif (is_numeric($_msg) !== false && $seqcode == "0007"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
