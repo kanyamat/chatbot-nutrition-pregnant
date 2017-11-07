@@ -92,8 +92,8 @@ if (!is_null($events['events'])) {
                       ];          
   
 
-  }elseif ($event['type']== 'message' && $seqcode == "0005" ) {
-
+  }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
+    $u = pg_escape_string($_msg);
   
     $ans = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
     $replyToken = $event['replyToken'];
@@ -117,7 +117,7 @@ if (!is_null($events['events'])) {
             ]
         ]
     ];     
-      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0006',$_msg,'0007','0',NOW(),NOW())") or die(pg_errormessage());
+      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0006','{$u}','0007','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
