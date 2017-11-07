@@ -92,7 +92,7 @@ if (!is_null($events['events'])) {
                       ];          
   
 
-  }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
+  }elseif ($event['type']== 'messages' && $seqcode == "0005" ) {
 
   
     $ans = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
