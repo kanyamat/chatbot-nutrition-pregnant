@@ -131,7 +131,7 @@ if (!is_null($events['events'])) {
                   // $pieces = explode("", $answer);
                   // $name =str_replace("","",$pieces[0]);
                   // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
+                 //$u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
