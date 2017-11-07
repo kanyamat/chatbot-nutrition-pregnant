@@ -81,7 +81,7 @@ if (!is_null($events['events'])) {
                         'text' =>  $question
                       ];
 
-                $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005','','0007','0',NOW(),NOW())") or die(pg_errormessage());
+                $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005','','0006','0',NOW(),NOW())") or die(pg_errormessage());
 
 #################################### ผู้ใช้เลือกไม่สนใจ ####################################    
   }elseif ($event['message']['text'] == "ไม่สนใจ" ) {
@@ -91,7 +91,36 @@ if (!is_null($events['events'])) {
                         'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ:) หากคุณสนใจในภายหลังให้พิมพ์ว่า"ต้องการผู้ช่วย"'
                       ];          
   
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
 
  
 
