@@ -677,9 +677,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   'altText'=> 'this is a buttons template',
                   'template'=> [
                       'type'=> 'buttons',
-                      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+                      'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
                       'title'=> 'คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ',
-                      //'text'=> '',
+                      'text'=> '',
                       'actions'=> [
                           [
                             'type'=> 'postback',
@@ -771,7 +771,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       ]
                   ]
               ]; 
-     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());         
+   $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0003','','0005','0',NOW(),NOW())") or die(pg_errormessage());    
     // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0006','0',NOW(),NOW())") or die(pg_errormessage());
     // }else{
     //   $replyToken = $event['replyToken'];
