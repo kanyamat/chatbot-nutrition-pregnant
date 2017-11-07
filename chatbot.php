@@ -131,7 +131,7 @@ if (!is_null($events['events'])) {
                   // $pieces = explode("", $answer);
                   // $name =str_replace("","",$pieces[0]);
                   // $surname =str_replace("","",$pieces[1]);
-                 //$u = pg_escape_string($answer);
+                 $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
@@ -139,7 +139,7 @@ if (!is_null($events['events'])) {
                         'text' => $answer
                       ];
 
-$q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}',$answer,'1',NOW())") or die(pg_errormessage());
+$q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
 
     
 
