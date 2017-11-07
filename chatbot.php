@@ -199,8 +199,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'text' => 'ขอทราบส่วนสูงปัจจุบันของคุณค่ะ (กรุณาตอบเป็นตัวเลขในหน่วยเซ็นติเมตร เช่น 160)'
                       ];
 
- $q = pg_exec($dbconn, "UPDATE users_register SET user_age = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0008','{$u}','0009','0',NOW(),NOW())") or die(pg_errormessage());
+ $q = pg_exec($dbconn, "UPDATE users_register SET user_age = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0008','','0009','0',NOW(),NOW())") or die(pg_errormessage());
  // }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
  //                 $replyToken = $event['replyToken'];
  //                 $messages = [
