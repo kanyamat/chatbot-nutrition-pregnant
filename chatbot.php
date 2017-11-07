@@ -92,7 +92,32 @@ if (!is_null($events['events'])) {
                       ];          
   
 
-
+  }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
+  
+   
+    $age_mes = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
+    $replyToken = $event['replyToken'];
+    $messages = [
+        'type' => 'template',
+        'altText' => 'this is a confirm template',
+        'template' => [
+            'type' => 'confirm',
+            'text' => $age_mes ,
+            'actions' => [
+                [
+                    'type' => 'message',
+                    'label' => 'ใช่',
+                    'text' => 'ใช่'
+                ],
+                [
+                    'type' => 'message',
+                    'label' => 'ไม่ใช่',
+                    'text' => 'ไม่ใช่'
+                ],
+            ]
+        ]
+    ];     
+      // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005', $age ,'0007','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
