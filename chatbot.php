@@ -93,36 +93,52 @@ if (!is_null($events['events'])) {
   
 
   }elseif (strpos($_msg) !== false && $seqcode == "0006" ) {
-  
+
    
-    $age_mes = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
+    $ans = 'ชื่อของคุณคือ'.$_msg.'ใช่ไหมคะ?' ;
     $replyToken = $event['replyToken'];
     $messages = [
         'type' => 'template',
         'altText' => 'this is a confirm template',
         'template' => [
             'type' => 'confirm',
-            'text' => $age_mes ,
+            'text' => $ans ,
             'actions' => [
                 [
                     'type' => 'message',
-                    'label' => 'ใช่',
+                    'label' => 'ชื่อถูกต้อง',
                     'text' => 'ใช่'
                 ],
                 [
                     'type' => 'message',
-                    'label' => 'ไม่ใช่',
+                    'label' => 'ชื่อไม่ถูกต้อง',
                     'text' => 'ไม่ใช่'
                 ],
             ]
         ]
     ];     
-      // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005', $age ,'0007','0',NOW(),NOW())") or die(pg_errormessage());
+      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0006', $_msg ,'0007','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
+ }elseif ($event['message']['text'] == "ชื่อถูกต้อง" && $seqcode == "0006"  ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
+ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                }   
 
+                  $pieces = explode("", $answer);
+                  $name =str_replace("","",$pieces[0]);
+                  $surname =str_replace("","",$pieces[1]);
 
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' =>  "aaaa"
+                      ];
+
+                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_surname,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}',$name,$surname,'','','','','','','','','','','','')") or die(pg_errormessage());
 
 
 
