@@ -136,7 +136,7 @@ if (!is_null($events['events'])) {
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => $u
+                        'text' => $answer
                       ];
 
                 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}','{$u}','','','','','','','','','','','1',NOW())") or die(pg_errormessage());
