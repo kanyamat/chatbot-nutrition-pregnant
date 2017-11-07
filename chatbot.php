@@ -684,17 +684,17 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           [
                             'type'=> 'message',
                             'label'=> 'แพ้ยา',
-                            'text'=> 'แพ้ยา'
+                            'data'=> 'แพ้ยา'
                           ],
                           [
                             'type'=> 'message',
                             'label'=> 'แพ้อาหาร',
-                            'text'=> 'แพ้อาหาร'
+                            'data'=> 'แพ้อาหาร'
                           ],
                           [
                             'type'=> 'message',
                             'label'=> 'ไม่มี',
-                            'text'=> 'ไม่มีประวัติการแพ้'
+                            'data'=> 'ไม่มีประวัติการแพ้'
                           ]
                       ]
                   ]
