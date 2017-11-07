@@ -128,15 +128,15 @@ if (!is_null($events['events'])) {
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
                 }   
 
-                  $pieces = explode("", $answer);
+                  // $pieces = explode("", $answer);
                   // $name =str_replace("","",$pieces[0]);
                   // $surname =str_replace("","",$pieces[1]);
-                  // $u = pg_escape_string($name);
+                 $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => $answer
+                        'text' => $u
                       ];
 
                 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}','{$name}','{$surname}','','','','','','','','','','','1',NOW())") or die(pg_errormessage());
