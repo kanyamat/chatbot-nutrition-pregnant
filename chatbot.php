@@ -107,7 +107,7 @@ if (!is_null($events['events'])) {
                 [
                     'type' => 'message',
                     'label' => 'ใช่',
-                    'text' => 'ถูกต้อง'
+                    'text' => 'ชื่อถูกต้อง'
                 ],
                 [
                     'type' => 'message',
