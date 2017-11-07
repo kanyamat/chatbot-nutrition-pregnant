@@ -129,17 +129,17 @@ if (!is_null($events['events'])) {
                 }   
 
                   $pieces = explode("", $answer);
-                  $name =str_replace("","",$pieces[0]);
-                  $surname =str_replace("","",$pieces[1]);
-                  $u = pg_escape_string($name);
-                  $u2 = pg_escape_string($surname);
+                  // $name =str_replace("","",$pieces[0]);
+                  // $surname =str_replace("","",$pieces[1]);
+                  // $u = pg_escape_string($name);
+                  // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' =>  $name .'ooooo'. $surname . $pieces
+                        'text' => $answer
                       ];
 
-                // $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_surname,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}','{$name}','{$surname}','','','','','','','','','','','1',NOW())") or die(pg_errormessage());
+                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}','{$name}','{$surname}','','','','','','','','','','','1',NOW())") or die(pg_errormessage());
 
 
 
