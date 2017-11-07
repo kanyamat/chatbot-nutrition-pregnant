@@ -151,8 +151,7 @@ $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updat
 }elseif (is_numeric($_msg) !== false && $seqcode == "0007"{
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                  echo $answer = $row[0]; 
                 }   
 
                   $u = pg_escape_string($_msg);
@@ -178,9 +177,9 @@ $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updat
                           ]
                       ]
                   ];     
-                    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007','{$u}','0008','0',NOW(),NOW())") or die(pg_errormessage());
+                    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007',$_msg,'0008','0',NOW(),NOW())") or die(pg_errormessage());
 
-                    $q1 = pg_exec($dbconn, "UPDATE users_register SET  user_age = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+                    // $q1 = pg_exec($dbconn, "UPDATE users_register SET user_age = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 }
 
 
