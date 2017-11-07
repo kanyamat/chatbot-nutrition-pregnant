@@ -380,8 +380,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 ###########################################################################################################
- }elseif (is_numeric($_msg) !== false && $seqcode == "0015"){
- // }elseif (strlen($_msg) == 5 && $seqcode == "0008") {
+ // }elseif (is_numeric($_msg) !== false && $seqcode == "0015"){
+ }elseif (strlen($_msg) !== false && $seqcode == "0015") {
     // $birth_years =  str_replace("วันที่","", $_msg);
     $pieces = explode(" ", $_msg);
     $date = str_replace("","",$pieces[0]);
