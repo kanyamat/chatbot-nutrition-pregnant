@@ -139,7 +139,7 @@ if (!is_null($events['events'])) {
                         'text' => $answer
                       ];
 
-                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}', '','','','','','','','','','','','1',NOW())") or die(pg_errormessage());
+                $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,user_age,user_height,user_pre_weight,user_weight,preg_week,phone_number,hospital_name,hospital_number,history_medicine,history_food,status,updated_at )VALUES('{$user_id}', $answer,'0','0','0','0','0','0','0','0','0','0','1',NOW())") or die(pg_errormessage());
 
 
 
