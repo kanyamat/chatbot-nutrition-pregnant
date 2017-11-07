@@ -700,7 +700,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   ]
                 ];
 
-}elseif ($event['message']['text'] == "แพ้ยา" && $seqcode == "0022"  ) {
+}elseif ($event['message']['text'] == "แพ้ยา" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
@@ -720,8 +720,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-$q = pg_exec($dbconn, "UPDATE users_register SET history_medicine = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0022','','1001','0',NOW(),NOW())") or die(pg_errormessage());
+$q = pg_exec($dbconn, "UPDATE users_register SET history_medicine = '{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
