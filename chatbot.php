@@ -853,7 +853,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				];
 
 
-}elseif ($event['message']['text'] == "หนัก"   ) {
+}elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
 	if ($_msg=="หนัก" ) {
 		$vigorous = 2.0;
@@ -905,7 +905,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				}
 
 
-
+			$replyToken = $event['replyToken'];
 				$messages3 = [
                         'type' => 'text',
                         'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
