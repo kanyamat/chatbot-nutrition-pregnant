@@ -853,7 +853,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				];
 
 
-}elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
+}elseif ($event['message']['text'] == "หนัก"   ) {
                  
 	if ($_msg=="หนัก" ) {
 		$vigorous = 2.0;
