@@ -916,7 +916,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 				if ($_msg=="หนัก" ) {
 					$total = $cal*2.0;
-				} lseif($_msg=="ปานกลาง") {
+				}elseif($_msg=="ปานกลาง") {
 					$total = $cal*1.7;
 				}else{
 					$total = $cal*1.4;
