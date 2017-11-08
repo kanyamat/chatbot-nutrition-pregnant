@@ -801,23 +801,23 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				  'template'=> [
 				      'type'=> 'buttons',
 				      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-				      'title'=> "Menu",
+				      'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
 				      'text'=> "Please select",
 				      'actions'=> [
 				          [
 				            'type'=> 'postback',
-				            'label'=> 'Buy',
-				            'data'=> 'action=buy&itemid=123'
+				            'label'=> 'เบา',
+				            'data'=> 'เบา'
 				          ],
 				          [
 				            'type'=> 'postback',
-				            'label'=> 'Add to cart',
-				            'data'=> 'action=add&itemid=123'
+				            'label'=> 'ปานกลาง',
+				            'data'=> 'ปานกลาง'
 				          ],
 				          [
-				            'type'=> 'uri',
-				            'label'=> 'View detail',
-				            'uri'=> 'http://example.com/page/123'
+				            'type'=> 'postback',
+				            'label'=> 'หนัก',
+				            'data'=> 'หนัก'
 				          ]
 				      ]
 				  ]
