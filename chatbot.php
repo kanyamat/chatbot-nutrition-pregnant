@@ -955,13 +955,38 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 
 
-
-
 			$replyToken = $event['replyToken'];
-				$messages3 = [
-                        'type' => 'text',
-                        'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
-                      ];
+                    $messages3 = [
+                                                              
+                        'type' => 'template',
+                        'altText' => 'template',
+                        'template' => [
+                            'type' => 'buttons',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$answer4 .'.jpg',
+                            'title' => 'ลูกน้อยของคุณ',
+                            'text' =>  'อายุ'.$answer4.'สัปดาห์',
+                            'actions' => [
+                                          // [
+                                          //     'type' => 'postback',
+                                          //     'label' => 'good',
+                                          //     'data' => 'value'
+                                          // ],
+                                [
+                                    'type' => 'uri',
+                                    'label' => 'กราฟ',
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                          ]
+                                      ]
+                                  ]
+                              ];
+
+
+
+
+				// $messages3 = [
+    //                     'type' => 'text',
+    //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
+    //                   ];
  				$messages4 = [
                         'type' => 'text',
                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
