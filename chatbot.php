@@ -794,7 +794,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   // $surname =str_replace("","",$pieces[1]);
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
-                 $replyToken = $event['replyToken'];
+                $replyToken = $event['replyToken'];
 				$messages = [
 				  'type'=> 'template',
 				  'altText'=> 'this is a buttons template',
@@ -821,7 +821,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				          ]
 				      ]
 				  ]
-				]
+				];
 
 
 
