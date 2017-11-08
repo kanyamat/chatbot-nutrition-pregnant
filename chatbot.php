@@ -898,31 +898,43 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$result="Obese";
 				}
 
-   $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+   $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q3)) {
             
                   echo $weight = $row[0]; 
                   echo $age = $row[1];
- 
+ 				  echo $preg_week = $row[2];
                 } 
-
-
 
 				if ($age>=10 && $age<=18) {
 					$cal=(13.384*$weight)+692.6;
-				} elseif ($age>=18 && $age<=30) {
+				}elseif ($age>=18 && $age<=30) {
 					$cal=(14.818*$weight)+486.6;
 				}else{
 					$cal=(8.126*$weight)+845.6;
 				}
 
-	if ($_msg=="หนัก" ) {
-		$total = $cal*2.0;
-	} elseif($_msg=="ปานกลาง") {
-		$total = $cal*1.7;
-	}else {
-		$total = $cal*1.4;
-	}
+				if ($_msg=="หนัก" ) {
+					$total = $cal*2.0;
+				} lseif($_msg=="ปานกลาง") {
+					$total = $cal*1.7;
+				}else{
+					$total = $cal*1.4;
+				}
+
+				if ($preg_week >=13 && $preg_week<=40) {
+					$a = $total+300;
+				}else
+					$a=$total; 
+				
+ 	$check_q4 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q4)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $age = $row[1];
+ 				  echo $preg_week = $row[2];
+                } 
+
 
 
 
@@ -941,7 +953,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
                 $messages5 = [
                         'type' => 'text',
-                        'text' =>  'จำนวนแคล'.$total
+                        'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$a
                       ];
 
 		$url = 'https://api.line.me/v2/bot/message/reply';
