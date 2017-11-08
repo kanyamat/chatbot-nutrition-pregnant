@@ -928,13 +928,29 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$a=$total; 
 				}
 				
- 	// $check_q4 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-  //               while ($row = pg_fetch_row($check_q4)) {
+ 	$check_q4 = pg_query($dbconn,"SELECT caloric_level ,starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing ");
+                while ($row = pg_fetch_row($check_q4)) {
             
-  //                 echo $weight = $row[0]; 
-  //                 echo $age = $row[1];
- 	// 			  echo $preg_week = $row[2];
-  //               } 
+                    echo $caloric = $row[0]; 
+                    echo $starches = $row[1];
+ 				    echo $vegetables = $row[2];
+					echo $fruits = $row[3];
+					echo $meats = $row[4];
+					echo $fats = $row[5];
+					echo $lf_milk = $row[6];
+					echo $c = $row[7];
+					echo $p = $row[8];
+					echo $f = $row[9];
+					echo $g_protein  = $row[10];
+
+                } 
+
+                if ($total <= 1600) {
+                	$bbb = $starches.$vegetables.$fruits
+                } else {
+                	# code...
+                }
+                
 
 
 
@@ -954,13 +970,17 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
                 $messages5 = [
                         'type' => 'text',
-                        'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$a
+                        'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$total
+                      ];
+                $messages6 = [
+                        'type' => 'text',
+                        'text' =>  $bbb
                       ];
 
 		$url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages3,$messages4,$messages5],
+          'messages' => [$messages3,$messages4,$messages5,$messages6],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
