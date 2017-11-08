@@ -669,26 +669,59 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' => 'คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'มี',
-                                  'text' => 'มีประวัติการแพ้'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่มี',
-                                  'text' => 'ไม่มีประวัติการแพ้'
-                              ],
-                          ]
-                      ]
-                  ]; 
+
+
+				$messages = [
+				  'type'=> 'template',
+				  'altText'=> 'this is a buttons template',
+				  'template'=> [
+				      'type'=> 'buttons',
+				      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+				      'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ",
+				      'text'=> "Please select",
+				      'actions'=> [
+				          [
+				            'type'=> 'postback',
+				            'label'=> 'แพ้ยา',
+				            'data'=> 'แพ้ยา'
+				          ],
+				          [
+				            'type'=> 'postback',
+				            'label'=> 'แพ้อาหาร',
+				            'data'=> 'แพ้อาหาร'
+				          ],
+				          [
+				            'type'=> 'postback',
+				            'label'=> 'ไม่มีประวัติการแพ้',
+				            'data'=> 'ไม่มีประวัติการแพ้'
+				          ]
+				      ]
+				  ]
+				];
+
+
+
+
+                  // $messages = [
+                  //     'type' => 'template',
+                  //     'altText' => 'this is a confirm template',
+                  //     'template' => [
+                  //         'type' => 'confirm',
+                  //         'text' => 'คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ' ,
+                  //         'actions' => [
+                  //             [
+                  //                 'type' => 'message',
+                  //                 'label' => 'มี',
+                  //                 'text' => 'มีประวัติการแพ้'
+                  //             ],
+                  //             [
+                  //                 'type' => 'message',
+                  //                 'label' => 'ไม่มี',
+                  //                 'text' => 'ไม่มีประวัติการแพ้'
+                  //             ],
+                  //         ]
+                  //     ]
+                  // ]; 
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','1001','0',NOW(),NOW())") or die(pg_errormessage());
@@ -822,6 +855,14 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				      ]
 				  ]
 				];
+
+
+
+
+
+
+
+
 
 
 
