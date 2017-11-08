@@ -795,11 +795,40 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
-                 $messages = [
+				$messages2 = [
+				  'type'=> 'template',
+				  'altText'=> 'this is a buttons template',
+				  'template'=> [
+				      'type'=> 'buttons',
+				      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+				      'title'=> "Menu",
+				      'text'=> "Please select",
+				      'actions'=> [
+				          [
+				            'type'=> 'postback',
+				            'label'=> 'Buy',
+				            'data'=> 'action=buy&itemid=123'
+				          ],
+				          [
+				            'type'=> 'postback',
+				            'label'=> 'Add to cart',
+				            'data'=> 'action=add&itemid=123'
+				          ],
+				          [
+				            'type'=> 'uri',
+				            'label'=> 'View detail',
+				            'uri'=> 'http://example.com/page/123'
+				          ]
+				      ]
+				  ]
+				]
+
+
+
+                 $messages2 = [
                         'type' => 'text',
                         'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
                       ];
-
 
 
    $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
@@ -813,11 +842,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
 
-				$messages2 = [
+				$messages3 = [
                         'type' => 'text',
                         'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
                       ];
- 				$messages3 = [
+ 				$messages4 = [
                         'type' => 'text',
                         'text' =>  'ค่าดัชนีมวลกาย'.$bmi
                       ];
@@ -825,7 +854,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 		$url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages, $messages2,$messages3],
+          'messages' => [$messages, $messages2,$messages3,$messages4,$messages5],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
