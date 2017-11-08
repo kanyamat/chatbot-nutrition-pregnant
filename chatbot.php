@@ -681,9 +681,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				      'text'=> "Please select",
 				      'actions'=> [
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'แพ้ยา',
-				            'data'=> 'แพ้ยา'
+				            'text'=> 'แพ้ยา'
 				          ],
 				          [
 				            'type'=> 'postback',
@@ -728,41 +728,40 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 
 ###########################################################################################################
 
-}elseif ($event['message']['text'] == "มีประวัติการแพ้" && $seqcode == "0023"  ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }   
+// }elseif ($event['message']['text'] == "มีประวัติการแพ้" && $seqcode == "0023"  ) {
+//                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+//                 while ($row = pg_fetch_row($result)) {
+//                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
+// ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+//                 }   
 
                 
-
-                  // $pieces = explode("", $answer);
-                  // $name =str_replace("","",$pieces[0]);
-                  // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
-                  // $u2 = pg_escape_string($surname);
-                 $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' => 'คุณมีประวัติการแพ้อะไรคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'แพ้ยา',
-                                  'text' => 'แพ้ยา'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'แพ้อาหาร',
-                                  'text' => 'แพ้อาหาร'
-                              ],
-                          ]
-                      ]
-                  ]; 
+//                   // $pieces = explode("", $answer);
+//                   // $name =str_replace("","",$pieces[0]);
+//                   // $surname =str_replace("","",$pieces[1]);
+//                  $u = pg_escape_string($answer);
+//                   // $u2 = pg_escape_string($surname);
+//                  $replyToken = $event['replyToken'];
+//                   $messages = [
+//                       'type' => 'template',
+//                       'altText' => 'this is a confirm template',
+//                       'template' => [
+//                           'type' => 'confirm',
+//                           'text' => 'คุณมีประวัติการแพ้อะไรคะ' ,
+//                           'actions' => [
+//                               [
+//                                   'type' => 'message',
+//                                   'label' => 'แพ้ยา',
+//                                   'text' => 'แพ้ยา'
+//                               ],
+//                               [
+//                                   'type' => 'message',
+//                                   'label' => 'แพ้อาหาร',
+//                                   'text' => 'แพ้อาหาร'
+//                               ],
+//                           ]
+//                       ]
+//                   ]; 
 
 
 }elseif ($event['message']['text'] == "แพ้ยา" && $seqcode == "0023"  ) {
