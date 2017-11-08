@@ -686,42 +686,19 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				            'text'=> 'แพ้ยา'
 				          ],
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'แพ้อาหาร',
-				            'data'=> 'แพ้อาหาร'
+				            'text'=> 'แพ้อาหาร'
 				          ],
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'ไม่มีประวัติการแพ้',
-				            'data'=> 'ไม่มีประวัติการแพ้'
+				            'text'=> 'ไม่มีประวัติการแพ้'
 				          ]
 				      ]
 				  ]
 				];
 
-
-
-
-                  // $messages = [
-                  //     'type' => 'template',
-                  //     'altText' => 'this is a confirm template',
-                  //     'template' => [
-                  //         'type' => 'confirm',
-                  //         'text' => 'คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ' ,
-                  //         'actions' => [
-                  //             [
-                  //                 'type' => 'message',
-                  //                 'label' => 'มี',
-                  //                 'text' => 'มีประวัติการแพ้'
-                  //             ],
-                  //             [
-                  //                 'type' => 'message',
-                  //                 'label' => 'ไม่มี',
-                  //                 'text' => 'ไม่มีประวัติการแพ้'
-                  //             ],
-                  //         ]
-                  //     ]
-                  // ]; 
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','1001','0',NOW(),NOW())") or die(pg_errormessage());
@@ -789,7 +766,19 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 // $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','1001','0',NOW(),NOW())") or die(pg_errormessage());
+ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0024','','1001','0',NOW(),NOW())") or die(pg_errormessage());
+
+}elseif (strpos($_msg) !== false && $seqcode == "0024"  ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
+ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                }   
+
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+
+
+
 
 
 }elseif ($event['message']['text'] == "แพ้อาหาร" && $seqcode == "0023"  ) {
@@ -799,8 +788,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
                 }   
 
-                
-
+               
                   // $pieces = explode("", $answer);
                   // $name =str_replace("","",$pieces[0]);
                   // $surname =str_replace("","",$pieces[1]);
@@ -811,8 +799,17 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' => 'คุณแพ้อาหารอะไรคะ?'
                       ];
+ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
 
+}elseif (strpos($_msg) !== false && $seqcode == "0025"  ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
+ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                }   
+
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
 
 }elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" && $seqcode == "0023"  ) {
@@ -854,15 +851,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 				      ]
 				  ]
 				];
-
-
-
-
-
-
-
-
-
 
 
                  $messages2 = [
