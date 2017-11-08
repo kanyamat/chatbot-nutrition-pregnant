@@ -799,11 +799,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
                       ];
-   $check_q = pg_query($dbconn,"SELECT user_id, user_weight FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+   $check_q = pg_query($dbconn,"SELECT user_weight, user_height FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
             
-                  echo $answer1 = $row[0]; 
-                  echo $weight = $row[1]; 
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
                 } 
 					$height1 =$height*0.01;
 	                $bmi = $weight/($height1*$height1);
