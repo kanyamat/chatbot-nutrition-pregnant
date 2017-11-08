@@ -904,6 +904,30 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$result="Obese";
 				}
 
+   $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q3)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $age = $row[1];
+ 
+                } 
+
+
+
+				if ($age>=10 && $age<=18) {
+					$cal=(13.384*$weight)+692.6;
+				} elseif ($age>=18 && $age<=30) {
+					$cal=(14.818*$weight)+486.6;
+				}else{
+					$cal=(8.126*$weight)+845.6;
+				}
+
+
+
+
+
+
+
 
 			$replyToken = $event['replyToken'];
 				$messages3 = [
@@ -915,10 +939,15 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                       ];
 
+                $messages5 = [
+                        'type' => 'text',
+                        'text' =>  'จำนวนแคล'.$cal
+                      ];
+
 		$url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages3,$messages4],
+          'messages' => [$messages3,$messages4,$messages5],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
