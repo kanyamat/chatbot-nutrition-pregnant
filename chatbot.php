@@ -894,11 +894,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
 
-				if ($bmi<18.5) {
+				if ($bmi<"18.5") {
 					$result="Underweight";
-				} elseif ($bmi==18.5 && 24.9) {
+				} elseif ($bmi=="18.5" && "24.9") {
 					$result="Nomal weight";
-				} elseif ($bmi==24.9 && 29.9) {
+				} elseif ($bmi=="24.9" && "29.9") {
 					$result="Overweight";
 				}else{
 					$result="Obese";
