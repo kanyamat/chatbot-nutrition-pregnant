@@ -855,13 +855,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
-	if ($_msg=="หนัก" ) {
-		$vigorous = 2.0;
-	} elseif($_msg=="ปานกลาง") {
-		$moderately = 1.7;
-	}else {
-		$sedentary = 1.4;
-	}
+
 
 	   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q2)) {
@@ -922,7 +916,13 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$cal=(8.126*$weight)+845.6;
 				}
 
-
+	if ($_msg=="หนัก" ) {
+		$total = $cal*2.0;
+	} elseif($_msg=="ปานกลาง") {
+		$total = $cal*1.7;
+	}else {
+		$total = $cal*1.4;
+	}
 
 
 
@@ -941,7 +941,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
                 $messages5 = [
                         'type' => 'text',
-                        'text' =>  'จำนวนแคล'.$cal
+                        'text' =>  'จำนวนแคล'.$total
                       ];
 
 		$url = 'https://api.line.me/v2/bot/message/reply';
