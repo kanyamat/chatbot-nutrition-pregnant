@@ -882,10 +882,10 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 
 
-                 $messages2 = [
-                        'type' => 'text',
-                        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
-                      ];
+                 // $messages2 = [
+                 //        'type' => 'text',
+                 //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
+                 //      ];
 
 
    $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
