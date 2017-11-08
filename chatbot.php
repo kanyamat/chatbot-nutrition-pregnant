@@ -946,7 +946,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                 } 
 
                 if ($total <= 1600) {
-                	$bbb = $starches.$vegetables.$fruits
+                	$bbb = $starches.$vegetables.$fruits;
                 } else {
                 	# code...
                 }
