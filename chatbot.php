@@ -957,7 +957,6 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 
 
-
 			$replyToken = $event['replyToken'];
 				$messages3 = [
                         'type' => 'text',
