@@ -964,7 +964,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                             'type' => 'buttons',
                             'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ลูกน้อยของคุณ',
-                            'text' =>  'อายุ'.$preg_week.'สัปดาห์',
+                            'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'actions' => [
                                           // [
                                           //     'type' => 'postback',
