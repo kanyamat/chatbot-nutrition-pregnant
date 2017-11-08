@@ -855,87 +855,83 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
-	// if ($_msg=="หนัก" ) {
-	// 	$vigorous = 2.0;
-	// } elseif($_msg=="ปานกลาง") {
-	// 	$moderately = 1.7;
-	// }else {
-	// 	$sedentary = 1.4;
-	// }
-$replyToken = $event['replyToken'];
-                 $messages = [
+	if ($_msg=="หนัก" ) {
+		$vigorous = 2.0;
+	} elseif($_msg=="ปานกลาง") {
+		$moderately = 1.7;
+	}else {
+		$sedentary = 1.4;
+	}
+
+	   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
+                } 
+					$height1 =$height*0.01;
+	                $bmi = $weight/($height1*$height1);
+	                $bmi = number_format($bmi, 2, '.', '');
+
+
+
+
+                 // $messages2 = [
+                 //        'type' => 'text',
+                 //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
+                 //      ];
+
+
+   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
+                } 
+					$height1 =$height*0.01;
+	                $bmi = $weight/($height1*$height1);
+	                $bmi = number_format($bmi, 2, '.', '');
+
+				if ($bmi<18.5) {
+					$result="Underweight";
+				} elseif ($bmi==18.5 && 24.9) {
+					$result="Nomal weight";
+				} elseif ($bmi==24.9 && 29.9) {
+					$result="Overweight";
+				}else{
+					$result="Obese";
+				}
+
+
+			$replyToken = $event['replyToken'];
+				$messages3 = [
                         'type' => 'text',
-                        'text' => 'คุณแพ้อาหารอะไรคะ?'
+                        'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
                       ];
-	//    $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
- //                while ($row = pg_fetch_row($check_q2)) {
-            
- //                  echo $weight = $row[0]; 
- //                  echo $height = $row[1]; 
- //                  echo $preg_week = $row[2]; 
- //                } 
-	// 				$height1 =$height*0.01;
-	//                 $bmi = $weight/($height1*$height1);
-	//                 $bmi = number_format($bmi, 2, '.', '');
+ 				$messages4 = [
+                        'type' => 'text',
+                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
+                      ];
 
-
-
-
- //                 // $messages2 = [
- //                 //        'type' => 'text',
- //                 //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
- //                 //      ];
-
-
- //   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
- //                while ($row = pg_fetch_row($check_q2)) {
-            
- //                  echo $weight = $row[0]; 
- //                  echo $height = $row[1]; 
- //                  echo $preg_week = $row[2]; 
- //                } 
-	// 				$height1 =$height*0.01;
-	//                 $bmi = $weight/($height1*$height1);
-	//                 $bmi = number_format($bmi, 2, '.', '');
-
-	// 			if ($bmi<18.5) {
-	// 				$result="Underweight";
-	// 			} elseif ($bmi==18.5 && 24.9) {
-	// 				$result="Nomal weight";
-	// 			} elseif ($bmi==24.9 && 29.9) {
-	// 				$result="Overweight";
-	// 			}else{
-	// 				$result="Obese";
-	// 			}
-
-
-	// 		$replyToken = $event['replyToken'];
-	// 			$messages3 = [
- //                        'type' => 'text',
- //                        'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
- //                      ];
- // 				$messages4 = [
- //                        'type' => 'text',
- //                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
- //                      ];
-
-	// 	$url = 'https://api.line.me/v2/bot/message/reply';
- //         $data = [
- //          'replyToken' => $replyToken,
- //          'messages' => [$messages, $messages2,$messages3,$messages4,$messages5],
- //         ];
- //         error_log(json_encode($data));
- //         $post = json_encode($data);
- //         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
- //         $ch = curl_init($url);
- //         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
- //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
- //         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
- //         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
- //         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
- //         $result = curl_exec($ch);
- //         curl_close($ch);
- //         echo $result . "\r\n";
+		$url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages3,$messages4],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
     
 
 
