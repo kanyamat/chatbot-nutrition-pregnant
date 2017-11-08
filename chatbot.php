@@ -834,19 +834,19 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				      'text'=> "Please select",
 				      'actions'=> [
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'เบา',
-				            'data'=> 'เบา'
+				            'text'=> 'เบา'
 				          ],
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'ปานกลาง',
-				            'data'=> 'ปานกลาง'
+				            'text'=> 'ปานกลาง'
 				          ],
 				          [
-				            'type'=> 'postback',
+				            'type'=> 'message',
 				            'label'=> 'หนัก',
-				            'data'=> 'หนัก'
+				            'text'=> 'หนัก'
 				          ]
 				      ]
 				  ]
@@ -873,11 +873,6 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$height1 =$height*0.01;
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
-
-
-
-
-
 
 
 
