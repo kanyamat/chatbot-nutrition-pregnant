@@ -946,11 +946,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                 } 
 
                 if ($total <= 1600) {
-                	$bbb = $starches;
+                	$bbb = $starches."ชิ้น";
                 } elseif ($total >= 2000) {
-                  $bbb = $fats;
+                  $bbb = $fats."ทัพพี";
                 }else {
-                	$bbb = $starches;
+                	$bbb = $starches."ส่วน";
                 }
                 
 
