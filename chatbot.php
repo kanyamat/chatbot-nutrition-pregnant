@@ -853,6 +853,78 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				];
 
 
+}elseif ($event['message']['text'] == "หนัก" ) {
+                 $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายหนักใช่ไหมคะ' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ใช่',
+                                  'text' => 'ออกกำลังกายหนัก'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ใช่',
+                                  'text' => 'ไม่ถูกต้อง'
+                              ],
+                          ]
+                      ]
+                  ];  
+
+}elseif ($event['message']['text'] == "ปานกลาง" ) {
+                 $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายปานกลางช่ไหมคะ' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ใช่',
+                                  'text' => 'ออกกำลังกายปานกลาง'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ใช่',
+                                  'text' => 'ไม่ถูกต้อง'
+                              ],
+                          ]
+                      ]
+                  ];
+
+}elseif ($event['message']['text'] == "เบา" ) {
+                 $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายเบาใช่ไหมคะ' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ใช่',
+                                  'text' => 'ออกกำลังกายเบา'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ใช่',
+                                  'text' => 'ไม่ถูกต้อง'
+                              ],
+                          ]
+                      ]
+                  ];
+
+
+
+
                  $messages2 = [
                         'type' => 'text',
                         'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
