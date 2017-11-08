@@ -924,16 +924,17 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 				if ($preg_week >=13 && $preg_week<=40) {
 					$a = $total+300;
-				}else
+				}else{
 					$a=$total; 
+				}
 				
- 	$check_q4 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q4)) {
+ 	// $check_q4 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+  //               while ($row = pg_fetch_row($check_q4)) {
             
-                  echo $weight = $row[0]; 
-                  echo $age = $row[1];
- 				  echo $preg_week = $row[2];
-                } 
+  //                 echo $weight = $row[0]; 
+  //                 echo $age = $row[1];
+ 	// 			  echo $preg_week = $row[2];
+  //               } 
 
 
 
