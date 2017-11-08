@@ -853,74 +853,31 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 				];
 
 
-}elseif ($event['message']['text'] == "หนัก" ) {
-                 $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายหนักใช่ไหมคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ใช่',
-                                  'text' => 'ออกกำลังกายหนัก'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่ใช่',
-                                  'text' => 'ไม่ถูกต้อง'
-                              ],
-                          ]
-                      ]
-                  ];  
+}elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
+                 
+	if ($_msg=="หนัก" ) {
+		$vigorous = 2.0;
+	} elseif($_msg=="ปานกลาง") {
+		$moderately = 1.7;
+	}else {
+		$sedentary = 1.4;
+	}
 
-}elseif ($event['message']['text'] == "ปานกลาง" ) {
-                 $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายปานกลางช่ไหมคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ใช่',
-                                  'text' => 'ออกกำลังกายปานกลาง'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่ใช่',
-                                  'text' => 'ไม่ถูกต้อง'
-                              ],
-                          ]
-                      ]
-                  ];
+	   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
+                } 
+					$height1 =$height*0.01;
+	                $bmi = $weight/($height1*$height1);
+	                $bmi = number_format($bmi, 2, '.', '');
 
-}elseif ($event['message']['text'] == "เบา" ) {
-                 $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' => 'ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายเบาใช่ไหมคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ใช่',
-                                  'text' => 'ออกกำลังกายเบา'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่ใช่',
-                                  'text' => 'ไม่ถูกต้อง'
-                              ],
-                          ]
-                      ]
-                  ];
+
+
+
+
 
 
 
@@ -942,13 +899,25 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
 
+				if ($bmi<18.5) {
+					$result="Underweight";
+				} elseif ($bmi==18.5 && 24.9) {
+					$result="Nomal weight";
+				} elseif ($bmi==24.9 && 29.9) {
+					$result="Overweight";
+				}else{
+					$result="Obese";
+				}
+
+
+
 				$messages3 = [
                         'type' => 'text',
                         'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
                       ];
  				$messages4 = [
                         'type' => 'text',
-                        'text' =>  'ค่าดัชนีมวลกาย'.$bmi
+                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                       ];
 
 		$url = 'https://api.line.me/v2/bot/message/reply';
