@@ -962,9 +962,9 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$answer4 .'.jpg',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ลูกน้อยของคุณ',
-                            'text' =>  'อายุ'.$answer4.'สัปดาห์',
+                            'text' =>  'อายุ'.$preg_week.'สัปดาห์',
                             'actions' => [
                                           // [
                                           //     'type' => 'postback',
