@@ -799,13 +799,39 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
                       ];
-   $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at ,answer FROM sequentsteps  WHERE sender_id = '{$user_id}' order by updated_at desc limit 1   ");
+   $check_q = pg_query($dbconn,"SELECT user_id, user_weight FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
             
-                  echo $answer = $row[3];  
+                  echo $answer1 = $row[0]; 
+                  echo $weight = $row[1]; 
                 } 
+					$height1 =$height*0.01;
+	                $bmi = $weight/($height1*$height1);
+	                $bmi = number_format($bmi, 2, '.', '');
 
+ 				$messages1 = [
+                        'type' => 'text',
+                        'text' =>  'ค่าดัชนีมวลกาย'.$bmi
+                      ];
 
+		$url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages, $messages1],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+    
 
 
 ###########################################################################################################
