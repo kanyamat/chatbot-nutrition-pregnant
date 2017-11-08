@@ -799,17 +799,25 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
                       ];
-   $check_q = pg_query($dbconn,"SELECT user_weight, user_height FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q)) {
+
+
+
+   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
             
                   echo $weight = $row[0]; 
                   echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
                 } 
 					$height1 =$height*0.01;
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
 
- 				$messages1 = [
+				$messages2 = [
+                        'type' => 'text',
+                        'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
+                      ];
+ 				$messages3 = [
                         'type' => 'text',
                         'text' =>  'ค่าดัชนีมวลกาย'.$bmi
                       ];
@@ -817,7 +825,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 		$url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages, $messages1],
+          'messages' => [$messages, $messages2,$messages3],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
