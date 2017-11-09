@@ -117,11 +117,11 @@ if (!is_null($events['events'])) {
             ]
         ]
     ];     
-      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0006','{$u}','0007','0',NOW(),NOW())") or die(pg_errormessage());
+      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005','{$u}','0007','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
- }elseif ($event['message']['text'] == "ชื่อถูกต้อง" && $seqcode == "0006"  ) {
+ }elseif ($event['message']['text'] == "ชื่อถูกต้อง"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
