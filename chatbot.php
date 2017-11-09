@@ -487,6 +487,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
 
 
+
  }elseif ($event['message']['text'] == "อายุครรภ์ถูกต้อง"  ) {
     $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at ,answer FROM sequentsteps  WHERE sender_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
