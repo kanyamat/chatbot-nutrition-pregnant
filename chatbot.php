@@ -884,7 +884,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                   echo $height = $row[1]; 
                   echo $preg_week = $row[2]; 
                 } 
-					$height1 =$height*0.01;
+					        $height1 =$height*0.01;
 	                $bmi = $weight/($height1*$height1);
 	                $bmi = number_format($bmi, 2, '.', '');
 
@@ -981,7 +981,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 
 			$replyToken = $event['replyToken'];
-                    $messages3 = [
+                    $messages = [
                                                               
                         'type' => 'template',
                         'altText' => 'template',
@@ -1012,16 +1012,16 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
     //                     'type' => 'text',
     //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
     //                   ];
- 				$messages4 = [
+ 				$messages2 = [
                         'type' => 'text',
                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                       ];
 
-                $messages5 = [
+                $messages3 = [
                         'type' => 'text',
                         'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$total
                       ];
-                $messages6 = [
+                $messages4 = [
                         'type' => 'text',
                         'text' =>  $aaa
                       ];
@@ -1029,7 +1029,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 		$url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages3,$messages4,$messages5,$messages6],
+          'messages' => [$messages,$messages2,$messages3,$messages4],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
@@ -1047,6 +1047,13 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 
 
 ###########################################################################################################
+  }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'กรุณาพิมพ์ใหม่'
+                      ];  
+###########################################################################################################                     
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
     
      $replyToken = $event['replyToken'];
