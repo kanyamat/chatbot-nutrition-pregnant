@@ -991,7 +991,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
           'template'=> [
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารอีกไหมคะ",
+              'title'=> "คุณมีประวัติการแพ้อีกไหมคะ",
               'text'=> "Please select",
               'actions'=> [
                   [
@@ -1013,7 +1013,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
           ]
         ];
 
-
+$q1 = pg_exec($dbconn, "INSERT INTO users_register(user_id,history_medicine,status,created_at,updated_at  )VALUES('{$user_id}','{$_msg}','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 }elseif ($event['message']['text'] == "แพ้อาหาร" ) {
@@ -1052,7 +1052,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
           'template'=> [
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารอีกไหมคะ",
+              'title'=> "คุณมีประวัติการแพ้อีกไหมคะ",
               'text'=> "Please select",
               'actions'=> [
                   [
@@ -1074,6 +1074,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
           ]
         ];
 
+$q1 = pg_exec($dbconn, "INSERT INTO users_register(user_id,history_food,status,created_at,updated_at  )VALUES('{$user_id}','{$_msg}','0',NOW(),NOW())") or die(pg_errormessage());
 }elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
