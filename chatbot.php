@@ -991,23 +991,23 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
           'template'=> [
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
+              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารอีกไหมคะ",
               'text'=> "Please select",
               'actions'=> [
                   [
                     'type'=> 'message',
-                    'label'=> 'เบา',
-                    'text'=> 'เบา'
+                    'label'=> 'แพ้ยา',
+                    'text'=> 'แพ้ยา'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ปานกลาง',
-                    'text'=> 'ปานกลาง'
+                    'label'=> 'แพ้อาหาร',
+                    'text'=> 'แพ้อาหาร'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'หนัก',
-                    'text'=> 'หนัก'
+                    'label'=> 'ไม่มีประวัติการแพ้',
+                    'text'=> 'ไม่มีประวัติการแพ้'
                   ]
               ]
           ]
@@ -1052,28 +1052,27 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
           'template'=> [
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
+              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารอีกไหมคะ",
               'text'=> "Please select",
               'actions'=> [
                   [
                     'type'=> 'message',
-                    'label'=> 'เบา',
-                    'text'=> 'เบา'
+                    'label'=> 'แพ้ยา',
+                    'text'=> 'แพ้ยา'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ปานกลาง',
-                    'text'=> 'ปานกลาง'
+                    'label'=> 'แพ้อาหาร',
+                    'text'=> 'แพ้อาหาร'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'หนัก',
-                    'text'=> 'หนัก'
+                    'label'=> 'ไม่มีประวัติการแพ้',
+                    'text'=> 'ไม่มีประวัติการแพ้'
                   ]
               ]
           ]
         ];
-
 
 }elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
