@@ -928,27 +928,30 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$a=$total; 
 				}
 				
- 	$check_q4 = pg_query($dbconn,"SELECT caloric_level ,starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing ");
+ 	$check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <= $total");
                 while ($row = pg_fetch_row($check_q4)) {
             
-                    echo $caloric = $row[0]; 
-                    echo $starches = $row[1];
- 				    echo $vegetables = $row[2];
-					echo $fruits = $row[3];
-					echo $meats = $row[4];
-					echo $fats = $row[5];
-					echo $lf_milk = $row[6];
-					echo $c = $row[7];
-					echo $p = $row[8];
-					echo $f = $row[9];
-					echo $g_protein  = $row[10];
+          //echo $caloric = $row[0]; 
+          echo $starches = $row[0];
+ 				  echo $vegetables = $row[1];
+					echo $fruits = $row[2];
+					echo $meats = $row[3];
+					echo $fats = $row[4];
+					echo $lf_milk = $row[5];
+					echo $c = $row[6];
+					echo $p = $row[7];
+					echo $f = $row[8];
+					echo $g_protein  = $row[9];
 
                 } 
 
                 if ($total <= 1600) {
                 	$bbb = $starches."ชิ้น";
-                } elseif ($total >= 2000) {
+                } elseif ($total >= 1601 && <=1700) {
                   $bbb = $fats."ทัพพี";
+                }elseif ($total >=1701 && <=1800) {
+                  $bbb = $lf_milk."test"
+                
                 }else {
                 	$bbb = $starches."ส่วน";
                 }
