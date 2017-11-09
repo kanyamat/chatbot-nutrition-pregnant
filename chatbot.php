@@ -760,6 +760,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   // $name =str_replace("","",$pieces[0]);
                   // $surname =str_replace("","",$pieces[1]);
                  $u = pg_escape_string($answer);
+
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
                  $messages = [
@@ -779,9 +780,10 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }   
+                }  
+                 $u = pg_escape_string($_msg); 
 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine =$_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
       $replyToken = $event['replyToken'];
         $messages = [
@@ -842,8 +844,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine =$_msg WHERE 
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
                 }   
-
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+            $u = pg_escape_string($_msg); 
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
       $replyToken = $event['replyToken'];
         $messages = [
           'type'=> 'template',
