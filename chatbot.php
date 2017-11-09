@@ -484,7 +484,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
          $result = curl_exec($ch);
          curl_close($ch);
          echo $result . "\r\n";
-    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','00015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
 
 
  }elseif ($event['message']['text'] == "อายุครรภ์ถูกต้อง"  ) {
@@ -518,7 +518,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   $replyToken = $event['replyToken'];
                   $messages = [
                       'type' => 'template',
-                      'altText' => 'this is a confirm template',
+                      'altText' => 'this is a confirm template'
                       'template' => [
                           'type' => 'confirm',
                           'text' => $ans ,
