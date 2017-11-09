@@ -1051,7 +1051,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => 'กรุณาพิมพ์ใหม่'
+                        'text' => 'กรุณาพิมพ์ใหม่นะคะ'
                       ];  
 ###########################################################################################################                     
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
