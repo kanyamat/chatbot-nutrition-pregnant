@@ -928,25 +928,25 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 					$a=$total; 
 				}
 				
- 	// $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing ");
-  //               while ($row = pg_fetch_row($check_q4)) {
+ 	$check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
+                while ($row = pg_fetch_row($check_q4)) {
             
-  //         //echo $caloric = $row[0]; 
-  //         echo $starches = $row[0];
- 	// 			  echo $vegetables = $row[1];
-		// 			echo $fruits = $row[2];
-		// 			echo $meats = $row[3];
-		// 			echo $fats = $row[4];
-		// 			echo $lf_milk = $row[5];
-		// 			echo $c = $row[6];
-		// 			echo $p = $row[7];
-		// 			echo $f = $row[8];
-		// 			echo $g_protein  = $row[9];
+          //echo $caloric = $row[0]; 
+          echo $starches = $row[0];
+ 				  echo $vegetables = $row[1];
+					echo $fruits = $row[2];
+					echo $meats = $row[3];
+					echo $fats = $row[4];
+					echo $lf_milk = $row[5];
+					echo $c = $row[6];
+					echo $p = $row[7];
+					echo $f = $row[8];
+					echo $g_protein  = $row[9];
 
-  //               } 
+                } 
 
                 if ($total <= 1600) {
-                	$bbb = "ข้าววันละ 8 ทัพพี
+                	$bbb = "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 4 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 5 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -954,7 +954,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 } elseif ($total >= 1601 && $total<=1700) {
-                  $bbb =  "ข้าววันละ 9 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 2 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 5 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -962,7 +962,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 }elseif ($total >=1701 && $total<=1800) {
-                  $bbb =  "ข้าววันละ 9 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 6 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -970,7 +970,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 }elseif ($total >=1801 && $total<=1900) {
-                  $bbb =  "ข้าววันละ 9 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 6 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -978,7 +978,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 }elseif ($total >=1901 && $total<=2000) {
-                  $bbb =  "ข้าววันละ 10 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -986,7 +986,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 }elseif ($total >=2001 && $total<=2100 ) {
-                  $bbb =  "ข้าววันละ 11 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -994,7 +994,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 2 แก้ว
                           ";
                 }elseif ($total >= 2101 && $total<=2200) {
-                  $bbb =  "ข้าววันละ 11 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -1002,7 +1002,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 3 แก้ว
                           ";
                 }elseif ($total >= 2201 && $total <=2300) {
-                  $bbb =  "ข้าววันละ 11 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -1010,7 +1010,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 3 แก้ว
                           ";
                 }elseif ($total >= 2301 && $total <=2400) {
-                  $bbb =  "ข้าววันละ 12 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -1018,7 +1018,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 3 แก้ว
                           ";
                 }elseif ($total >= 2401 && $total <=2500) {
-                  $bbb =  "ข้าววันละ 12 ทัพพี
+                  $bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 4 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 8 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
@@ -1026,7 +1026,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
                           นมไขมันต่ำวันละ 3 แก้ว
                           ";
                 }else {
-                	$bbb =  "ข้าววันละ 12 ทัพพี
+                	$bbb =  "ข้าววันละ". $starches ."ทัพพี
                           ผักวันละ 3 ทัพพี
                           ผลไม้วันละ 4 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)
                           เนื้อวันละ 9 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)
