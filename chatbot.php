@@ -756,11 +756,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                 } 
 
-                  $bbb = "ข้าววันละ". $starches ."ทัพพี".
-                          "ผักวันละ". $vegetables. "ทัพพี".
-                          "ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)".
-                          "เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)".
-                          "ไขมันวันละ" .$fats. "ช้อนชา".
+                  $bbb = "ข้าววันละ". $starches ."ทัพพี"."<br>"
+                          "ผักวันละ". $vegetables. "ทัพพี"."<br>"
+                          "ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."<br>"
+                          "เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."<br>"
+                          "ไขมันวันละ" .$fats. "ช้อนชา"."<br>"
                           "นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
 
                 if ($total <= 1600) {
@@ -1191,9 +1191,3 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
 
 ?>
 
-<!-- AIzaSyB5FmzSJk9yrpwHTyJMQSvl7EdjC7asyyU
-
-search engin 014388729015054466439:gqr4m9bfx0i 
-
-AIzaSyAtvPyVCpD6WNkS4cfqiIWb5-nBEXL9LK8
--->
