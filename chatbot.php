@@ -1025,7 +1025,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
                   [
                     'type'=> 'message',
                     'label'=> 'ไม่มีประวัติการแพ้',
-                    'text'=> 'ไม่มีประวัติการแพ้'
+                    'text'=> 'ไม่มี'
                   ]
               ]
           ]
@@ -1068,14 +1068,14 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
                   [
                     'type'=> 'message',
                     'label'=> 'ไม่มีประวัติการแพ้',
-                    'text'=> 'ไม่มีประวัติการแพ้'
+                    'text'=> 'ไม่มี'
                   ]
               ]
           ]
         ];
 
 
-}elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" ) {
+}elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" && $seqcode == "0025") {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
