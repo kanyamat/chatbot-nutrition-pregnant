@@ -105,13 +105,15 @@ if (!$dbconn) {
 $user = $_GET["data"];
 $user_id = pg_escape_string($user);
  // echo $user_id;
-$check = pg_query($dbconn,"SELECT user_weight FROM users  WHERE  user_id = '{$user_id}'  ");
+/*น้ำหนักก่อนตั้งครรภ์*/
+$check = pg_query($dbconn,"SELECT user_pre_weight FROM users_register  WHERE  user_id = '{$user_id}'  ");
                 while ($row= pg_fetch_row($check)) {
               
                  $result = $row[0];
   
                 } 
 $arrayName=[];
+/*น้ำหนักปกติ ทุกweek*/
 $check_q = pg_query($dbconn,"SELECT preg_week ,preg_weight FROM recordofpregnancy WHERE  user_id = '{$user_id}' order by preg_week  ASC  ");
                 while ($arr= pg_fetch_array($check_q)) {
                   $week = $arr[0];

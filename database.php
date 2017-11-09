@@ -69,39 +69,39 @@ if (!$dbconn) {
 // pg_exec($dbconn, $sql3) or die(pg_errormessage());
 
 
-// $sql4="CREATE TABLE RecordOfPregnancy(
-// id SERIAL,
-// user_id  varchar(50),
-// preg_week  integer,
-// preg_weight varchar(3),
-// updated_at timestamp,
-// -- his_preg_wc varchar(225)
-//  PRIMARY KEY(id)
-//  -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
-//  -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
-//  )";   
-// pg_exec($dbconn, $sql4) or die(pg_errormessage());
-
-
-
-$sql="CREATE TABLE meal_planing(
+$sql4="CREATE TABLE RecordOfPregnancy(
 id SERIAL,
-caloric_level integer,
-starches integer,
-vegetables integer,
-fruits integer,
-meats integer,
-fats integer,
-lf_milk integer,
-c integer,
-p integer,
-f integer,
-g_protein integer,
-created_at timestamp,
+user_id  varchar(50),
+preg_week  integer,
+preg_weight varchar(3),
 updated_at timestamp,
-PRIMARY KEY(id)
-)";   
-pg_exec($dbconn, $sql) or die(pg_errormessage());
+-- his_preg_wc varchar(225)
+ PRIMARY KEY(id)
+ -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
+ -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
+ )";   
+pg_exec($dbconn, $sql4) or die(pg_errormessage());
+
+
+
+// $sql="CREATE TABLE meal_planing(
+// id SERIAL,
+// caloric_level integer,
+// starches integer,
+// vegetables integer,
+// fruits integer,
+// meats integer,
+// fats integer,
+// lf_milk integer,
+// c integer,
+// p integer,
+// f integer,
+// g_protein integer,
+// created_at timestamp,
+// updated_at timestamp,
+// PRIMARY KEY(id)
+// )";   
+// pg_exec($dbconn, $sql) or die(pg_errormessage());
 
 
 
@@ -214,31 +214,31 @@ pg_exec($dbconn, $sql) or die(pg_errormessage());
 
 // pg_exec($dbconn, $sql1) or die(pg_errormessage());
 
-$sql1="INSERT INTO  meal_planing (id, caloric_level, starches, vegetables, fruits, meats, fats, lf_milk, c,p,f, g_protein, created_at, updated_at) VALUES
-(1, 1600, 8,3,2,5,6,2,52,18,30,73, NULL, NULL),
+// $sql1="INSERT INTO  meal_planing (id, caloric_level, starches, vegetables, fruits, meats, fats, lf_milk, c,p,f, g_protein, created_at, updated_at) VALUES
+// (1, 1600, 8,3,2,5,6,2,52,18,30,73, NULL, NULL),
 
-(2, 1700, 9,3,2,5,6,2,54,17,29,75, NULL, NULL),
+// (2, 1700, 9,3,2,5,6,2,54,17,29,75, NULL, NULL),
 
-(3, 1800, 9,3,9,6,6,2,54,18,28,82, NULL, NULL),
+// (3, 1800, 9,3,9,6,6,2,54,18,28,82, NULL, NULL),
 
-(4, 1900, 9,3,3,6,8,2,51,17,32,82, NULL, NULL),
+// (4, 1900, 9,3,3,6,8,2,51,17,32,82, NULL, NULL),
 
-(5, 2000, 10,3,3,7,8,2,52,17,31,91, NULL, NULL),
+// (5, 2000, 10,3,3,7,8,2,52,17,31,91, NULL, NULL),
 
-(6, 2100, 11,3,3,7,8,2,53,17,30,93, NULL, NULL),
+// (6, 2100, 11,3,3,7,8,2,53,17,30,93, NULL, NULL),
 
-(7, 2200, 11,3,3,7,8,3,52,18,30,101, NULL, NULL),
+// (7, 2200, 11,3,3,7,8,3,52,18,30,101, NULL, NULL),
 
-(8, 2300, 11,3,3,7,9,3,51,17,32,101, NULL, NULL),
+// (8, 2300, 11,3,3,7,9,3,51,17,32,101, NULL, NULL),
 
-(9, 2400, 12,3,3,7,10,3,51,17,32,103, NULL, NULL),
+// (9, 2400, 12,3,3,7,10,3,51,17,32,103, NULL, NULL),
 
-(10, 2500, 12,3,4,8,10,3,51,17,32,110, NULL, NULL),
+// (10, 2500, 12,3,4,8,10,3,51,17,32,110, NULL, NULL),
 
-(11, 2600, 12,3,4,9,11,3,50,17,33,117, NULL, NULL)";
+// (11, 2600, 12,3,4,9,11,3,50,17,33,117, NULL, NULL)";
 
 
-pg_exec($dbconn, $sql1) or die(pg_errormessage());
+// pg_exec($dbconn, $sql1) or die(pg_errormessage());
 
 
 
