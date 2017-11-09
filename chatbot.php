@@ -994,11 +994,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
               'title'=> "คุณมีประวัติการแพ้อีกไหมคะ",
               'text'=> "Please select",
               'actions'=> [
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้ยา',
-                    'text'=> 'แพ้ยา'
-                  ],
+                  // [
+                  //   'type'=> 'message',
+                  //   'label'=> 'แพ้ยา',
+                  //   'text'=> 'แพ้ยา'
+                  // ],
                   [
                     'type'=> 'message',
                     'label'=> 'แพ้อาหาร',
@@ -1060,11 +1060,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
                     'label'=> 'แพ้ยา',
                     'text'=> 'แพ้ยา'
                   ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้อาหาร',
-                    'text'=> 'แพ้อาหาร'
-                  ],
+                  // [
+                  //   'type'=> 'message',
+                  //   'label'=> 'แพ้อาหาร',
+                  //   'text'=> 'แพ้อาหาร'
+                  // ],
                   [
                     'type'=> 'message',
                     'label'=> 'ไม่มีประวัติการแพ้',
