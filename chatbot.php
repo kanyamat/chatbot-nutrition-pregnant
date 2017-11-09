@@ -780,9 +780,36 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
                 }   
 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
-
+     $replyToken = $event['replyToken'];
+        $messages = [
+          'type'=> 'template',
+          'altText'=> 'this is a buttons template',
+          'template'=> [
+              'type'=> 'buttons',
+              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
+              'text'=> "Please select",
+              'actions'=> [
+                  [
+                    'type'=> 'message',
+                    'label'=> 'เบา',
+                    'text'=> 'เบา'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'ปานกลาง',
+                    'text'=> 'ปานกลาง'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'หนัก',
+                    'text'=> 'หนัก'
+                  ]
+              ]
+          ]
+        ];
 
 
 
@@ -814,9 +841,36 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine = $answer WHE
 ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
                 }   
 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = $_msg WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
-
+     $replyToken = $event['replyToken'];
+        $messages = [
+          'type'=> 'template',
+          'altText'=> 'this is a buttons template',
+          'template'=> [
+              'type'=> 'buttons',
+              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
+              'text'=> "Please select",
+              'actions'=> [
+                  [
+                    'type'=> 'message',
+                    'label'=> 'เบา',
+                    'text'=> 'เบา'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'ปานกลาง',
+                    'text'=> 'ปานกลาง'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'หนัก',
+                    'text'=> 'หนัก'
+                  ]
+              ]
+          ]
+        ];
 }elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
