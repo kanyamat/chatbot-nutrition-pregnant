@@ -1024,8 +1024,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ไม่มีประวัติการแพ้',
-                    'text'=> 'ไม่มี'
+                    'label'=> 'ไม่มี',
+                    'text'=> 'ไม่มีประวัติการแพ้'
                   ]
               ]
           ]
@@ -1067,8 +1067,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
                   // ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ไม่มีประวัติการแพ้',
-                    'text'=> 'ไม่มี'
+                    'label'=> 'ไม่มี',
+                    'text'=> 'ไม่มีประวัติการแพ้'
                   ]
               ]
           ]
