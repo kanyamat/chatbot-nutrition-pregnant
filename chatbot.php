@@ -91,6 +91,12 @@ if (!is_null($events['events'])) {
                         'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ:) หากคุณสนใจในภายหลังให้พิมพ์ว่า"ต้องการผู้ช่วย"'
                       ];          
   
+  }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'กรุณาพิมพ์ใหม่นะคะ'
+                      ];  
 
   }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
     
@@ -119,12 +125,6 @@ if (!is_null($events['events'])) {
     ];     
       $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0005','{$u}','0007','0',NOW(),NOW())") or die(pg_errormessage());
 
-  }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'กรุณาพิมพ์ใหม่นะคะ'
-                      ];  
 
  }elseif ($event['message']['text'] == "ชื่อถูกต้อง" && $seqcode == "0005" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
