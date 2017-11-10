@@ -63,11 +63,11 @@ if (!is_null($events['events'])) {
     ];
 
 ####################################  insert data to sequentsteps   ####################################
- $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0003','','0005','0',NOW(),NOW())") or die(pg_errormessage());
+ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());
        
 
 #################################### ผู้ใช้เลือกสนใจ #################################### 
-  }elseif ($event['message']['text'] == "สนใจ"  ) {
+  }elseif ($event['message']['text'] == "สนใจ" && $seqcode == "0004"  ) {
                $result = pg_query($dbconn,"SELECT seqcode,question FROM sequents WHERE seqcode = '0005'");
                 while ($row = pg_fetch_row($result)) {
                   echo $seqcode =  $row[0];
@@ -756,8 +756,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                 } 
 
-                  $bbb = "ตัวอย่างปริมาณอาหารที่แนะนำ/วัน". "\n".
-                          "-ข้าววันละ". $starches ."ทัพพี". "\n".
+                  $bbb = "-ข้าววันละ". $starches ."ทัพพี". "\n".
                           "-ผักวันละ". $vegetables. "ทัพพี"."\n".
                           "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
                           "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
@@ -789,7 +788,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 }
                 
 
-                $eatProtein=$weight+25;
+
 
 
       $replyToken = $event['replyToken'];
@@ -818,7 +817,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                               ];
 
 
-
+            // $eatProtein=$weight+25;
 
         // $messages3 = [
     //                     'type' => 'text',
@@ -837,15 +836,15 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' =>  $aaa
                       ];
-                $messages5 = [
-                        'type' => 'text',
-                        'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
-                      ];
+                // $messages5 = [
+                //         'type' => 'text',
+                //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
+                //       ];
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3,$messages4,,$messages5],
+          'messages' => [$messages,$messages2,$messages3,$messages4],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
@@ -881,33 +880,33 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $replyToken = $event['replyToken'];
 
 
-				$messages = [
-				  'type'=> 'template',
-				  'altText'=> 'this is a buttons template',
-				  'template'=> [
-				      'type'=> 'buttons',
-				      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-				      'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ",
-				      'text'=> "Please select",
-				      'actions'=> [
-				          [
-				            'type'=> 'message',
-				            'label'=> 'แพ้ยา',
-				            'text'=> 'แพ้ยา'
-				          ],
-				          [
-				            'type'=> 'message',
-				            'label'=> 'แพ้อาหาร',
-				            'text'=> 'แพ้อาหาร'
-				          ],
-				          [
-				            'type'=> 'message',
-				            'label'=> 'ไม่มีประวัติการแพ้',
-				            'text'=> 'ไม่มีประวัติการแพ้'
-				          ]
-				      ]
-				  ]
-				];
+        $messages = [
+          'type'=> 'template',
+          'altText'=> 'this is a buttons template',
+          'template'=> [
+              'type'=> 'buttons',
+              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ",
+              'text'=> "Please select",
+              'actions'=> [
+                  [
+                    'type'=> 'message',
+                    'label'=> 'แพ้ยา',
+                    'text'=> 'แพ้ยา'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'แพ้อาหาร',
+                    'text'=> 'แพ้อาหาร'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'ไม่มีประวัติการแพ้',
+                    'text'=> 'ไม่มีประวัติการแพ้'
+                  ]
+              ]
+          ]
+        ];
 
 
 //$q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
@@ -1158,7 +1157,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
                       ]
                   ]
               ]; 
- $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0003','','0005','0',NOW(),NOW())") or die(pg_errormessage());
+ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());
        
     // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0006','0',NOW(),NOW())") or die(pg_errormessage());
     // }else{

@@ -817,7 +817,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                               ];
 
 
-
+            // $eatProtein=$weight+25;
 
         // $messages3 = [
     //                     'type' => 'text',
@@ -830,12 +830,16 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                 $messages3 = [
                         'type' => 'text',
-                        'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$total
+                        'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
                       ];
                 $messages4 = [
                         'type' => 'text',
                         'text' =>  $aaa
                       ];
+                // $messages5 = [
+                //         'type' => 'text',
+                //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
+                //       ];
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
