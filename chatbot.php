@@ -842,7 +842,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
                       ];
 
-
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
