@@ -756,7 +756,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                 } 
 
-                  $bbb = "-ข้าววันละ". $starches ."ทัพพี". "\n".
+                  $bbb = "ตัวอย่างปริมาณอาหารที่แนะนำ/วัน". "\n".
+                          "-ข้าววันละ". $starches ."ทัพพี". "\n".
                           "-ผักวันละ". $vegetables. "ทัพพี"."\n".
                           "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
                           "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
@@ -788,7 +789,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 }
                 
 
-
+                $eatProtein=$weight+25;
 
 
       $replyToken = $event['replyToken'];
@@ -830,17 +831,22 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                 $messages3 = [
                         'type' => 'text',
-                        'text' =>  'จำนวนแคลโลรี่ที่คุณต้องการต่อวันคือ '.$total
+                        'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
                       ];
                 $messages4 = [
                         'type' => 'text',
                         'text' =>  $aaa
                       ];
+                $messages5 = [
+                        'type' => 'text',
+                        'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
+                      ];
+
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3,$messages4],
+          'messages' => [$messages,$messages2,$messages3,$messages4,,$messages5],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
