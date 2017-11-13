@@ -805,7 +805,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
 $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
       $replyToken = $event['replyToken'];
 
-
+ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 
@@ -824,6 +824,10 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
 //                  $u = pg_escape_string($answer);
 //                   // $u2 = pg_escape_string($surname);
 //                 $replyToken = $event['replyToken'];
+
+
+/*.........................................................................................................................................*/
+/*ถึงตรงนี้*/
         $messages = [
           'type'=> 'template',
           'altText'=> 'this is a buttons template',
@@ -852,7 +856,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
           ]
         ];
 
-
+/*.........................................................................................................................................*/
 
 
 ############################################################### Summary ####################################################################################
