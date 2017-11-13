@@ -815,17 +815,15 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ],
-                                                                  [
-                                    'type' => 'text',
-                                    'label' => 'รายละเอียดเพิ่มเติม',
-                                    'text' => $descript
                                     ]
 
                                       ]
                                   ]
                               ];
-
+                $messages4 = [
+                        'type' => 'text',
+                        'text' =>  $descript
+                      ];
 
             // $eatProtein=$weight+25;
 
@@ -842,10 +840,10 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'type' => 'text',
                         'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
                       ];
-                $messages4 = [
-                        'type' => 'text',
-                        'text' =>  $aaa
-                      ];
+                // $messages4 = [
+                //         'type' => 'text',
+                //         'text' =>  $aaa
+                //       ];
                 // $messages5 = [
                 //         'type' => 'text',
                 //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
