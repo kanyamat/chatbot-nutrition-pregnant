@@ -37,7 +37,7 @@ hospital_name varchar(100),
 hospital_number varchar(100),
 history_medicine varchar(255),
 history_food varchar(255),
-active_lifestyle integer
+active_lifestyle integer,
 status integer,
 updated_at timestamp,
 PRIMARY KEY(id)
