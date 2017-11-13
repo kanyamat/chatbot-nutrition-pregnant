@@ -21,27 +21,27 @@ if (!$dbconn) {
 // )";   
 // pg_exec($dbconn, $sql) or die(pg_errormessage());
 
-$sql1="CREATE TABLE users_register(
-id SERIAL,
-user_id varchar(50),
-user_name varchar(50),
-/*user_surname varchar(100),*/
-user_age  varchar(3),
-user_height varchar(3),
-user_Pre_weight varchar(3),
-user_weight varchar(3),
-preg_week  varchar(3),
-phone_number integer,
-email varchar(100),
-hospital_name varchar(100),
-hospital_number varchar(100),
-history_medicine varchar(255),
-history_food varchar(255),
-status integer,
-updated_at timestamp,
-PRIMARY KEY(id)
-)";   
-pg_exec($dbconn, $sql1) or die(pg_errormessage());
+// $sql1="CREATE TABLE users_register(
+// id SERIAL,
+// user_id varchar(50),
+// user_name varchar(50),
+// /*user_surname varchar(100),*/
+// user_age  varchar(3),
+// user_height varchar(3),
+// user_Pre_weight varchar(3),
+// user_weight varchar(3),
+// preg_week  varchar(3),
+// phone_number integer,
+// email varchar(100),
+// hospital_name varchar(100),
+// hospital_number varchar(100),
+// history_medicine varchar(255),
+// history_food varchar(255),
+// status integer,
+// updated_at timestamp,
+// PRIMARY KEY(id)
+// )";   
+// pg_exec($dbconn, $sql1) or die(pg_errormessage());
 
 // $sql2="CREATE TABLE sequentsteps(
 // id SERIAL,
