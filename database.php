@@ -32,7 +32,7 @@ user_Pre_weight varchar(3),
 user_weight varchar(3),
 preg_week  varchar(3),
 phone_number integer,
-email varchar(100)
+email varchar(100),
 hospital_name varchar(100),
 hospital_number varchar(100),
 history_medicine varchar(255),
