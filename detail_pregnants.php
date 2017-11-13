@@ -7,7 +7,7 @@ if (!$dbconn) {
 // $user = $_GET["data"];
 $user_id = pg_escape_string($user);
  // echo $user_id;
-         $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = $answer4  ");
+         $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants ");
               while ($row = pg_fetch_row($des_preg)) {
                   echo $des = $row[0]; 
                   echo $img = $row[1]; 
