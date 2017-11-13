@@ -807,11 +807,17 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                           //     'label' => 'good',
                                           //     'data' => 'value'
                                           // ],
-                                [
+                                   [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                          ]
+                                    ],
+                                                                  [
+                                    'type' => 'message',
+                                    'label' => 'รายละเอียดเพิ่มเติม',
+                                    'text' => 'รายละเอียดเพิ่มเติม'
+                                    ]
+
                                       ]
                                   ]
                               ];
