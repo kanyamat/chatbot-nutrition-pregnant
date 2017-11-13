@@ -787,8 +787,12 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   $aaa=$bbb;
                 }
                 
+  $check_q5 = pg_query($dbconn,"SELECT descript FROM pregnant WHERE week = $preg_week ");
+                while ($row = pg_fetch_row($check_q5)) {          
+         
+          echo $descript = $row[0];
 
-
+                } 
 
 
       $replyToken = $event['replyToken'];
@@ -813,9 +817,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                                                   [
-                                    'type' => 'message',
+                                    'type' => 'text',
                                     'label' => 'รายละเอียดเพิ่มเติม',
-                                    'text' => 'รายละเอียดเพิ่มเติม'
+                                    'text' => $descript
                                     ]
 
                                       ]
@@ -995,7 +999,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           ]
         ];
 
-
+###########################################################################################################################
 }elseif ($event['message']['text'] == "แพ้อาหาร" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -1016,6 +1020,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       ];
  $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
+###########################################################################################################################
 }elseif ($event['message']['text'] == "แพ้ยา"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -1044,6 +1049,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 // $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
  $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0024','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
+###########################################################################################################################
 }elseif (strpos($_msg) !== false && $seqcode == "0024"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -1085,9 +1091,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WH
 
 // $q1 = pg_exec($dbconn, "INSERT INTO users_register(user_id,history_medicine,status,created_at,updated_at  )VALUES('{$user_id}','{$_msg}','0',NOW(),NOW())") or die(pg_errormessage());
 
-
-
-
+###########################################################################################################################
 
 }elseif (strpos($_msg) !== false && $seqcode == "0025"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
@@ -1126,9 +1130,18 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
           ]
         ];
 
-
-
-
+###########################################################################################################################
+// }elseif ($event['message']['text'] == "รายละเอียดเพิ่มเติม" ) {
+//          $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = $answer4  ");
+//               while ($row = pg_fetch_row($des_preg)) {
+//                   echo $des = $row[0]; 
+//                   echo $img = $row[1]; 
+ 
+//                 } 
+//                     $messages = [
+//                         'type' => 'text',
+//                         'text' =>  $des
+//                       ];
 
 ###########################################################################################################                     
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
