@@ -629,9 +629,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
     ];     
       $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0019','{$u}','0021','0',NOW(),NOW())") or die(pg_errormessage());
 
-
-
-
+###########################################################################################################
 
 }elseif (is_numeric($_msg) !== false && $seqcode == "0021"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
@@ -664,6 +662,115 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   ];     
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0021',$_msg,'0023','0',NOW(),NOW())") or die(pg_errormessage());
 
+###########################################################################################################
+
+ }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0];
+
+                }   
+
+                
+                  // $pieces = explode("", $answer);
+                  // $name =str_replace("","",$pieces[0]);
+                  // $surname =str_replace("","",$pieces[1]);
+                 $u = pg_escape_string($answer);
+                  // $u2 = pg_escape_string($surname);
+                 $replyToken = $event['replyToken'];
+
+
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณมีประวัติการแพ้ยาไหมคะ?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'มี',
+                                  'text' => 'แพ้ยา'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่มี',
+                                  'text' => 'ไม่แพ้ยา'
+                              ],
+                          ]
+                      ]
+                  ];        
+
+
+$q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','0025','0',NOW(),NOW())") or die(pg_errormessage());
+                
+###########################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################################################################################################
+
+
+}elseif ($event['message']['text'] == "ไม่แพ้อาหาร" ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
+ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                }  
+                  // $pieces = explode("", $answer);
+                  // $name =str_replace("","",$pieces[0]);
+                  // $surname =str_replace("","",$pieces[1]);
+                 $u = pg_escape_string($answer);
+                  // $u2 = pg_escape_string($surname);
+                $replyToken = $event['replyToken'];
+        $messages = [
+          'type'=> 'template',
+          'altText'=> 'this is a buttons template',
+          'template'=> [
+              'type'=> 'buttons',
+              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
+              'text'=> "Please select",
+              'actions'=> [
+                  [
+                    'type'=> 'message',
+                    'label'=> 'เบา',
+                    'text'=> 'เบา'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'ปานกลาง',
+                    'text'=> 'ปานกลาง'
+                  ],
+                  [
+                    'type'=> 'message',
+                    'label'=> 'หนัก',
+                    'text'=> 'หนัก'
+                  ]
+              ]
+          ]
+        ];
+
+
+
+
+############################################################### Summary ####################################################################################
  }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
 
@@ -867,265 +974,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
     
 
 
-###########################################################################################################                   
+#########################################################################END Summary#################################################################                   
 
- }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0];
-
-                }   
-
-                
-
-                  // $pieces = explode("", $answer);
-                  // $name =str_replace("","",$pieces[0]);
-                  // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
-                  // $u2 = pg_escape_string($surname);
-                 $replyToken = $event['replyToken'];
-
-
-        $messages = [
-          'type'=> 'template',
-          'altText'=> 'this is a buttons template',
-          'template'=> [
-              'type'=> 'buttons',
-              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "คุณมีประวัติการแพ้ยาหรืออาหารไหมคะ",
-              'text'=> "Please select",
-              'actions'=> [
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้ยา',
-                    'text'=> 'แพ้ยา'
-                  ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้อาหาร',
-                    'text'=> 'แพ้อาหาร'
-                  ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'ไม่มีประวัติการแพ้',
-                    'text'=> 'ไม่มีประวัติการแพ้'
-                  ]
-              ]
-          ]
-        ];
-
-
-$q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023','','1001','0',NOW(),NOW())") or die(pg_errormessage());
-                
-###########################################################################################################
-
-// }elseif ($event['message']['text'] == "มีประวัติการแพ้" && $seqcode == "0023"  ) {
-//                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($result)) {
-//                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-// ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-//                 }   
-
-                
-//                   // $pieces = explode("", $answer);
-//                   // $name =str_replace("","",$pieces[0]);
-//                   // $surname =str_replace("","",$pieces[1]);
-//                  $u = pg_escape_string($answer);
-//                   // $u2 = pg_escape_string($surname);
-//                  $replyToken = $event['replyToken'];
-//                   $messages = [
-//                       'type' => 'template',
-//                       'altText' => 'this is a confirm template',
-//                       'template' => [
-//                           'type' => 'confirm',
-//                           'text' => 'คุณมีประวัติการแพ้อะไรคะ' ,
-//                           'actions' => [
-//                               [
-//                                   'type' => 'message',
-//                                   'label' => 'แพ้ยา',
-//                                   'text' => 'แพ้ยา'
-//                               ],
-//                               [
-//                                   'type' => 'message',
-//                                   'label' => 'แพ้อาหาร',
-//                                   'text' => 'แพ้อาหาร'
-//                               ],
-//                           ]
-//                       ]
-//                   ]; 
-
-}elseif ($event['message']['text'] == "ไม่มีประวัติการแพ้" ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }  
-                  // $pieces = explode("", $answer);
-                  // $name =str_replace("","",$pieces[0]);
-                  // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
-                  // $u2 = pg_escape_string($surname);
-                $replyToken = $event['replyToken'];
-        $messages = [
-          'type'=> 'template',
-          'altText'=> 'this is a buttons template',
-          'template'=> [
-              'type'=> 'buttons',
-              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
-              'text'=> "Please select",
-              'actions'=> [
-                  [
-                    'type'=> 'message',
-                    'label'=> 'เบา',
-                    'text'=> 'เบา'
-                  ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'ปานกลาง',
-                    'text'=> 'ปานกลาง'
-                  ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'หนัก',
-                    'text'=> 'หนัก'
-                  ]
-              ]
-          ]
-        ];
-
-###########################################################################################################################
-}elseif ($event['message']['text'] == "แพ้อาหาร" ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }   
-
-               
-                  // $pieces = explode("", $answer);
-                  // $name =str_replace("","",$pieces[0]);
-                  // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
-                  // $u2 = pg_escape_string($surname);
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'คุณแพ้อาหารอะไรคะ?'
-                      ];
- $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','1001','0',NOW(),NOW())") or die(pg_errormessage());
-
-###########################################################################################################################
-}elseif ($event['message']['text'] == "แพ้ยา"  ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }   
-
-                
-
-                  // $pieces = explode("", $answer);
-                  // $name =str_replace("","",$pieces[0]);
-                  // $surname =str_replace("","",$pieces[1]);
-                 $u = pg_escape_string($answer);
-
-                  // $u2 = pg_escape_string($surname);
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'คุณแพ้ยาอะไรคะ?'
-                      ];
-
-
-
-
-
-// $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
- $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0024','','1001','0',NOW(),NOW())") or die(pg_errormessage());
-###########################################################################################################################
-}elseif (strpos($_msg) !== false && $seqcode == "0024"  ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }  
-                 $u = pg_escape_string($_msg); 
-
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-
-      $replyToken = $event['replyToken'];
-        $messages = [
-          'type'=> 'template',
-          'altText'=> 'this is a buttons template',
-          'template'=> [
-              'type'=> 'buttons',
-              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "คุณมีประวัติการแพ้อีกไหมคะ",
-              'text'=> "Please select",
-              'actions'=> [
-                  // [
-                  //   'type'=> 'message',
-                  //   'label'=> 'แพ้ยา',
-                  //   'text'=> 'แพ้ยา'
-                  // ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้อาหาร',
-                    'text'=> 'แพ้อาหาร'
-                  ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'ไม่มี',
-                    'text'=> 'ไม่มีประวัติการแพ้'
-                  ]
-              ]
-          ]
-        ];
-
-// $q1 = pg_exec($dbconn, "INSERT INTO users_register(user_id,history_medicine,status,created_at,updated_at  )VALUES('{$user_id}','{$_msg}','0',NOW(),NOW())") or die(pg_errormessage());
-
-
-
-
-
-}elseif (strpos($_msg) !== false && $seqcode == "0025"  ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
-                }   
-            $u = pg_escape_string($_msg); 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-      $replyToken = $event['replyToken'];
-        $messages = [
-          'type'=> 'template',
-          'altText'=> 'this is a buttons template',
-          'template'=> [
-              'type'=> 'buttons',
-              //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "คุณมีประวัติการแพ้อีกไหมคะ",
-              'text'=> "Please select",
-              'actions'=> [
-                  [
-                    'type'=> 'message',
-                    'label'=> 'แพ้ยา',
-                    'text'=> 'แพ้ยา'
-                  ],
-                  // [
-                  //   'type'=> 'message',
-                  //   'label'=> 'แพ้อาหาร',
-                  //   'text'=> 'แพ้อาหาร'
-                  // ],
-                  [
-                    'type'=> 'message',
-                    'label'=> 'ไม่มี',
-                    'text'=> 'ไม่มีประวัติการแพ้'
-                  ]
-              ]
-          ]
-        ];
 
 
 
