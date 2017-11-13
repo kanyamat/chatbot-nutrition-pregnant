@@ -4,7 +4,7 @@ $dbconn = pg_pconnect($conn_string);
 if (!$dbconn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-// $user = $_GET["data"];
+$user = $_GET["data"];
 $user_id = pg_escape_string($user);
  // echo $user_id;
          $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants ");
