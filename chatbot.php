@@ -368,24 +368,53 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  //        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
                  //      ];
 
+                // $messages = [
+                //   'type'=> 'template',
+                //   'altText'=> 'this is a buttons template',
+                //   'template'=> [
+                //       'type'=> 'buttons',
+                //       'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+                //       'title'=> 'ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?',
+                //       'text'=> 'กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ',
+                //       'actions'=> [
+                //           [
+                //             'type'=> 'message',
+                //             'label'=> 'ครั้งสุดท้ายที่คุณมีประจำเดือน',
+                //             'text'=> 'action=buy&itemid=123'
+                //           ],
+                //           [
+                //             'type'=> 'message',
+                //             'label'=> 'กำหนดการคลอด',
+                //             'text'=> 'action=add&itemid=123'
+                //           ]
+                //       ]
+                //   ]
+                // ];
+
+
                 $messages = [
                   'type'=> 'template',
                   'altText'=> 'this is a buttons template',
                   'template'=> [
                       'type'=> 'buttons',
-                      'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-                      'title'=> 'ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?',
-                      'text'=> 'กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ',
+                      //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+                      'title'=> "ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?",
+                      'text'=> "กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ",
                       'actions'=> [
                           [
                             'type'=> 'message',
-                            'label'=> 'ครั้งสุดท้ายที่คุณมีประจำเดือน',
-                            'text'=> 'action=buy&itemid=123'
+                            'label'=> 'แพ้ยา',
+                            'text'=> 'แพ้ยา'
                           ],
+                          // [
+                          //   'type'=> 'message',
+                          //   'label'=> 'แพ้อาหาร',
+                          //   'text'=> 'แพ้อาหาร'
+                          // ],
                           [
                             'type'=> 'message',
-                            'label'=> 'กำหนดการคลอด',
-                            'text'=> 'action=add&itemid=123'
+                            'label'=> 'ไม่มี',
+                            'text'=> 'ไม่มีประวัติการแพ้'
                           ]
                       ]
                   ]
