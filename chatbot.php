@@ -1085,12 +1085,13 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ],
-                                                                  [
-                                    'type' => 'message',
-                                    'label' => 'รายละเอียดเพิ่มเติม',
-                                    'text' => 'รายละเอียดเพิ่มเติม'
                                     ]
+                                    ,
+                                    //                               [
+                                    // 'type' => 'message',
+                                    // 'label' => 'รายละเอียดเพิ่มเติม',
+                                    // 'text' => 'รายละเอียดเพิ่มเติม'
+                                    // ]
 
                                       ]
                                   ]
@@ -1103,7 +1104,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
     //                     'type' => 'text',
     //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
     //                   ];
-        $messages2 = [
+                $messages2 = [
                         'type' => 'text',
                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                       ];
