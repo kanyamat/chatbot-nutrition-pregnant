@@ -370,33 +370,33 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
-                 // $messages = [
-                 //        'type' => 'text',
-                 //        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
-                 //      ];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
+                      ];
 
-                $messages = [
-                  'type'=> 'template',
-                  'altText'=> 'this is a buttons template',
-                  'template'=> [
-                      'type'=> 'buttons',
-                      'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-                      'title'=> 'Menu',
-                      'text'=> 'Please select',
-                      'actions'=> [
-                          [
-                            'type'=> 'postback',
-                            'label'=> 'Buy',
-                            'data'=> 'action=buy&itemid=123'
-                          ],
-                          [
-                            'type'=> 'postback',
-                            'label'=> 'Add to cart',
-                            'data'=> 'action=add&itemid=123'
-                          ]
-                      ]
-                  ]
-                ];
+                // $messages = [
+                //   'type'=> 'template',
+                //   'altText'=> 'this is a buttons template',
+                //   'template'=> [
+                //       'type'=> 'buttons',
+                //       'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+                //       'title'=> 'Menu',
+                //       'text'=> 'Please select',
+                //       'actions'=> [
+                //           [
+                //             'type'=> 'postback',
+                //             'label'=> 'Buy',
+                //             'data'=> 'action=buy&itemid=123'
+                //           ],
+                //           [
+                //             'type'=> 'postback',
+                //             'label'=> 'Add to cart',
+                //             'data'=> 'action=add&itemid=123'
+                //           ]
+                //       ]
+                //   ]
+                // ];
 
 
 
