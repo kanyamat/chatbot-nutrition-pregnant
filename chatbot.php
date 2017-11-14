@@ -374,18 +374,18 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   'template'=> [
                       'type'=> 'buttons',
                       'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-                      'title'=> 'Menu',
-                      'text'=> 'Please select',
+                      'title'=> 'ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?',
+                      'text'=> 'กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ',
                       'actions'=> [
                           [
-                            'type'=> 'postback',
-                            'label'=> 'Buy',
-                            'data'=> 'action=buy&itemid=123'
+                            'type'=> 'message',
+                            'label'=> 'ครั้งสุดท้ายที่คุณมีประจำเดือน',
+                            'text'=> 'action=buy&itemid=123'
                           ],
                           [
-                            'type'=> 'postback',
-                            'label'=> 'Add to cart',
-                            'data'=> 'action=add&itemid=123'
+                            'type'=> 'message',
+                            'label'=> 'กำหนดการคลอด',
+                            'text'=> 'action=add&itemid=123'
                           ]
                       ]
                   ]
@@ -748,46 +748,46 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 // ########################################################################################################################################################
 
-//  }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
-//                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($result)) {
-//                   echo $answer = $row[0];
+ }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0];
 
-//                 }   
+                }   
 
                 
-//                   // $pieces = explode("", $answer);
-//                   // $name =str_replace("","",$pieces[0]);
-//                   // $surname =str_replace("","",$pieces[1]);
-//                  $u = pg_escape_string($answer);
-//                   // $u2 = pg_escape_string($surname);
-//                  $replyToken = $event['replyToken'];
+                  // $pieces = explode("", $answer);
+                  // $name =str_replace("","",$pieces[0]);
+                  // $surname =str_replace("","",$pieces[1]);
+                 $u = pg_escape_string($answer);
+                  // $u2 = pg_escape_string($surname);
+                 $replyToken = $event['replyToken'];
 
 
-//                   $messages = [
-//                       'type' => 'template',
-//                       'altText' => 'this is a confirm template',
-//                       'template' => [
-//                           'type' => 'confirm',
-//                           'text' =>'คุณมีประวัติการแพ้ยาไหมคะ?' ,
-//                           'actions' => [
-//                               [
-//                                   'type' => 'message',
-//                                   'label' => 'มี',
-//                                   'text' => 'แพ้ยา'
-//                               ],
-//                               [
-//                                   'type' => 'message',
-//                                   'label' => 'ไม่มี',
-//                                   'text' => 'ไม่แพ้ยา'
-//                               ],
-//                           ]
-//                       ]
-//                   ];        
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณมีประวัติการแพ้ยาไหมคะ?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'มี',
+                                  'text' => 'แพ้ยา'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่มี',
+                                  'text' => 'ไม่แพ้ยา'
+                              ],
+                          ]
+                      ]
+                  ];        
 
 
-// $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0026','0',NOW(),NOW())") or die(pg_errormessage());
+$q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0026','0',NOW(),NOW())") or die(pg_errormessage());
                 
 // ########################################################################################################################################################
 
