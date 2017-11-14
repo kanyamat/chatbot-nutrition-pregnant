@@ -65,14 +65,13 @@ if (!is_null($events['events'])) {
 ####################################  insert data to sequentsteps   ####################################
  $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());
        
-
+/*********************************************คำถามที่หนึ่ง****************************************************************/
 #################################### ผู้ใช้เลือกสนใจ #################################### 
   }elseif ($event['message']['text'] == "สนใจ" && $seqcode == "0004"  ) {
                $result = pg_query($dbconn,"SELECT seqcode,question FROM sequents WHERE seqcode = '0005'");
                 while ($row = pg_fetch_row($result)) {
                   echo $seqcode =  $row[0];
-                  echo $question = $row[1]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
-ขอทราบปีพ.ศ.เกิดเพื่อคำนวณอายุค่ะ*/
+                  echo $question = $row[1]; 
                 }   
 
                  $replyToken = $event['replyToken'];
@@ -97,6 +96,8 @@ if (!is_null($events['events'])) {
                         'type' => 'text',
                         'text' => 'กรุณาพิมพ์ใหม่นะคะ'
                       ];  
+
+/*********************************************จบคำถามที่หนึ่ง     เริ่มคำถามที่สอง****************************************************************/                      
 }elseif ($event['message']['text'] == "ชื่อถูกต้อง"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -116,12 +117,6 @@ if (!is_null($events['events'])) {
 
 $q = pg_exec($dbconn, "INSERT INTO users_register(user_id,user_name,status,updated_at )VALUES('{$user_id}','{$u}','1',NOW())") or die(pg_errormessage());
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0007','','0008','0',NOW(),NOW())") or die(pg_errormessage());
- // }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
- //                 $replyToken = $event['replyToken'];
- //                 $messages = [
- //                        'type' => 'text',
- //                        'text' => 'กรุณาพิมพ์ใหม่ค่ะ'
- //                      ];     
 
 ###########################################################################################################
   }elseif (strpos($_msg) !== false && $seqcode == "0005" ) {
@@ -370,33 +365,33 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
-                      ];
+                 // $messages = [
+                 //        'type' => 'text',
+                 //        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
+                 //      ];
 
-                // $messages = [
-                //   'type'=> 'template',
-                //   'altText'=> 'this is a buttons template',
-                //   'template'=> [
-                //       'type'=> 'buttons',
-                //       'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-                //       'title'=> 'Menu',
-                //       'text'=> 'Please select',
-                //       'actions'=> [
-                //           [
-                //             'type'=> 'postback',
-                //             'label'=> 'Buy',
-                //             'data'=> 'action=buy&itemid=123'
-                //           ],
-                //           [
-                //             'type'=> 'postback',
-                //             'label'=> 'Add to cart',
-                //             'data'=> 'action=add&itemid=123'
-                //           ]
-                //       ]
-                //   ]
-                // ];
+                $messages = [
+                  'type'=> 'template',
+                  'altText'=> 'this is a buttons template',
+                  'template'=> [
+                      'type'=> 'buttons',
+                      'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
+                      'title'=> 'Menu',
+                      'text'=> 'Please select',
+                      'actions'=> [
+                          [
+                            'type'=> 'postback',
+                            'label'=> 'Buy',
+                            'data'=> 'action=buy&itemid=123'
+                          ],
+                          [
+                            'type'=> 'postback',
+                            'label'=> 'Add to cart',
+                            'data'=> 'action=add&itemid=123'
+                          ]
+                      ]
+                  ]
+                ];
 
 
 
@@ -726,7 +721,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-//$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0024','','0025','0',NOW(),NOW())") or die(pg_errormessage());
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0024','','0025','0',NOW(),NOW())") or die(pg_errormessage());
                 
 ########################################################################################################################################################
 
