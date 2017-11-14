@@ -399,12 +399,12 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       'type'=> 'buttons',
                       //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
                       'title'=> "ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?",
-                      'text'=> "กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ",
+                      'text'=> "กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่อให้ทางเราคำนวณอายุครรภ์ค่ะ",
                       'actions'=> [
                           [
                             'type'=> 'message',
-                            'label'=> 'แพ้ยา',
-                            'text'=> 'แพ้ยา'
+                            'label'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน',
+                            'text'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน'
                           ],
                           // [
                           //   'type'=> 'message',
@@ -413,8 +413,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           // ],
                           [
                             'type'=> 'message',
-                            'label'=> 'ไม่มี',
-                            'text'=> 'ไม่มีประวัติการแพ้'
+                            'label'=> 'กำหนดการคลอด',
+                            'text'=> 'กำหนดการคลอด'
                           ]
                       ]
                   ]
