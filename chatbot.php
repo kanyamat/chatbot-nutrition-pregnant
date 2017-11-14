@@ -586,7 +586,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => 'ขอทราบเลขประจำตัวผู้ป่วยของโรงพยาบาลที่คุณแม่ไปฝากครรภ์หน่อยค่ะ'
+                        'text' => 'ขอทราบ E-mail ของคุณหน่อยค่ะ'
                       ];
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_name = '{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
@@ -638,7 +638,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 }   
 
                   $u = pg_escape_string($_msg);
-                  $ans = 'เลขประจำตัวผู้ป่วยของคุณคือ'.$_msg.'ใช่ไหมคะ' ;
+                  $ans = 'E-mailของคุณคือ'.$_msg.'ใช่ไหมคะ' ;
                   $replyToken = $event['replyToken'];
                   $messages = [
                       'type' => 'template',
@@ -650,7 +650,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                               [
                                   'type' => 'message',
                                   'label' => 'ใช่',
-                                  'text' => 'เลขประจำตัวผู้ป่วยของถูกต้อง'
+                                  'text' => 'E-mailถูกต้อง'
                               ],
                               [
                                   'type' => 'message',
