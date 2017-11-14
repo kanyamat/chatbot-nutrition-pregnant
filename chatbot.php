@@ -403,7 +403,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       'actions'=> [
                           [
                             'type'=> 'message',
-                            'label'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน',
+                            'label'=> 'ครั้งสุดท้ายที่',
                             'text'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน'
                           ],
                           // [
