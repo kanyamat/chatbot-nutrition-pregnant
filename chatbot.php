@@ -363,33 +363,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $u = pg_escape_string($answer);
                   // $u2 = pg_escape_string($surname);
                  $replyToken = $event['replyToken'];
-                 // $messages = [
-                 //        'type' => 'text',
-                 //        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
-                 //      ];
-
-                // $messages = [
-                //   'type'=> 'template',
-                //   'altText'=> 'this is a buttons template',
-                //   'template'=> [
-                //       'type'=> 'buttons',
-                //       'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-                //       'title'=> 'ขณะนี้คุณมีอายุครรภ์กี่สัปดาห์คะ?',
-                //       'text'=> 'กรุณาเลือกตอบข้อใดข้อหนึ่งเพื่ให้ทางเราอคำนวณอายุครรภ์ค่ะ',
-                //       'actions'=> [
-                //           [
-                //             'type'=> 'message',
-                //             'label'=> 'ครั้งสุดท้ายที่คุณมีประจำเดือน',
-                //             'text'=> 'action=buy&itemid=123'
-                //           ],
-                //           [
-                //             'type'=> 'message',
-                //             'label'=> 'กำหนดการคลอด',
-                //             'text'=> 'action=add&itemid=123'
-                //           ]
-                //       ]
-                //   ]
-                // ];
 
 
                 $messages = [
@@ -406,11 +379,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                             'label'=> 'ครั้งสุดท้ายที่มีประจำเดือน',
                             'text'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน'
                           ],
-                          // [
-                          //   'type'=> 'message',
-                          //   'label'=> 'แพ้อาหาร',
-                          //   'text'=> 'แพ้อาหาร'
-                          // ],
                           [
                             'type'=> 'message',
                             'label'=> 'กำหนดการคลอด',
@@ -431,7 +399,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 ########################################################################################################################################################
- // }elseif (is_numeric($_msg) !== false && $seqcode == "0015"){
+
  }elseif (strlen($_msg) == 5 && $seqcode == "0015") {
     // $birth_years =  str_replace("วันที่","", $_msg);
     $pieces = explode(" ", $_msg);
