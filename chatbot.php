@@ -377,7 +377,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           [
                             'type'=> 'message',
                             'label'=> 'ครั้งสุดท้ายที่มีประจำเดือน',
-                            'text'=> 'ครั้งสุดท้ายที่เป็นประจำเดือน'
+                            'text'=> 'ครั้งสุดท้ายที่มีประจำเดือน'
                           ],
                           [
                             'type'=> 'message',
@@ -400,9 +400,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 ########################################################################################################################################################
 
-<<<<<<< HEAD
 
- }elseif ($event['message']['text'] == "ครั้งสุดท้ายที่มีประจำเดือน"  ) {
+ }elseif ($event['message']['text'] == "ครั้งสุดท้ายที่มีประจำเดือน" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; /*ก่อนอื่น ดิฉันขออนุญาตถามข้อมูลเบื้องต้นเกี่ยวกับคุณก่อนนะคะ
@@ -427,9 +426,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 ########################################################################################################################################################
 
  }elseif (strlen($_msg) == 5 && $seqcode == "0015") {
-=======
- }elseif (strlen($_msg) == 5 && /*$seqcode == "0015"*/$event['message']['text'] == "ครั้งสุดท้ายที่มีประจำเดือน" ) {
->>>>>>> caa6e6370dd30a544c9985062210a5b67d738c59
     // $birth_years =  str_replace("วันที่","", $_msg);
     $pieces = explode(" ", $_msg);
     $date = str_replace("","",$pieces[0]);
