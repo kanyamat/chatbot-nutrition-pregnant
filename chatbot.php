@@ -969,88 +969,129 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                   $replyToken = $event['replyToken'];
                     
-                    $messages = [
+            //         $messages = [
                                                               
-                        'type' => 'template',
-                        'altText' => 'template',
-                        'template' => [
-                            'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'ลูกน้อยของคุณ',
-                            'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                            'actions' => [
-                                          // [
-                                          //     'type' => 'postback',
-                                          //     'label' => 'good',
-                                          //     'data' => 'value'
-                                          // ],
-                                   [
-                                    'type' => 'uri',
-                                    'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ]
-                                    ,
-                                    //                               [
-                                    // 'type' => 'message',
-                                    // 'label' => 'รายละเอียดเพิ่มเติม',
-                                    // 'text' => 'รายละเอียดเพิ่มเติม'
-                                    // ]
+            //             'type' => 'template',
+            //             'altText' => 'template',
+            //             'template' => [
+            //                 'type' => 'buttons',
+            //                 'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+            //                 'title' => 'ลูกน้อยของคุณ',
+            //                 'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+            //                 'actions' => [
 
-                                      ]
-                                  ]
-                              ];
+            //                        [
+            //                         'type' => 'uri',
+            //                         'label' => 'กราฟ',
+            //                         'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+            //                         ]
+            //                         ,
 
 
-            // $eatProtein=$weight+25;
+            //                           ]
+            //                       ]
+            //                   ];
 
-        // $messages3 = [
-    //                     'type' => 'text',
-    //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
-    //                   ];
-                $messages2 = [
-                        'type' => 'text',
-                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
-                      ];
 
-                // $messages3 = [
-                //         'type' => 'text',
-                //         'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
-                //       ];
-                $messages3 = [
+            // // $eatProtein=$weight+25;
+
+      
+            //     $messages2 = [
+            //             'type' => 'text',
+            //             'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
+            //           ];
+
+                
+            //     $messages3 = [
                                                               
-                        'type' => 'template',
-                        'altText' => 'template',
-                        'template' => [
-                            'type' => 'buttons',
-                            //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
-                            'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
-                            'actions' => [
+            //             'type' => 'template',
+            //             'altText' => 'template',
+            //             'template' => [
+            //                 'type' => 'buttons',
+            //                 //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+            //                 'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
+            //                 'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
+            //                 'actions' => [
 
-                                   [
-                                    'type' => 'uri',
-                                    'label' => 'รายละเอียด',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ]
-                                    ,
-                                    //                               [
-                                    // 'type' => 'message',
-                                    // 'label' => 'รายละเอียดเพิ่มเติม',
-                                    // 'text' => 'รายละเอียดเพิ่มเติม'
-                                    // ]
+            //                        [
+            //                         'type' => 'uri',
+            //                         'label' => 'รายละเอียด',
+            //                         'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+            //                         ]
+            //                         ,
+                                    
 
-                                      ]
-                                  ]
-                              ];
+            //                           ]
+            //                       ]
+            //                   ];
+
+            //     $messages4 = [
+            //             'type' => 'text',
+            //             'text' =>  $aaa
+            //           ];
+ 
+
+
 
                 $messages4 = [
-                        'type' => 'text',
-                        'text' =>  $aaa
-                      ];
-                // $messages5 = [
-                //         'type' => 'text',
-                //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
-                //       ];
+                          'type'=> 'template',
+                          'altText'=> 'this is a carousel template',
+                          'template'=> [
+                              'type'=> 'carousel',
+                              'columns'=> [
+                                  [
+                                    'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                                    'title'=> 'ลูกน้อยของคุณ',
+                                    'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                                    'actions'=> [
+                                        [
+                                            'type' => 'uri',
+                                            'label' => 'กราฟ',
+                                            'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
+                                        ],
+                                        [
+                                            "type"=> "uri",
+                                            "label"=> "View detail",
+                                            "uri"=> "http://example.com/page/111"
+                                        ]
+                                    ]
+                                  ]
+                              //     [
+                              //       "thumbnailImageUrl"=> "https://example.com/bot/images/item2.jpg",
+                              //       "title"=> "this is menu",
+                              //       "text"=> "description",
+                              //       "actions": [
+                              //           [
+                              //               "type"=> "postback",
+                              //               "label"=> "Buy",
+                              //               "data"=> "action=buy&itemid=222"
+                              //           ],
+                              //           [
+                              //               "type"=> "postback",
+                              //               "label"=> "Add to cart",
+                              //               "data"=> "action=add&itemid=222"
+                              //           ],
+                              //           [
+                              //               "type"=> "uri",
+                              //               "label"=> "View detail",
+                              //               "uri"=> "http://example.com/page/222"
+                              //           ]
+                              //       ]
+                              //     ]
+                              // ]
+                          ]
+                        ];
+
+
+
+
+
+
+
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
