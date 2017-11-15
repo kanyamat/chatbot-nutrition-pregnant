@@ -969,113 +969,113 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                   $replyToken = $event['replyToken'];
                     
-                    $messages = [
+            //         $messages = [
                                                               
-                        'type' => 'template',
-                        'altText' => 'template',
-                        'template' => [
-                            'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'ลูกน้อยของคุณ',
-                            'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                            'actions' => [
+            //             'type' => 'template',
+            //             'altText' => 'template',
+            //             'template' => [
+            //                 'type' => 'buttons',
+            //                 'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+            //                 'title' => 'ลูกน้อยของคุณ',
+            //                 'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+            //                 'actions' => [
 
-                                   [
-                                    'type' => 'uri',
-                                    'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ]
-                                    ,
-
-
-                                      ]
-                                  ]
-                              ];
+            //                        [
+            //                         'type' => 'uri',
+            //                         'label' => 'กราฟ',
+            //                         'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+            //                         ]
+            //                         ,
 
 
-            // $eatProtein=$weight+25;
+            //                           ]
+            //                       ]
+            //                   ];
+
+
+            // // $eatProtein=$weight+25;
 
       
-                $messages2 = [
-                        'type' => 'text',
-                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
-                      ];
+            //     $messages2 = [
+            //             'type' => 'text',
+            //             'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
+            //           ];
 
                 
-                $messages3 = [
+            //     $messages3 = [
                                                               
-                        'type' => 'template',
-                        'altText' => 'template',
-                        'template' => [
-                            'type' => 'buttons',
-                            //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
-                            'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
-                            'actions' => [
+            //             'type' => 'template',
+            //             'altText' => 'template',
+            //             'template' => [
+            //                 'type' => 'buttons',
+            //                 //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+            //                 'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
+            //                 'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
+            //                 'actions' => [
 
-                                   [
-                                    'type' => 'uri',
-                                    'label' => 'รายละเอียด',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ]
-                                    ,
+            //                        [
+            //                         'type' => 'uri',
+            //                         'label' => 'รายละเอียด',
+            //                         'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+            //                         ]
+            //                         ,
                                     
 
-                                      ]
-                                  ]
-                              ];
+            //                           ]
+            //                       ]
+            //                   ];
 
-                $messages4 = [
-                        'type' => 'text',
-                        'text' =>  $aaa
-                      ];
+            //     $messages4 = [
+            //             'type' => 'text',
+            //             'text' =>  $aaa
+            //           ];
  
 
 
 
-                // $messages = [
-                //           'type'=> 'template',
-                //           'altText'=> 'this is a carousel template',
-                //           'template'=> [
-                //               'type'=> 'carousel',
-                //               'columns'=> [
-                //                   [
-                //                     'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                //                     'title'=> 'ลูกน้อยของคุณ',
-                //                     'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                //                     'actions'=> [
-                //                         [
-                //                             'type' => 'uri',
-                //                             'label' => 'กราฟ',
-                //                             'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                //                         ],
-                //                         [
-                //                             'type'=> 'uri',
-                //                             'label'=> 'View detail',
-                //                             'uri'=> 'http://example.com/page/111'
-                //                         ]
-                //                     ]
-                //                   ],
-                //                   [
-                //                     //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                //                     'title'=> 'ลูกน้อยของคุณ',
-                //                     'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                //                     'actions'=> [
-                //                         [
-                //                             'type' => 'uri',
-                //                             'label' => 'กราฟ',
-                //                             'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                //                         ],
-                //                         [
-                //                             'type'=> 'uri',
-                //                             'label'=> 'View detail',
-                //                             'uri'=> 'http://example.com/page/111'
-                //                         ]
-                //                     ]
-                //                   ]
-                //               ]
-                //           ]
-                //         ];
+                $messages = [
+                          'type'=> 'template',
+                          'altText'=> 'this is a carousel template',
+                          'template'=> [
+                              'type'=> 'carousel',
+                              'columns'=> [
+                                  [
+                                    'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                                    'title'=> 'ลูกน้อยของคุณ',
+                                    'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                                    'actions'=> [
+                                        [
+                                            'type' => 'uri',
+                                            'label' => 'กราฟ',
+                                            'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                        ],
+                                        [
+                                            'type'=> 'uri',
+                                            'label'=> 'View detail',
+                                            'uri'=> 'http://example.com/page/111'
+                                        ]
+                                    ]
+                                  ],
+                                  [
+                                    //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                                    'title'=> 'test',
+                                    'text'=> '.....',
+                                    'actions'=> [
+                                        [
+                                            'type'=> 'uri',
+                                            'label'=> 'View detail',
+                                            'uri'=> 'http://example.com/page/111'
+                                        ],
+                                        [
+                                            'type'=> 'uri',
+                                            'label'=> 'View detail',
+                                            'uri'=> 'http://example.com/page/111'
+                                        ]
+                                    ]
+                                  ]
+                              ]
+                          ]
+                        ];
 
 
 
@@ -1084,23 +1084,23 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-    $url = 'https://api.line.me/v2/bot/message/reply';
-         $data = [
-          'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3,$messages4],
-         ];
-         error_log(json_encode($data));
-         $post = json_encode($data);
-         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-         $ch = curl_init($url);
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-         $result = curl_exec($ch);
-         curl_close($ch);
-         echo $result . "\r\n";
+    // $url = 'https://api.line.me/v2/bot/message/reply';
+    //      $data = [
+    //       'replyToken' => $replyToken,
+    //       'messages' => [$messages,$messages2,$messages3,$messages4],
+    //      ];
+    //      error_log(json_encode($data));
+    //      $post = json_encode($data);
+    //      $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+    //      $ch = curl_init($url);
+    //      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    //      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+    //      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    //      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    //      $result = curl_exec($ch);
+    //      curl_close($ch);
+    //      echo $result . "\r\n";
 
 ########################################################################################################################################################
 
