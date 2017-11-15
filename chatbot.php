@@ -1125,21 +1125,21 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
               'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
-              'text'=> "Please select",
+              'text'=> "เบา=ออกกำลังกายน้อย , ปานกลาง=อกกำลังกายสม่ำเสมอ , หนัก=ออกกำลังกายหนักเป็นประจำ",
               'actions'=> [
                   [
                     'type'=> 'message',
-                    'label'=> 'มีการออกกำลังกายน้อย',
+                    'label'=> 'เบา',
                     'text'=> 'เบา'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'มีการออกกำลังกายสม่ำเสมอ',
+                    'label'=> 'ปานกลาง',
                     'text'=> 'ปานกลาง'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ออกกำลังกายหนักเป็นประจำ',
+                    'label'=> 'หนัก',
                     'text'=> 'หนัก'
                   ]
               ]
