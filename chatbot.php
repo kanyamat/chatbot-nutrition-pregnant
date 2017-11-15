@@ -1059,7 +1059,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                             'uri'=> 'http://example.com/page/111'
                                         ]
                                     ]
-                                  ]
+                                  ],
                                   [
                                     //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                                     'title'=> 'ลูกน้อยของคุณ',
