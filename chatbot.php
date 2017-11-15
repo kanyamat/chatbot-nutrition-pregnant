@@ -967,10 +967,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 }
                 
 
-
-
-
-      $replyToken = $event['replyToken'];
+                  $replyToken = $event['replyToken'];
+                    
                     $messages = [
                                                               
                         'type' => 'template',
@@ -1014,10 +1012,37 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                       ];
 
+                // $messages3 = [
+                //         'type' => 'text',
+                //         'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
+                //       ];
                 $messages3 = [
-                        'type' => 'text',
-                        'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
-                      ];
+                                                              
+                        'type' => 'template',
+                        'altText' => 'template',
+                        'template' => [
+                            'type' => 'buttons',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
+                            'text' =>  'หากต้องการดูรายละเอียดการรับประทานอาหารในแต่ละวันสามารถกดปุ่มด้านล่างได้เลยค่ะ',
+                            'actions' => [
+
+                                   [
+                                    'type' => 'uri',
+                                    'label' => 'กราฟ',
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    ]
+                                    ,
+                                    //                               [
+                                    // 'type' => 'message',
+                                    // 'label' => 'รายละเอียดเพิ่มเติม',
+                                    // 'text' => 'รายละเอียดเพิ่มเติม'
+                                    // ]
+
+                                      ]
+                                  ]
+                              ];
+
                 $messages4 = [
                         'type' => 'text',
                         'text' =>  $aaa
