@@ -945,208 +945,208 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE
  $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
 
-// ############################################################### Summary ####################################################################################
-//  }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
+############################################################### Summary ####################################################################################
+ }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
 
 
-//      $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($check_q2)) {
+     $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
             
-//                   echo $weight = $row[0]; 
-//                   echo $height = $row[1]; 
-//                   echo $preg_week = $row[2]; 
-//                 } 
-//           $height1 =$height*0.01;
-//                   $bmi = $weight/($height1*$height1);
-//                   $bmi = number_format($bmi, 2, '.', '');
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
+                } 
+          $height1 =$height*0.01;
+                  $bmi = $weight/($height1*$height1);
+                  $bmi = number_format($bmi, 2, '.', '');
 
 
 
 
-//                  // $messages2 = [
-//                  //        'type' => 'text',
-//                  //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
-//                  //      ];
+                 // $messages2 = [
+                 //        'type' => 'text',
+                 //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
+                 //      ];
 
 
-//    $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($check_q2)) {
+   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
             
-//                   echo $weight = $row[0]; 
-//                   echo $height = $row[1]; 
-//                   echo $preg_week = $row[2]; 
-//                 } 
-//                   $height1 =$height*0.01;
-//                   $bmi = $weight/($height1*$height1);
-//                   $bmi = number_format($bmi, 2, '.', '');
+                  echo $weight = $row[0]; 
+                  echo $height = $row[1]; 
+                  echo $preg_week = $row[2]; 
+                } 
+                  $height1 =$height*0.01;
+                  $bmi = $weight/($height1*$height1);
+                  $bmi = number_format($bmi, 2, '.', '');
 
-//         if ($bmi<18.5) {
-//           $result="Underweight";
-//         } elseif ($bmi>=18.5 && $bmi<24.9) {
-//           $result="Nomal weight";
-//         } elseif ($bmi>=24.9 && $bmi<=29.9) {
-//           $result="Overweight";
-//         }else{
-//           $result="Obese";
-//         }
+        if ($bmi<18.5) {
+          $result="Underweight";
+        } elseif ($bmi>=18.5 && $bmi<24.9) {
+          $result="Nomal weight";
+        } elseif ($bmi>=24.9 && $bmi<=29.9) {
+          $result="Overweight";
+        }else{
+          $result="Obese";
+        }
 
-//    $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($check_q3)) {
+   $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q3)) {
             
-//                   echo $weight = $row[0]; 
-//                   echo $age = $row[1];
-//           echo $preg_week = $row[2];
-//                 } 
+                  echo $weight = $row[0]; 
+                  echo $age = $row[1];
+          echo $preg_week = $row[2];
+                } 
 
-//         if ($age>=10 && $age<=18) {
-//           $cal=(13.384*$weight)+692.6;
-//         }elseif ($age>=18 && $age<=30) {
-//           $cal=(14.818*$weight)+486.6;
-//         }else{
-//           $cal=(8.126*$weight)+845.6;
-//         }
+        if ($age>=10 && $age<=18) {
+          $cal=(13.384*$weight)+692.6;
+        }elseif ($age>=18 && $age<=30) {
+          $cal=(14.818*$weight)+486.6;
+        }else{
+          $cal=(8.126*$weight)+845.6;
+        }
 
-//         if ($_msg=="หนัก" ) {
-//           $total = $cal*2.0;
-//         }elseif($_msg=="ปานกลาง") {
-//           $total = $cal*1.7;
-//         }else{
-//           $total = $cal*1.4;
-//         }
+        if ($_msg=="หนัก" ) {
+          $total = $cal*2.0;
+        }elseif($_msg=="ปานกลาง") {
+          $total = $cal*1.7;
+        }else{
+          $total = $cal*1.4;
+        }
 
-//         if ($preg_week >=13 && $preg_week<=40) {
-//           $a = $total+300;
-//         }else{
-//           $a=$total; 
-//         }
+        if ($preg_week >=13 && $preg_week<=40) {
+          $a = $total+300;
+        }else{
+          $a=$total; 
+        }
         
-//   $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
-//                 while ($row = pg_fetch_row($check_q4)) {
+  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
+                while ($row = pg_fetch_row($check_q4)) {
             
-//           //echo $caloric = $row[0]; 
-//           echo $starches = $row[0];
-//           echo $vegetables = $row[1];
-//           echo $fruits = $row[2];
-//           echo $meats = $row[3];
-//           echo $fats = $row[4];
-//           echo $lf_milk = $row[5];
-//           echo $c = $row[6];
-//           echo $p = $row[7];
-//           echo $f = $row[8];
-//           echo $g_protein  = $row[9];
+          //echo $caloric = $row[0]; 
+          echo $starches = $row[0];
+          echo $vegetables = $row[1];
+          echo $fruits = $row[2];
+          echo $meats = $row[3];
+          echo $fats = $row[4];
+          echo $lf_milk = $row[5];
+          echo $c = $row[6];
+          echo $p = $row[7];
+          echo $f = $row[8];
+          echo $g_protein  = $row[9];
 
-//                 } 
+                } 
 
-//                   $bbb = "-ข้าววันละ". $starches ."ทัพพี". "\n".
-//                           "-ผักวันละ". $vegetables. "ทัพพี"."\n".
-//                           "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
-//                           "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
-//                           "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
-//                           "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
+                  $bbb = "-ข้าววันละ". $starches ."ทัพพี". "\n".
+                          "-ผักวันละ". $vegetables. "ทัพพี"."\n".
+                          "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
+                          "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
+                          "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
+                          "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
 
-//                 if ($total <= 1600) {
-//                   $aaa=$bbb;
-//                 } elseif ($total >= 1601 && $total<=1700) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >=1701 && $total<=1800) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >=1801 && $total<=1900) {
-//                  $aaa=$bbb;
-//                 }elseif ($total >=1901 && $total<=2000) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >=2001 && $total<=2100 ) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >= 2101 && $total<=2200) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >= 2201 && $total <=2300) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >= 2301 && $total <=2400) {
-//                   $aaa=$bbb;
-//                 }elseif ($total >= 2401 && $total <=2500) {
-//                  $aaa=$bbb;
-//                 }else {
-//                   $aaa=$bbb;
-//                 }
+                if ($total <= 1600) {
+                  $aaa=$bbb;
+                } elseif ($total >= 1601 && $total<=1700) {
+                  $aaa=$bbb;
+                }elseif ($total >=1701 && $total<=1800) {
+                  $aaa=$bbb;
+                }elseif ($total >=1801 && $total<=1900) {
+                 $aaa=$bbb;
+                }elseif ($total >=1901 && $total<=2000) {
+                  $aaa=$bbb;
+                }elseif ($total >=2001 && $total<=2100 ) {
+                  $aaa=$bbb;
+                }elseif ($total >= 2101 && $total<=2200) {
+                  $aaa=$bbb;
+                }elseif ($total >= 2201 && $total <=2300) {
+                  $aaa=$bbb;
+                }elseif ($total >= 2301 && $total <=2400) {
+                  $aaa=$bbb;
+                }elseif ($total >= 2401 && $total <=2500) {
+                 $aaa=$bbb;
+                }else {
+                  $aaa=$bbb;
+                }
                 
 
 
 
 
-//       $replyToken = $event['replyToken'];
-//                     $messages = [
+      $replyToken = $event['replyToken'];
+                    $messages = [
                                                               
-//                         'type' => 'template',
-//                         'altText' => 'template',
-//                         'template' => [
-//                             'type' => 'buttons',
-//                             'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-//                             'title' => 'ลูกน้อยของคุณ',
-//                             'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-//                             'actions' => [
-//                                           // [
-//                                           //     'type' => 'postback',
-//                                           //     'label' => 'good',
-//                                           //     'data' => 'value'
-//                                           // ],
-//                                    [
-//                                     'type' => 'uri',
-//                                     'label' => 'กราฟ',
-//                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-//                                     ]
-//                                     ,
-//                                     //                               [
-//                                     // 'type' => 'message',
-//                                     // 'label' => 'รายละเอียดเพิ่มเติม',
-//                                     // 'text' => 'รายละเอียดเพิ่มเติม'
-//                                     // ]
+                        'type' => 'template',
+                        'altText' => 'template',
+                        'template' => [
+                            'type' => 'buttons',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'title' => 'ลูกน้อยของคุณ',
+                            'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                            'actions' => [
+                                          // [
+                                          //     'type' => 'postback',
+                                          //     'label' => 'good',
+                                          //     'data' => 'value'
+                                          // ],
+                                   [
+                                    'type' => 'uri',
+                                    'label' => 'กราฟ',
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    ]
+                                    ,
+                                    //                               [
+                                    // 'type' => 'message',
+                                    // 'label' => 'รายละเอียดเพิ่มเติม',
+                                    // 'text' => 'รายละเอียดเพิ่มเติม'
+                                    // ]
 
-//                                       ]
-//                                   ]
-//                               ];
+                                      ]
+                                  ]
+                              ];
 
 
-//             // $eatProtein=$weight+25;
+            // $eatProtein=$weight+25;
 
-//         // $messages3 = [
-//     //                     'type' => 'text',
-//     //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
-//     //                   ];
-//                 $messages2 = [
-//                         'type' => 'text',
-//                         'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
-//                       ];
+        // $messages3 = [
+    //                     'type' => 'text',
+    //                     'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week. 'สัปดาห์'
+    //                   ];
+                $messages2 = [
+                        'type' => 'text',
+                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
+                      ];
 
-//                 $messages3 = [
-//                         'type' => 'text',
-//                         'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
-//                       ];
-//                 $messages4 = [
-//                         'type' => 'text',
-//                         'text' =>  $aaa
-//                       ];
-//                 // $messages5 = [
-//                 //         'type' => 'text',
-//                 //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
-//                 //       ];
+                $messages3 = [
+                        'type' => 'text',
+                        'text' =>  'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total
+                      ];
+                $messages4 = [
+                        'type' => 'text',
+                        'text' =>  $aaa
+                      ];
+                // $messages5 = [
+                //         'type' => 'text',
+                //         'text' =>  'โปรตีนที่ต้องการ'.$eatProtein
+                //       ];
 
-//     $url = 'https://api.line.me/v2/bot/message/reply';
-//          $data = [
-//           'replyToken' => $replyToken,
-//           'messages' => [$messages,$messages2,$messages3,$messages4],
-//          ];
-//          error_log(json_encode($data));
-//          $post = json_encode($data);
-//          $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-//          $ch = curl_init($url);
-//          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-//          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//          curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-//          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-//          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-//          $result = curl_exec($ch);
-//          curl_close($ch);
-//          echo $result . "\r\n";
+    $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2,$messages3,$messages4],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
     
 
 
