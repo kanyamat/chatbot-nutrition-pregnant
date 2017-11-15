@@ -1033,7 +1033,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-                $messages4 = [
+                $messages = [
                           'type'=> 'template',
                           'altText'=> 'this is a carousel template',
                           'template'=> [
@@ -1092,23 +1092,23 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-    $url = 'https://api.line.me/v2/bot/message/reply';
-         $data = [
-          'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3,$messages4],
-         ];
-         error_log(json_encode($data));
-         $post = json_encode($data);
-         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-         $ch = curl_init($url);
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-         $result = curl_exec($ch);
-         curl_close($ch);
-         echo $result . "\r\n";
+    // $url = 'https://api.line.me/v2/bot/message/reply';
+    //      $data = [
+    //       'replyToken' => $replyToken,
+    //       'messages' => [$messages,$messages2,$messages3,$messages4],
+    //      ];
+    //      error_log(json_encode($data));
+    //      $post = json_encode($data);
+    //      $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+    //      $ch = curl_init($url);
+    //      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    //      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+    //      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    //      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    //      $result = curl_exec($ch);
+    //      curl_close($ch);
+    //      echo $result . "\r\n";
 
 ########################################################################################################################################################
 
