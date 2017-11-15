@@ -1029,7 +1029,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
                                    [
                                     'type' => 'uri',
-                                    'label' => 'กราฟ',
+                                    'label' => 'รายละเอียด',
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ]
                                     ,
@@ -1129,17 +1129,17 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE
               'actions'=> [
                   [
                     'type'=> 'message',
-                    'label'=> 'เบา',
+                    'label'=> 'วิถีชีวิตทั่วไป ไม่มีการออกกำลังกาย หรือมีการออกกำลังกายน้อย',
                     'text'=> 'เบา'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'ปานกลาง',
+                    'label'=> 'วิถีชีวิตกระฉับกระเฉง หรือ มีการออกกำลังกายสม่ำเสมอ',
                     'text'=> 'ปานกลาง'
                   ],
                   [
                     'type'=> 'message',
-                    'label'=> 'หนัก',
+                    'label'=> 'วิถีชีวิตมีการใช้แรงงานหนัก ออกกำลังกายหนักเป็นประจำ',
                     'text'=> 'หนัก'
                   ]
               ]
