@@ -400,7 +400,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 ########################################################################################################################################################
 
- }elseif (strlen($_msg) == 5 && $seqcode == "0015") {
+ }elseif (strlen($_msg) == 5 && /*$seqcode == "0015"*/ || $event['message']['text'] == "ครั้งสุดท้ายที่มีประจำเดือน" ) {
     // $birth_years =  str_replace("วันที่","", $_msg);
     $pieces = explode(" ", $_msg);
     $date = str_replace("","",$pieces[0]);
