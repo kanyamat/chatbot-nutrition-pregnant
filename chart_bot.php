@@ -12,6 +12,7 @@ $check = pg_query($dbconn,"SELECT user_weight FROM user_data  WHERE  user_id = '
               
                  $result = $row[0];
   
+  
                 } 
 $a =[];
 $arrayName=[];
