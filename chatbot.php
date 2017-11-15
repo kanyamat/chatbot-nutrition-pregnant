@@ -770,10 +770,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   echo $answer = $row[0]; 
                 }  
                  $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
 
-
-
-      $replyToken = $event['replyToken'];
                   $messages = [
                       'type' => 'template',
                       'altText' => 'this is a confirm template',
@@ -808,7 +806,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   echo $answer = $row[0]; 
                 }   
             $u = pg_escape_string($_msg); 
-
+            $replyToken = $event['replyToken'];
+            
         $messages = [
           'type'=> 'template',
           'altText'=> 'this is a buttons template',
