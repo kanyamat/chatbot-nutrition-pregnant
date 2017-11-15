@@ -998,49 +998,49 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
 
 
-                $messages = [
-                          'type'=> 'template',
-                          'altText'=> 'this is a carousel template',
-                          'template'=> [
-                              'type'=> 'carousel',
-                              'columns'=> [
-                                  [
-                                    'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                                    'title'=> 'ลูกน้อยของคุณ',
-                                    'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                                    'actions'=> [
-                                        [
-                                            'type' => 'uri',
-                                            'label' => 'กราฟ',
-                                            'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                        ],
-                                        [
-                                            'type'=> 'uri',
-                                            'label'=> 'View detail',
-                                            'uri'=> 'http://example.com/page/111'
-                                        ]
-                                    ]
-                                  ],
-                                  [
-                                    //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                                    'title'=> 'test',
-                                    'text'=> '.....',
-                                    'actions'=> [
-                                        [
-                                            'type'=> 'uri',
-                                            'label'=> 'View detail',
-                                            'uri'=> 'http://example.com/page/111'
-                                        ],
-                                        [
-                                            'type'=> 'uri',
-                                            'label'=> 'View detail',
-                                            'uri'=> 'http://example.com/page/111'
-                                        ]
-                                    ]
-                                  ]
-                              ]
-                          ]
-                        ];
+                // $messages = [
+                //           'type'=> 'template',
+                //           'altText'=> 'this is a carousel template',
+                //           'template'=> [
+                //               'type'=> 'carousel',
+                //               'columns'=> [
+                //                   [
+                //                     'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                //                     'title'=> 'ลูกน้อยของคุณ',
+                //                     'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                //                     'actions'=> [
+                //                         [
+                //                             'type' => 'uri',
+                //                             'label' => 'กราฟ',
+                //                             'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                //                         ],
+                //                         [
+                //                             'type'=> 'uri',
+                //                             'label'=> 'View detail',
+                //                             'uri'=> 'http://example.com/page/111'
+                //                         ]
+                //                     ]
+                //                   ],
+                //                   [
+                //                     //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                //                     'title'=> 'test',
+                //                     'text'=> '.....',
+                //                     'actions'=> [
+                //                         [
+                //                             'type'=> 'uri',
+                //                             'label'=> 'View detail',
+                //                             'uri'=> 'http://example.com/page/111'
+                //                         ],
+                //                         [
+                //                             'type'=> 'uri',
+                //                             'label'=> 'View detail',
+                //                             'uri'=> 'http://example.com/page/111'
+                //                         ]
+                //                     ]
+                //                   ]
+                //               ]
+                //           ]
+                //         ];
 
 
 
