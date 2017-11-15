@@ -1054,9 +1054,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                         //     'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                                         // ]
                                         [
-                                            "type"=> "uri",
-                                            "label"=> "View detail",
-                                            "uri"=> "http://example.com/page/111"
+                                            'type'=> 'uri',
+                                            'label'=> 'View detail',
+                                            'uri'=> 'http://example.com/page/111'
                                         ]
                                     ]
                                   ]
@@ -1069,16 +1069,16 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                             'type' => 'uri',
                                             'label' => 'กราฟ',
                                             'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                        ]/*,
+                                        ],
                                         [
                                             'type' => 'text',
                                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
                                         ],
                                         [
-                                            "type"=> "uri",
-                                            "label"=> "View detail",
-                                            "uri"=> "http://example.com/page/111"
-                                        ]*/
+                                            'type'=> 'uri',
+                                            'label'=> 'View detail',
+                                            'uri'=> 'http://example.com/page/111'
+                                        ]
                                     ]
                                   ]
                               ]
