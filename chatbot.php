@@ -857,7 +857,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                   ];        
 
 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 //$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0026','{$u}','0027','0',NOW(),NOW())") or die(pg_errormessage());
 
 ########################################################################################################################################################
