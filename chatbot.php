@@ -806,14 +806,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 //$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0026','0',NOW(),NOW())") or die(pg_errormessage());
 ########################################################################################################################################################
-}elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
-    
-     $replyToken = $event['replyToken'];
-      $text = "ดิฉันไม่เข้าใจค่ะ กรุณาพิมพ์ใหม่อีกครั้งนะคะ";
-      $messages = [
-          'type' => 'text',
-          'text' => $text
-        ];               
+              
 ########################################################################################################################################################
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
@@ -1192,7 +1185,14 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 ########################################################################################################################################################
-                   
+}elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
+    
+     $replyToken = $event['replyToken'];
+      $text = "ดิฉันไม่เข้าใจค่ะ กรุณาพิมพ์ใหม่อีกครั้งนะคะ";
+      $messages = [
+          'type' => 'text',
+          'text' => $text
+        ];                    
 
 
   }else {
