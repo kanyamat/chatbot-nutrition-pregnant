@@ -566,14 +566,14 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 $strDate2=date("Y-m-d");
                 
                 $date_pre = (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 );
-                $week = $date_pre/7;
-                $week2 = 39-$week;   
+                $week = 39-($date_pre/7);
+                //$week2 = 39-$week;   
 
-                $week_preg = number_format($week2);
-                $day = $date_pre%7;
-                $day2 = 7-$day;
+                $week_preg = number_format($week);
+                $day = 7-($date_pre%7);
+                //$day2 = 7-$day;
 
-                $day_preg = number_format($day2);
+                $day_preg = number_format($day);
 
                 $age_pre = 'คุณมีอายุครรภ์'. $week_preg .'สัปดาห์'.  $day_preg .'วัน' ;
                       $replyToken = $event['replyToken'];
