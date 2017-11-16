@@ -1101,7 +1101,23 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 #########################################################################################################################################################
 
-}elseif (strpos($_msg) !== false && $seqcode == "0025" && $event['message']['text'] == "ไม่แพ้ยา")  {
+
+}elseif ($event['message']['text'] == "แพ้อาหาร" ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }   
+
+                 $u = pg_escape_string($answer);
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'คุณแพ้อาหารอะไรคะ?'
+                      ];
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','','0028','0',NOW(),NOW())") or die(pg_errormessage());
+
+########################################################################################################################################################
+}elseif (strpos($_msg) !== false && $seqcode == "0025")  {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
@@ -1132,23 +1148,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 ########################################################################################################################################################
 
-}elseif ($event['message']['text'] == "แพ้อาหาร" ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; 
-                }   
-
-                 $u = pg_escape_string($answer);
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'คุณแพ้อาหารอะไรคะ?'
-                      ];
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','','0028','0',NOW(),NOW())") or die(pg_errormessage());
-
-########################################################################################################################################################
-
-}elseif (strpos($_msg) !== false && $seqcode == "0027" && $event['message']['text'] == "ไม่แพ้อาหาร") {
+}elseif (strpos($_msg) !== false && $seqcode == "0027" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
