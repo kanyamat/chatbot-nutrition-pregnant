@@ -1107,7 +1107,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 #########################################################################################################################################################
 
-}elseif (strpos($_msg) !== false && $seqcode == "0025")  {
+}elseif (strpos($_msg) !== false && $seqcode == "0025" && $event['message']['text'] == "ไม่แพ้ยา")  {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
@@ -1144,7 +1144,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE
 ############################################################### Summary ####################################################################################
 
 
-}elseif (strpos($_msg) !== false && $seqcode == "0027" ) {
+}elseif (strpos($_msg) !== false && $seqcode == "0027" && $event['message']['text'] == "ไม่แพ้อาหาร") {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
