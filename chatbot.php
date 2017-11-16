@@ -543,7 +543,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => 'ขอทราบครั้งสุดท้ายที่คุณมีประจำเดือนเพื่อคำนวณอายุครรภ์ค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
+                        'text' => 'ขอทราบกำหนดการคลอดของคุณหน่อยค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
                       ];
 
  $q = pg_exec($dbconn, "UPDATE users_register SET user_weight = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
@@ -565,7 +565,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 $strDate1 = $years."-".$month."-".$date;
                 $strDate2=date("Y-m-d");
                 
-                $date_pre =  ((strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 ))-1;
+                $date_pre = (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 );
                 $week = $date_pre/7;
                 $week2 = 39-$week;   
 
