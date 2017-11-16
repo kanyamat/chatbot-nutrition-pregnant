@@ -566,7 +566,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 $strDate2=date("Y-m-d");
                 
                 $date_pre = (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 );
-                $week = ($date_pre-1)/7;
+                $week = $date_pre/7;
                 //$week2 = 39-$week;   
 
                 $week_preg = number_format($week);
