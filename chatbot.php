@@ -953,45 +953,55 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                
                 $replyToken = $event['replyToken'];
                 
-                $messages = [
-                    'type'=> 'template',
-                    'altText'=> 'this is a image carousel template',
-                    'template'=> [
-                        'type'=> 'image_carousel',
-                        'columns'=> [
-                            [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                              'action'=> [
-                                'type'=> 'message',
-                                'label'=> 'Yes',
-                                'text'=> 'yes'
-                              ]
-                            ],
-                            [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                              'action'=> [
-                                'type'=> 'message',
-                                'label'=> 'Yes',
-                                'text'=> 'yes'
-                              ]
-                            ],
-                            [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                              'action'=> [
-                                'type'=> 'uri',
-                                'label'=> 'View detail',
-                                'uri'=> 'http://example.com/page/222'
-                              ]
-                            ]
-                        ]
-                      ]   
-                  ];    
+                // $messages = [
+                //     'type'=> 'template',
+                //     'altText'=> 'this is a image carousel template',
+                //     'template'=> [
+                //         'type'=> 'image_carousel',
+                //         'columns'=> [
+                //             [
+                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                //               'action'=> [
+                //                 'type'=> 'message',
+                //                 'label'=> 'Yes',
+                //                 'text'=> 'yes'
+                //               ]
+                //             ],
+                //             [
+                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                //               'action'=> [
+                //                 'type'=> 'message',
+                //                 'label'=> 'Yes',
+                //                 'text'=> 'yes'
+                //               ]
+                //             ],
+                //             [
+                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
+                //               'action'=> [
+                //                 'type'=> 'uri',
+                //                 'label'=> 'View detail',
+                //                 'uri'=> 'http://example.com/page/222'
+                //               ]
+                //             ]
+                //         ]
+                //       ]   
+                //   ];    
 
-                                  // $messages = [
-                                  //       'type'=> 'image',
-                                  //       'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                                  //       'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
-                                  //   ];
+                                  $messages = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                    ];
+                                  $messages2 = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                    ];
+                                  $messages3 = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                    ];
                  // $messages = [
                  //      'type'=> 'template',
                  //      'altText'=> 'this is a carousel template',
@@ -1044,7 +1054,25 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //              ]
                  //          ]
                  //      ]
-                 //    ];       
+                 //    ];    
+
+          $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2,$messages3],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";   
 ########################################################################################################################################################
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
