@@ -1200,7 +1200,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3,$messages4],
+          'messages' => [$messages,$messages2,$messages3],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
