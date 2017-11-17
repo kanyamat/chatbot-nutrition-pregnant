@@ -22,7 +22,6 @@
                 $strDate2=date("Y-m-d");
                 
 
-
                 $date_pre =  (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 )-1;
                 $week = $date_pre/7;
                 $week2 = $week-39;   
