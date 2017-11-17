@@ -998,11 +998,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 'title'=> 'this is menu',
                                 'text'=> 'description',
                                 'actions'=> [
-                                    [
-                                        'type'=> 'image',
-                                        'originalContentUrl'=> 'Buy',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
-                                    ],
+                                    // [
+                                    //     'type'=> 'image',
+                                    //     'originalContentUrl'=> 'Buy',
+                                    //     'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                    // ],
                                     [
                                         'type'=> 'postback',
                                         'label'=> 'Add to cart',
