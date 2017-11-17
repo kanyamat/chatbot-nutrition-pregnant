@@ -1216,44 +1216,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
          echo $result . "\r\n";
 
 
-###############################################################END Summary ####################################################################################
- }elseif ($event['message']['text'] == "รูปภาพ" ) {
-               
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                    'type'=> 'template',
-                    'altText'=> 'this is a image carousel template',
-                    'template'=> [
-                        'type'=> 'image_carousel',
-                        'columns'=> [
-                            [
-                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                              'action'=> [
-                                'type'=> 'postback',
-                                'label'=> 'Buy',
-                                'data'=> 'action=buy&itemid=111'
-                              ]
-                            ],
-                            [
-                              'imageUrl'=> 'hthttp://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                              'action'=> [
-                                'type'=> 'message',
-                                'label'=> 'Yes',
-                                'text'=> 'yes'
-                              ]
-                            ],
-                            [
-                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                             'action'=> [
-                                'type'=> 'uri',
-                                'label'=> 'View detail',
-                                'uri'=> 'http://example.com/page/222'
-                              ]
-                            ]
-                        ]
-                    ]
 
-                  ];
 
 
 #########################################################################################################################################################
@@ -1365,7 +1328,44 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 $q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','{$u}','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
+###############################################################END Summary ####################################################################################
+ }elseif ($event['message']['text'] == "รูปภาพ" ) {
+               
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                    'type'=> 'template',
+                    'altText'=> 'this is a image carousel template',
+                    'template'=> [
+                        'type'=> 'image_carousel',
+                        'columns'=> [
+                            [
+                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                              'action'=> [
+                                'type'=> 'postback',
+                                'label'=> 'Buy',
+                                'data'=> 'action=buy&itemid=111'
+                              ]
+                            ],
+                            [
+                              'imageUrl'=> 'hthttp://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                              'action'=> [
+                                'type'=> 'message',
+                                'label'=> 'Yes',
+                                'text'=> 'yes'
+                              ]
+                            ],
+                            [
+                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                             'action'=> [
+                                'type'=> 'uri',
+                                'label'=> 'View detail',
+                                'uri'=> 'http://example.com/page/222'
+                              ]
+                            ]
+                        ]
+                    ]
 
+                  ];
 ########################################################################################################################################################
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
     
