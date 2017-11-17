@@ -562,6 +562,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           
             // if(($month>$today_month && $month<=12 && $date<=31) || ($month==$today_month && $date>$today_day)  ){
                 $years = $today_years-1;
+                $days 
                 $strDate1 = $years."-".$month."-".$date;
                 $strDate2=date("Y-m-d");
                 
@@ -577,7 +578,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 $day = $aa%7;
                 //$day_preg = number_format($day);
                 $day2 = 7-$day;
-                $age_pre = 'คุณมีอายุครรภ์'. $week2 .'สัปดาห์'.  $day2 .'วัน' ;
+                $age_pre = 'คุณมีอายุครรภ์'. $week_preg .'สัปดาห์'.  $date_pre .'วัน' ;
                       $replyToken = $event['replyToken'];
                       $messages = [
                           'type' => 'template',
