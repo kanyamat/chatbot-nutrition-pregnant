@@ -1084,8 +1084,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                         'template' => [
                             'type' => 'buttons',
                             'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'ลูกน้อยของคุณ',
-                            'text' =>  'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                            'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                            'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
 
                                    [
@@ -1104,10 +1104,10 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
             // $eatProtein=$weight+25;
 
       
-                $messages2 = [
-                        'type' => 'text',
-                        'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result
-                      ];
+                // $messages2 = [
+                //         'type' => 'text',
+                //         'text' =>  
+                //       ];
 
                 
                 $messages3 = [
@@ -1205,7 +1205,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3],
+          'messages' => [$messages/*,$messages2*/,$messages3],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
