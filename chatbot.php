@@ -990,12 +990,10 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                       'type'=> 'template',
                       'altText'=> 'this is a carousel template',
                       'template'=> [
-                          'type'=> 'carousel',
+                          'type'=> 'image_carousel',
                           'columns'=> [
                               [
-                                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
-                                'title'=> 'this is menu',
-                                'text'=> 'description',
+                                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
                                 'actions'=> [
                                     [
                                         'type'=> 'postback',
@@ -1015,9 +1013,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 ]
                               ],
                               [
-                                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
-                                'title'=> 'this is menu',
-                                'text'=> 'description',
+                                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
                                 'actions'=> [
                                     [
                                         'type'=> 'postback',
