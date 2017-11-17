@@ -1074,7 +1074,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                   $aaa=$bbb;
                 }
                 
-                $testt = "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+                $testt = "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk";
                   $replyToken = $event['replyToken'];
                     
                     $messages = [
