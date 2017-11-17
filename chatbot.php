@@ -959,7 +959,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //        'type'=> 'image_carousel',
                  //        'columns'=> [
                  //            [
-                 //              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                 //              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
                  //              'action'=> [
                  //                'type'=> 'postback',
                  //                'label'=> 'Buy',
@@ -967,7 +967,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //              ]
                  //            ],
                  //            [
-                 //              'imageUrl'=> 'hthttp://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                 //              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
                  //              'action'=> [
                  //                'type'=> 'message',
                  //                'label'=> 'Yes',
@@ -975,7 +975,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //              ]
                  //            ],
                  //            [
-                 //              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                 //              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
                  //             'action'=> [
                  //                'type'=> 'uri',
                  //                'label'=> 'View detail',
@@ -986,19 +986,22 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //    ]
 
                  //  ];     
+
                  $messages = [
                       'type'=> 'template',
                       'altText'=> 'this is a carousel template',
                       'template'=> [
-                          'type'=> 'image_carousel',
+                          'type'=> 'carousel',
                           'columns'=> [
                               [
-                                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
+                                'title'=> 'this is menu',
+                                'text'=> 'description',
                                 'actions'=> [
                                     [
-                                        'type'=> 'postback',
-                                        'label'=> 'Buy',
-                                        'data'=> 'action=buy&itemid=111'
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'Buy',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
                                     ],
                                     [
                                         'type'=> 'postback',
@@ -1013,7 +1016,9 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 ]
                               ],
                               [
-                                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
+                                'title'=> 'this is menu',
+                                'text'=> 'description',
                                 'actions'=> [
                                     [
                                         'type'=> 'postback',
