@@ -951,8 +951,9 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
  }elseif ($event['message']['text'] == "รูปภาพ" ) {
                
-                 $replyToken = $event['replyToken'];
-                  $messages = [
+                $replyToken = $event['replyToken'];
+                
+                $messages = [
                     'type'=> 'template',
                     'altText'=> 'this is a image carousel template',
                     'template'=> [
