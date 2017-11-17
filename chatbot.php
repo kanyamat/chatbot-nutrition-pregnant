@@ -1085,7 +1085,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                             'type' => 'buttons',
                             'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                            'text' =>  'ค่าดัชนีมวลกายของคุณคือ'.$bmi. ' อยู่ในเกณฑ์ '.$result,
+                            'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
 
                                    [
@@ -1129,7 +1129,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                   [
                                     'type' => 'message',
                                     'label' => 'รูปภาพ',
-                                    'text' => 'รูป'
+                                    'text' => 'รูปภาพ'
                                   ]
                                   // [
                                   //   // 'type' => 'message',
