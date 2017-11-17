@@ -986,7 +986,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //    ]
 
                  //  ];     
-
+                                  // $messages = [
+                                  //       'type'=> 'image',
+                                  //       'originalContentUrl'=> 'Buy',
+                                  //       'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                  //   ]
                  $messages = [
                       'type'=> 'template',
                       'altText'=> 'this is a carousel template',
@@ -1020,11 +1024,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 'title'=> 'this is menu',
                                 'text'=> 'description',
                                 'actions'=> [
-                                    [
-                                        'type'=> 'postback',
-                                        'label'=> 'Buy',
-                                        'data'=> 'action=buy&itemid=111'
-                                    ],
+                                    // [
+                                    //     'type'=> 'postback',
+                                    //     'label'=> 'Buy',
+                                    //     'data'=> 'action=buy&itemid=111'
+                                    // ],
                                     [
                                         'type'=> 'postback',
                                         'label'=> 'Add to cart',
