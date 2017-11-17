@@ -985,7 +985,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                               ]
                             ]
                         ]
-                    ]
+                    
                   ];    
 
                                   // $messages = [
