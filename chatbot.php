@@ -958,30 +958,28 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                     'template'=> [
                         'type'=> 'image_carousel',
                         'columns'=> [
-                            [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                              // 'action'=> [
-                              //   'type'=> 'message',
-                              //   //'label'=> 'Yes',
-                              //   'text'=> 'yes'
+                              'actions'=> [
+                              [
+
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
                                     
-                              // ]
+                              ]
                             ],
+                              'actions'=> [
                             [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                              // 'action'=> [
-                              //   'type'=> 'message',
-                              //   //'label'=> 'Yes',
-                              //   'text'=> 'yes'
-                              // ]
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                              ]
                             ],
+                              'actions'=> [
                             [
-                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                              // 'action'=> [
-                              //   'type'=> 'uri',
-                              //   //'label'=> 'View detail',
-                              //   'uri'=> 'http://example.com/page/222'
-                              // ]
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                              ]
                             ]
                         ]
                     ]
