@@ -960,10 +960,9 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                         'columns'=> [
                             [
                               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                              'action'=> [
-                                        'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                'type'=> 'message',
+                                'label'=> 'Yes',
+                                'text'=> 'yes'
                                     
                               ]
                             ],
