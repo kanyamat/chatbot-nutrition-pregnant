@@ -1074,7 +1074,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                   $aaa=$bbb;
                 }
                 
-                $testt = "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk";
+               
                   $replyToken = $event['replyToken'];
                     
                     $messages = [
@@ -1093,9 +1093,6 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                     'label' => 'กราฟ',
                                     'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ]
-                                    
-
-
                                       ]
                                   ]
                               ];
