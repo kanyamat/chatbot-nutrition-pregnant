@@ -11,18 +11,27 @@
             $today_month= date("m") ;
             $today_day  = date("d") ;
           
-            if(($month>$today_month && $month<=12 && $date<=31) || ($month==$today_month && $date>$today_day)  ){
+
+
+
+
+            // if(($month>$today_month && $month<=12 && $date<=31) || ($month==$today_month && $date>$today_day)  ){
                 $years = $today_years-1;
+                $days = $today_day-1;
                 $strDate1 = $years."-".$month."-".$date;
                 $strDate2=date("Y-m-d");
                 
-                $date_pre =  ((strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 ))-1;
+
+
+                $date_pre =  (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 )-1;
                 $week = $date_pre/7;
-                $week2 = $week-39.7;   
+                $week2 = $week-39;   
 
                 $week_preg = number_format($week2);
                 $day = $date_pre%7;
-                $day_preg = number_format($day);
+                $day2 = 7-$day
+
+                $day_preg = number_format($day2);
 
                 $age_pre = 'คุณมีอายุครรภ์'. $week_preg .'สัปดาห์'.  $day_preg .'วัน' ;
                       $replyToken = $event['replyToken'];
