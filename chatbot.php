@@ -1037,8 +1037,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 ]
                               ]
                           ]
-                      }
-                    ]       
+                      ]
+                    ];       
 ########################################################################################################################################################
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
