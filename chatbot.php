@@ -989,7 +989,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                   $messages = [
                                         'type'=> 'image',
                                         'originalContentUrl'=> 'Buy',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                        'previewImageUrl'=> 'http://example.com/page/111'
                                     ];
                  // $messages = [
                  //      'type'=> 'template',
