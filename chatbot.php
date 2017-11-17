@@ -959,7 +959,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                         'type'=> 'image_carousel',
                         'columns'=> [
                             [
-                              'imageUrl'=> 'https://example.com/bot/images/item1.jpg',
+                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
                               'action'=> [
                                 'type'=> 'postback',
                                 'label'=> 'Buy',
@@ -967,7 +967,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                               ]
                             ],
                             [
-                              'imageUrl'=> 'https://example.com/bot/images/item2.jpg',
+                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
                               'action'=> [
                                 'type'=> 'message',
                                 'label'=> 'Yes',
@@ -975,7 +975,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                               ]
                             ],
                             [
-                              'imageUrl'=> 'https://example.com/bot/images/item3.jpg',
+                              'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
                               'action'=> [
                                 'type'=> 'uri',
                                 'label'=> 'View detail',
