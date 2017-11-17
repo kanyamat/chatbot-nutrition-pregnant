@@ -1121,22 +1121,27 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
-                                   [
+                                  [
                                     'type' => 'uri',
-                                    'label' => 'รายละเอียด',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                                    ]
-                                    ,
+                                    'label' => 'ไปยังลิงค์',
+                                    'uri' => ' http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
+                                  ],
+                                  [
+                                    'type' => 'message',
+                                    'label' => 'รูปภาพ',
+                                    'text' => 'รูปภาพ'
+                                  ]
+                                    
                                     
 
                                       ]
                                   ]
                               ];
 
-                $messages4 = [
-                        'type' => 'text',
-                        'text' =>  $aaa
-                      ];
+                // $messages4 = [
+                //         'type' => 'text',
+                //         'text' =>  $aaa
+                //       ];
  
 
 
@@ -1212,6 +1217,46 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
 
 ###############################################################END Summary ####################################################################################
+ }elseif ($event['message']['text'] == "รูปภาพ" ) {
+               
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                    'type'=> 'template',
+                    'altText'=> 'this is a image carousel template',
+                    'template'=> [
+                        'type'=> 'image_carousel',
+                        'columns'=> [
+                            [
+                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                              'action'=> [
+                                'type'=> 'postback',
+                                'label'=> 'Buy',
+                                'data'=> 'action=buy&itemid=111'
+                              ]
+                            ],
+                            [
+                              'imageUrl'=> 'hthttp://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                              'action'=> [
+                                'type'=> 'message',
+                                'label'=> 'Yes',
+                                'text'=> 'yes'
+                              ]
+                            ],
+                            [
+                              'imageUrl'=> 'http://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                             'action'=> [
+                                'type'=> 'uri',
+                                'label'=> 'View detail',
+                                'uri'=> 'http://example.com/page/222'
+                              ]
+                            ]
+                        ]
+                    ]
+
+                  ];
+
+
+#########################################################################################################################################################
 
 }elseif ($event['message']['text'] == "แพ้ยา"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
