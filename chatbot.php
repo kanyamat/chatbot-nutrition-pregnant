@@ -986,10 +986,11 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                  //    ]
 
                  //  ];     
+
                                   $messages = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'Buy',
-                                        'previewImageUrl'=> 'http://example.com/page/111'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
                                     ];
                  // $messages = [
                  //      'type'=> 'template',
