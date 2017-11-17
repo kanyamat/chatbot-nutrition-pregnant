@@ -1124,8 +1124,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                   [
                                     'type' => 'uri',
                                     'label' => 'ไปยังลิงค์',
-                                    'uri' => ' http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
-                                  ],
+                                    'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
+                                  ]
                                   // [
                                   //   // 'type' => 'message',
                                   //   // 'label' => 'รูปภาพ',
@@ -1135,8 +1135,8 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                   // 'data'=> 'รูปภาพ'
                                   // ]
                                 ]
-                                  ]
-                              ];
+                              ]
+                            ];
 
                 // $messages4 = [
                 //         'type' => 'text',
