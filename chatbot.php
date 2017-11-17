@@ -966,7 +966,6 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                 'label'=> 'Yes',
                                 'text'=> 'yes'
                               ]
-                              ]
                             ],
                             [
                               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
