@@ -960,28 +960,28 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                         'columns'=> [
                             [
                               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                              'action'=> [
-                                'type'=> 'message',
-                                //'label'=> 'Yes',
-                                'text'=> 'yes'
+                              // 'action'=> [
+                              //   'type'=> 'message',
+                              //   //'label'=> 'Yes',
+                              //   'text'=> 'yes'
                                     
-                              ]
+                              // ]
                             ],
                             [
                               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                              'action'=> [
-                                'type'=> 'message',
-                                //'label'=> 'Yes',
-                                'text'=> 'yes'
-                              ]
+                              // 'action'=> [
+                              //   'type'=> 'message',
+                              //   //'label'=> 'Yes',
+                              //   'text'=> 'yes'
+                              // ]
                             ],
                             [
                               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                              'action'=> [
-                                'type'=> 'uri',
-                                //'label'=> 'View detail',
-                                'uri'=> 'http://example.com/page/222'
-                              ]
+                              // 'action'=> [
+                              //   'type'=> 'uri',
+                              //   //'label'=> 'View detail',
+                              //   'uri'=> 'http://example.com/page/222'
+                              // ]
                             ]
                         ]
                     ]
