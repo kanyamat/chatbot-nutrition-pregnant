@@ -863,7 +863,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           ]
                       ]
                   ];     
-    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0021','','0023','0',NOW(),NOW())") or die(pg_errormessage());
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0021','{$u}','0023','0',NOW(),NOW())") or die(pg_errormessage());
 
 
 ########################################################################################################################################################
@@ -898,6 +898,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                       ]
                   ];     
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023',$_msg,'0025','0',NOW(),NOW())") or die(pg_errormessage());
+
+########################################################################################################################################################
+
 
 
 ########################################################################################################################################################
@@ -943,79 +946,13 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 //$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0026','0',NOW(),NOW())") or die(pg_errormessage());
-
-########################################################################################################################################################
-}elseif (strpos($_msg) !== false && $seqcode == "0025")  {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; 
-                }  
-                 $u = pg_escape_string($_msg); 
-                 $replyToken = $event['replyToken'];
-
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' =>'คุณมีประวัติการแพ้อาหารไหมคะ?' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'มี',
-                                  'text' => 'แพ้อาหาร'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่มี',
-                                  'text' => 'ไม่แพ้อาหาร'
-                              ],
-                          ]
-                      ]
-                  ];  
-
-
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0026','{$u}','0027','0',NOW(),NOW())") or die(pg_errormessage());
 ########################################################################################################################################################
 
- }elseif ($event['message']['text'] == "รูปภาพ" ) {
+ }elseif ($event['message']['text'] == "แนะนำอาหาร" ) {
                
                 $replyToken = $event['replyToken'];
                 
-                // $messages = [
-                //     'type'=> 'template',
-                //     'altText'=> 'this is a image carousel template',
-                //     'template'=> [
-                //         'type'=> 'image_carousel',
-                //         'columns'=> [
-                //             [
-                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                //               'action'=> [
-                //                 'type'=> 'message',
-                //                 'label'=> 'Yes',
-                //                 'text'=> 'yes'
-                //               ]
-                //             ],
-                //             [
-                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                //               'action'=> [
-                //                 'type'=> 'message',
-                //                 'label'=> 'Yes',
-                //                 'text'=> 'yes'
-                //               ]
-                //             ],
-                //             [
-                //               'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                //               'action'=> [
-                //                 'type'=> 'uri',
-                //                 'label'=> 'View detail',
-                //                 'uri'=> 'http://example.com/page/222'
-                //               ]
-                //             ]
-                //         ]
-                //       ]   
-                //   ];    
+             
 
                                   $messages = [
                                         'type'=> 'image',
@@ -1025,66 +962,14 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                   $messages2 = [
                                         'type'=> 'image',
                                         'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg'
                                     ];
                                   $messages3 = [
                                         'type'=> 'image',
                                         'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg'
                                     ];
-                 // $messages = [
-                 //      'type'=> 'template',
-                 //      'altText'=> 'this is a carousel template',
-                 //      'template'=> [
-                 //          'type'=> 'carousel',
-                 //          'columns'=> [
-                 //              [
-                 //                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
-                 //                'title'=> 'this is menu',
-                 //                'text'=> 'description',
-                 //                'actions'=> [
-                 //                    // [
-                 //                    //     'type'=> 'image',
-                 //                    //     'originalContentUrl'=> 'Buy',
-                 //                    //     'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
-                 //                    // ],
-                 //                    [
-                 //                        'type'=> 'postback',
-                 //                        'label'=> 'Add to cart',
-                 //                        'data'=> 'action=add&itemid=111'
-                 //                    ],
-                 //                    [
-                 //                        'type'=> 'uri',
-                 //                        'label'=> 'View detail',
-                 //                        'uri'=> 'http://example.com/page/111'
-                 //                    ]
-                 //                ]
-                 //              ],
-                 //              [
-                 //                'thumbnailImageUrl'=> 'https://example.com/bot/images/item1.jpg',
-                 //                'title'=> 'this is menu',
-                 //                'text'=> 'description',
-                 //                'actions'=> [
-                 //                    // [
-                 //                    //     'type'=> 'postback',
-                 //                    //     'label'=> 'Buy',
-                 //                    //     'data'=> 'action=buy&itemid=111'
-                 //                    // ],
-                 //                    [
-                 //                        'type'=> 'postback',
-                 //                        'label'=> 'Add to cart',
-                 //                        'data'=> 'action=add&itemid=111'
-                 //                    ],
-                 //                    [
-                 //                        'type'=> 'uri',
-                 //                        'label'=> 'View detail',
-                 //                        'uri'=> 'http://example.com/page/111'
-                 //                    ]
-                 //                ]
-                 //              ]
-                 //          ]
-                 //      ]
-                 //    ];    
+  
 
           $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
@@ -1103,7 +988,211 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
          $result = curl_exec($ch);
          curl_close($ch);
          echo $result . "\r\n";   
+
 ########################################################################################################################################################
+
+
+ }elseif ($event['message']['text'] == "แนะนำการออกกำลังกาย" ) {
+               
+                $replyToken = $event['replyToken'];
+                
+
+                                  $messages = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg'
+                                    ];
+                                  $messages2 = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg'
+                                    ];
+                                  $messages3 = [
+                                        'type'=> 'image',
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg'
+                                    ];
+                
+
+          $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2,$messages3],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";   
+
+########################################################################################################################################################
+
+
+ }elseif ($event['message']['text'] == "Nutrition" ) {
+    $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q3)) {
+            
+                  echo $weight = $row[0]; 
+                  echo $age = $row[1];
+                  echo $preg_week = $row[2];
+                } 
+
+        if ($age>=10 && $age<18) {
+          $cal=(13.384*$weight)+692.6;
+        }elseif ($age>18 && $age<31) {
+          $cal=(14.818*$weight)+486.6;
+        }else{
+          $cal=(8.126*$weight)+845.6;
+        }
+
+        if ($_msg=="หนัก"  ) {
+          $total = $cal*2.0;
+        }elseif($_msg=="ปานกลาง") {
+          $total = $cal*1.7;
+        }else{
+          $total = $cal*1.4;
+        }
+      $format = number_format($total);
+               
+
+  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
+                while ($row = pg_fetch_row($check_q4)) {
+            
+          //echo $caloric = $row[0]; 
+          echo $starches = $row[0];
+          echo $vegetables = $row[1];
+          echo $fruits = $row[2];
+          echo $meats = $row[3];
+          echo $fats = $row[4];
+          echo $lf_milk = $row[5];
+          echo $c = $row[6];
+          echo $p = $row[7];
+          echo $f = $row[8];
+          echo $g_protein  = $row[9];
+
+                } 
+
+                  $bbb =  "พลังงานที่ต้องการในแต่ละวันคือ". "\n".
+                          "-ข้าววันละ". $starches ."ทัพพี". "\n".
+                          "-ผักวันละ". $vegetables. "ทัพพี"."\n".
+                          "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
+                          "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
+                          "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
+                          "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
+
+                if ($total < 1601) {
+                  $aaa=$bbb;
+                } elseif ($total > 1600 && $total<1701) {
+                  $aaa=$bbb;
+                }elseif ($total >1700 && $total<1801) {
+                  $aaa=$bbb;
+                }elseif ($total >1800 && $total<1901) {
+                 $aaa=$bbb;
+                }elseif ($total >1900 && $total<2001) {
+                  $aaa=$bbb;
+                }elseif ($total >2000 && $total<2101 ) {
+                  $aaa=$bbb;
+                }elseif ($total > 2100 && $total<2201) {
+                  $aaa=$bbb;
+                }elseif ($total > 2200 && $total <2301) {
+                  $aaa=$bbb;
+                }elseif ($total > 2300 && $total <2401) {
+                  $aaa=$bbb;
+                }elseif ($total > 2400 && $total <2501) {
+                 $aaa=$bbb;
+                }else {
+                  $aaa=$bbb;
+                }
+                
+                $replyToken = $event['replyToken'];
+                
+                      $messages = [
+                          'type' => 'text',
+                          'text' => $bbb
+                      ];
+
+                      $messages2 = [
+                          'type' => 'text',
+                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ"
+                      ];
+
+
+
+
+          $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";   
+
+########################################################################################################################################################
+}elseif ($event['message']['text'] == "ทารกในครรภ์" ) {
+$check_q = pg_query($dbconn,"SELECT  user_age, user_weight ,user_height ,preg_week  FROM users_register WHERE  user_id = '{$user_id}' ");
+                while ($row = pg_fetch_row($check_q)) {
+                  echo $answer1 = $row[0]; 
+                  echo $weight = $row[1]; 
+                  echo $height = $row[2]; 
+                  echo $answer4 = $row[3];  
+                } 
+
+$des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = $answer4 ");
+              while ($row = pg_fetch_row($des_preg)) {
+                  echo $des = $row[0]; 
+                  echo $img = $row[1]; 
+ 
+                } 
+
+          $replyToken = $event['replyToken'];
+                      $messages = [
+                          'type' => 'text',
+                          'text' => $des
+                      ];
+
+                    // $messages2 = [
+                    //     'type' => 'text',
+                    //     'text' =>  $des
+                    //   ];
+                
+
+         //  $url = 'https://api.line.me/v2/bot/message/reply';
+         // $data = [
+         //  'replyToken' => $replyToken,
+         //  'messages' => [$messages,$messages2],
+         // ];
+         // error_log(json_encode($data));
+         // $post = json_encode($data);
+         // $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         // $ch = curl_init($url);
+         // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         // curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         // $result = curl_exec($ch);
+         // curl_close($ch);
+         // echo $result . "\r\n";   
+
+########################################################################################################################################################
+
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
 
@@ -1154,31 +1243,27 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
             
                   echo $weight = $row[0]; 
                   echo $age = $row[1];
-          echo $preg_week = $row[2];
+                  echo $preg_week = $row[2];
                 } 
 
-        if ($age>=10 && $age<=18) {
+        if ($age>=10 && $age<18) {
           $cal=(13.384*$weight)+692.6;
-        }elseif ($age>=18 && $age<=30) {
+        }elseif ($age>18 && $age<31) {
           $cal=(14.818*$weight)+486.6;
         }else{
           $cal=(8.126*$weight)+845.6;
         }
 
-        if ($_msg=="หนัก" ) {
+        if ($_msg=="หนัก"  ) {
           $total = $cal*2.0;
         }elseif($_msg=="ปานกลาง") {
           $total = $cal*1.7;
         }else{
           $total = $cal*1.4;
         }
+      $format = number_format($total);
+               
 
-        if ($preg_week >=13 && $preg_week<=40) {
-          $a = $total+300;
-        }else{
-          $a=$total; 
-        }
-        
   $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
                 while ($row = pg_fetch_row($check_q4)) {
             
@@ -1204,31 +1289,30 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                           "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
                           "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
 
-                if ($total <= 1600) {
+                if ($total < 1601) {
                   $aaa=$bbb;
-                } elseif ($total >= 1601 && $total<=1700) {
+                } elseif ($total > 1600 && $total<1701) {
                   $aaa=$bbb;
-                }elseif ($total >=1701 && $total<=1800) {
+                }elseif ($total >1700 && $total<1801) {
                   $aaa=$bbb;
-                }elseif ($total >=1801 && $total<=1900) {
+                }elseif ($total >1800 && $total<1901) {
                  $aaa=$bbb;
-                }elseif ($total >=1901 && $total<=2000) {
+                }elseif ($total >1900 && $total<2001) {
                   $aaa=$bbb;
-                }elseif ($total >=2001 && $total<=2100 ) {
+                }elseif ($total >2000 && $total<2101 ) {
                   $aaa=$bbb;
-                }elseif ($total >= 2101 && $total<=2200) {
+                }elseif ($total > 2100 && $total<2201) {
                   $aaa=$bbb;
-                }elseif ($total >= 2201 && $total <=2300) {
+                }elseif ($total > 2200 && $total <2301) {
                   $aaa=$bbb;
-                }elseif ($total >= 2301 && $total <=2400) {
+                }elseif ($total > 2300 && $total <2401) {
                   $aaa=$bbb;
-                }elseif ($total >= 2401 && $total <=2500) {
+                }elseif ($total > 2400 && $total <2501) {
                  $aaa=$bbb;
                 }else {
                   $aaa=$bbb;
                 }
                 
-               
                   $replyToken = $event['replyToken'];
                     
                     $messages = [
@@ -1237,7 +1321,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1245,30 +1329,29 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    ],
+                                  [
+                                    'type' => 'message',
+                                    'label' => 'ทารกในครรภ์',
+                                    'text' => 'ทารกในครรภ์'
                                     ]
                                       ]
                                   ]
                               ];
 
 
-            // $eatProtein=$weight+25;
-
-      
-                // $messages2 = [
-                //         'type' => 'text',
-                //         'text' =>  
-                //       ];
-
-                
-                $messages3 = [
+                if ($preg_week >=13 && $preg_week<=40) {
+                  $a = $total+300;
+                  $format2 = number_format($a);    
+                      $messages3 = [
                                                               
                         'type' => 'template',
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
                             //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$total,
+                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format2,
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
@@ -1279,74 +1362,43 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                   ],
                                   [
                                     'type' => 'message',
-                                    'label' => 'รูปภาพ',
-                                    'text' => 'รูปภาพ'
-                                  ]
-                                  // [
-                                  //   // 'type' => 'message',
-                                  //   // 'label' => 'รูปภาพ',
-                                  //   // 'text' => 'รูปภาพ'
-                                  // 'type'=> 'postback',
-                                  // 'label'=> 'รูปภาพ',
-                                  // 'data'=> 'รูปภาพ'
-                                  // ]
+                                    'label' => 'Nutrition',
+                                    'text' => 'Nutrition'
+                                    ]
                                 ]
                               ]
                             ];
+                   }else{
+                      
+                      $messages3 = [
+                                                              
+                        'type' => 'template',
+                        'altText' => 'template',
+                        'template' => [
+                            'type' => 'buttons',
+                            //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format,
+                            'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
+                            'actions' => [
 
-                // $messages4 = [
-                //         'type' => 'text',
-                //         'text' =>  $aaa
-                //       ];
- 
-
-
-
-                // $messages = [
-                //           'type'=> 'template',
-                //           'altText'=> 'this is a carousel template',
-                //           'template'=> [
-                //               'type'=> 'carousel',
-                //               'columns'=> [
-                //                   [
-                //                     'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                //                     'title'=> 'ลูกน้อยของคุณ',
-                //                     'text'=> 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
-                //                     'actions'=> [
-                //                         [
-                //                             'type' => 'uri',
-                //                             'label' => 'กราฟ',
-                //                             'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
-                //                         ],
-                //                         [
-                //                             'type'=> 'uri',
-                //                             'label'=> 'View detail',
-                //                             'uri'=> 'http://example.com/page/111'
-                //                         ]
-                //                     ]
-                //                   ],
-                //                   [
-                //                     //'thumbnailImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                //                     'title'=> 'test',
-                //                     'text'=> '.....',
-                //                     'actions'=> [
-                //                         [
-                //                             'type'=> 'uri',
-                //                             'label'=> 'View detail',
-                //                             'uri'=> 'http://example.com/page/111'
-                //                         ],
-                //                         [
-                //                             'type'=> 'uri',
-                //                             'label'=> 'View detail',
-                //                             'uri'=> 'http://example.com/page/111'
-                //                         ]
-                //                     ]
-                //                   ]
-                //               ]
-                //           ]
-                //         ];
+                                  [
+                                    'type' => 'uri',
+                                    'label' => 'ไปยังลิงค์',
+                                    'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
+                                  ],
+                                                                    [
+                                    'type' => 'uri',
+                                    'label' => 'Nutrition',
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    ]
+                                ]
+                              ]
+                            ];
+        }
+        
 
 
+              
 
 
 
@@ -1377,6 +1429,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 #########################################################################################################################################################
 
+
 }elseif ($event['message']['text'] == "แพ้ยา"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -1394,52 +1447,39 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 // $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0027','0',NOW(),NOW())") or die(pg_errormessage());
-
-
-#########################################################################################################################################################
-
-
-}elseif ($event['message']['text'] == "แพ้อาหาร" ) {
-               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($result)) {
-                  echo $answer = $row[0]; 
-                }   
-
-                 $u = pg_escape_string($answer);
-                 $replyToken = $event['replyToken'];
-                 $messages = [
-                        'type' => 'text',
-                        'text' => 'คุณแพ้อาหารอะไรคะ?'
-                      ];
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','','0028','0',NOW(),NOW())") or die(pg_errormessage());
-      
-########################################################################################################### 
-}elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
-    
-     $replyToken = $event['replyToken'];
-      $text = "ดิฉันไม่เข้าใจค่ะ กรุณาพิมพ์ใหม่อีกครั้งนะคะ";
-      $messages = [
-          'type' => 'text',
-          'text' => $text
-        ]; 
 ########################################################################################################################################################
 
-}elseif (strpos($_msg) !== false && $seqcode == "0027" ) {
+}elseif (strpos($_msg) !== false && $seqcode == "0027" || $event['message']['text'] == "ไม่แพ้อาหาร" ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
                 }   
             $u = pg_escape_string($_msg); 
             $replyToken = $event['replyToken'];
-
+        
+        $que = "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน?";
+        $que2 = "รายละเอียดของระดับ". "\n".
+                "เบา -  วิถีชีวิตทั่วไป ไม่มีการออกกำลังกาย หรือมีการออกกำลังกายน้อย". "\n".
+                "ปานกลาง - วิถีชีวิตกระฉับกระเฉง หรือ มีการออกกำลังกายสม่ำเสมอ". "\n".
+                "หนัก - วิถีชีวิตมีการใช้แรงงานหนัก ออกกำลังกายหนักเป็นประจำ". "\n";  
         $messages = [
+              'type' => 'text',
+              'text' => $que
+        ];
+
+        $messages2 = [
+              'type' => 'text',
+              'text' => $que2
+        ];
+
+        $messages3 = [
           'type'=> 'template',
           'altText'=> 'this is a buttons template',
           'template'=> [
               'type'=> 'buttons',
               //'thumbnailImageUrl'=> 'https://example.com/bot/images/image.jpg',
-              'title'=> "ช่วงระหว่างการตั้งครรภ์คุณออกกำลังกายในระดับไหน",
-              'text'=> "......",
+              'title'=> "ระดับของการออกกำลังกาย",
+              'text'=> "เลือกระดับด้านล่างได้เลยค่ะ",
               'actions'=> [
                   [
                     'type'=> 'message',
@@ -1460,11 +1500,103 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           ]
         ];
 
-$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$_msg}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+
+
+
+
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_food = '{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','{$u}','1001','0',NOW(),NOW())") or die(pg_errormessage());
 
 
+
+          $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2,$messages3],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n"; 
+
+
+
+#########################################################################################################################################################
+
+
+}elseif ($event['message']['text'] == "แพ้อาหาร" ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }   
+
+                 $u = pg_escape_string($answer);
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'คุณแพ้อาหารอะไรคะ?'
+                      ];
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0027','','1001','0',NOW(),NOW())") or die(pg_errormessage());
+
 ########################################################################################################################################################
+
+}elseif (strpos($_msg) !== false && $seqcode == "0025" || $event['message']['text'] == "ไม่แพ้ยา" )  {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }  
+                 $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณมีประวัติการแพ้อาหารไหมคะ?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'มี',
+                                  'text' => 'แพ้อาหาร'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่มี',
+                                  'text' => 'ไม่แพ้อาหาร'
+                              ],
+                          ]
+                      ]
+                  ]; 
+
+$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0026','{$u}','0027','0',NOW(),NOW())") or die(pg_errormessage());
+
+########################################################################################################### 
+
+
+}elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
+    
+     $replyToken = $event['replyToken'];
+      $text = "ดิฉันไม่เข้าใจค่ะ กรุณาพิมพ์ใหม่อีกครั้งนะคะ";
+      $messages = [
+          'type' => 'text',
+          'text' => $text
+        ]; 
+
+
+
+########################################################################################################################################################
+
+
 
 
   }else {
@@ -1492,14 +1624,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
               ]; 
  $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());
        
-    // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0006','0',NOW(),NOW())") or die(pg_errormessage());
-    // }else{
-    //   $replyToken = $event['replyToken'];
-    //   $text = "ฉันไม่เข้าใจค่ะ";
-    //   $messages = [
-    //       'type' => 'text',
-    //       'text' => $text
-    //     ];
   }
   
   
