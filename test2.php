@@ -12,9 +12,6 @@
             $today_day  = date("d") ;
           
 
-
-
-
             // if(($month>$today_month && $month<=12 && $date<=31) || ($month==$today_month && $date>$today_day)  ){
                 $years = $today_years-1;
                 $days = $today_day-1;
@@ -22,7 +19,7 @@
                 $strDate2=date("Y-m-d");
                 
 
-                $date_pre =  (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 )-1;
+                $date_pre =  (strtotime($strDate2) - strtotime($strDate1))/( 60 * 60 * 24 );
                 $week = $date_pre/7;
                 $week2 = $week-39;   
 
