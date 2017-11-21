@@ -1191,73 +1191,14 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา"  ) {
                  
 
-
-     $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+     $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q2)) {
             
                   echo $weight = $row[0]; 
                   echo $height = $row[1]; 
-                  echo $preg_week = $row[2]; 
-                } 
-          $height1 =$height*0.01;
-                  $bmi = $weight/($height1*$height1);
-                  $bmi = number_format($bmi, 2, '.', '');
-
-
-
-
-                 // $messages2 = [
-                 //        'type' => 'text',
-                 //        'text' => 'ขอบคุณสำหรับข้อมูลนะคะ'
-                 //      ];
-
-
-   $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q2)) {
-            
-                  echo $weight = $row[0]; 
-                  echo $height = $row[1]; 
-                  echo $preg_week = $row[2]; 
-                } 
-                  $height1 =$height*0.01;
-                  $bmi = $weight/($height1*$height1);
-                  $bmi = number_format($bmi, 2, '.', '');
-
-        if ($bmi<18.5) {
-          $result="Underweight";
-        } elseif ($bmi>=18.5 && $bmi<24.9) {
-          $result="Nomal weight";
-        } elseif ($bmi>=24.9 && $bmi<=29.9) {
-          $result="Overweight";
-        }else{
-          $result="Obese";
-        }
-
-   $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q3)) {
-            
-                  echo $weight = $row[0]; 
-                  echo $age = $row[1];
                   echo $preg_week = $row[2];
+                  echo $age = $row[3]; 
                 } 
-
-        if ($age>=10 && $age<18) {
-          $cal=(13.384*$weight)+692.6;
-        }elseif ($age>18 && $age<31) {
-          $cal=(14.818*$weight)+486.6;
-        }else{
-          $cal=(8.126*$weight)+845.6;
-        }
-
-        if ($_msg=="หนัก"  ) {
-          $total = $cal*2.0;
-        }elseif($_msg=="ปานกลาง") {
-          $total = $cal*1.7;
-        }else{
-          $total = $cal*1.4;
-        }
-      $format = number_format($total);
-               
 
   $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
                 while ($row = pg_fetch_row($check_q4)) {
@@ -1284,6 +1225,41 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                           "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
                           "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
 
+
+ /*คำนวณ BMI และบอกว่าอยู่ในเกณฑ์ไหน*/               
+          $height1 =$height*0.01;
+                  $bmi = $weight/($height1*$height1);
+                  $bmi = number_format($bmi, 2, '.', '');
+
+        if ($bmi<18.5) {
+          $result="Underweight";
+        } elseif ($bmi>=18.5 && $bmi<24.9) {
+          $result="Nomal weight";
+        } elseif ($bmi>=24.9 && $bmi<=29.9) {
+          $result="Overweight";
+        }else{
+          $result="Obese";
+        }
+
+/*นำน้ำหนักมาคำนวณหาพลังงานและสารอาหารโดยใช้สูตรFAOแบ่งตามอายุ ตัวเลขที่ได้จะเป็นพลังงานที่ใช้ในขณะพักผ่อน*/
+        if ($age>=10 && $age<18) {
+          $cal=(13.384*$weight)+692.6;
+        }elseif ($age>18 && $age<31) {
+          $cal=(14.818*$weight)+486.6;
+        }else{
+          $cal=(8.126*$weight)+845.6;
+        }
+/*กิจกรรมทางกาย*/
+        if ($_msg=="หนัก"  ) {
+          $total = $cal*2.0;
+        }elseif($_msg=="ปานกลาง") {
+          $total = $cal*1.7;
+        }else{
+          $total = $cal*1.4;
+        }
+      $format = number_format($total);
+               
+/*จำนวนแคลอรี่*/
                 if ($total < 1601) {
                   $aaa=$bbb;
                 } elseif ($total > 1600 && $total<1701) {
@@ -1308,15 +1284,20 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   $aaa=$bbb;
                 }
                 
+
+                 $ccc =  "น้ำหนักจองคุณเกินเกณฑ์ ลองปรับการรับประทานอาหารหรือออกกๆลังกายดูไหมคะ". "\n".
+                          "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีหรือออกกำลังกายแบบไหนดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ";
                   $replyToken = $event['replyToken'];
-                    
-                    $messages = [
+                  
+                    if ($bmi>=24.9 ) {
+                        
+                        $messages = [
                                                               
                         'type' => 'template',
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1324,7 +1305,38 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    ],
+                                  [
+                                    'type' => 'message',
+                                    'label' => 'ทารกในครรภ์',
+                                    'text' => 'ทารกในครรภ์'
+                                    ]
+                                      ]
+                                  ]
+                              ];
+                          $messages2 = [
+                            'type' => 'text',
+                            'text' => $ccc
+                      ];
+
+                    }else{
+
+                       $messages = [
+                                                              
+                        'type' => 'template',
+                        'altText' => 'template',
+                        'template' => [
+                            'type' => 'buttons',
+                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
+                            'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
+                            'actions' => [
+
+                                   [
+                                    'type' => 'uri',
+                                    'label' => 'กราฟ',
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1335,6 +1347,9 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                   ]
                               ];
 
+                    }
+                      
+/*ตั้งครรภ์ในช่วงไตรมาสที่ 2 และ 3 ให้บวกจำนวณแคลเพิ่มอีก300    */               
 
                 if ($preg_week >=13 && $preg_week<=40) {
                   $a = $total+300;
@@ -1372,7 +1387,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'template' => [
                             'type' => 'buttons',
                             //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format2,
+                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format,
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
@@ -1381,21 +1396,16 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                     'label' => 'ไปยังลิงค์',
                                     'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
                                   ],
-                                  [
-                                    'type' => 'message',
+                                                                    [
+                                    'type' => 'uri',
                                     'label' => 'Nutrition',
-                                    'text' => 'Nutrition'
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
                                     ]
                                 ]
                               ]
                             ];
         }
         
-
-
-              
-
-
 
 
 
