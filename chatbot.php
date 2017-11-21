@@ -2,7 +2,9 @@
 ################################## DATABASE ##################################
 $conn_string = "host=ec2-54-221-207-192.compute-1.amazonaws.com port=5432 dbname=ddarslmntab2u0 user=uuwabnobyyrnfe password=4d97f0b4150eb402dcfbd772910d388e127285bd85f3efea6184fe42da856142 ";
 $dbconn = pg_pconnect($conn_string);
-//
+
+##############################################################################
+
 $access_token = 'eBp/ZVsDsV2fMTqSBYGq4pgOvc+sgaPxxJFeT/rvpT/WTLiyw44BA2co2RBVROiLPVr8EEMrdiJ2I5cKWBe+j+GhNrHu6FUEHyol1dGf8DM/ZykdR84RgfTU2p+3U9NnhjqhWkDrN0tQT56rf23TxQdB04t89/1O/w1cDnyilFU=';
 
 $content = file_get_contents('php://input');
@@ -1013,18 +1015,18 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                                   $messages = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat1.jpg'
                                     ];
                                   $messages2 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg'
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat2.jpg',
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat2.jpg'
                                     ];
                                   $messages3 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg'
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat3.jpg',
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat3.jpg'
                                     ];
   
 
@@ -1056,18 +1058,18 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                                   $messages = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg',
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise.jpg',
                                         'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise.jpg'
                                     ];
                                   $messages2 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg'
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise2.jpg',
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise2.jpg'
                                     ];
                                   $messages3 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg'
+                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise3.jpg',
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise3.jpg'
                                     ];
                 
 
@@ -1270,33 +1272,33 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   $bmi = $weight/($height1*$height1);
                   $bmi = number_format($bmi, 2, '.', '');
 
-                  if ($bmi<18.5) {
-                    $result="Underweight";
-                  } elseif ($bmi>=18.5 && $bmi<24.9) {
-                    $result="Nomal weight";
-                  } elseif ($bmi>=24.9 && $bmi<=29.9) {
-                    $result="Overweight";
-                  }else{
-                    $result="Obese";
-                  }
+        if ($bmi<18.5) {
+          $result="Underweight";
+        } elseif ($bmi>=18.5 && $bmi<24.9) {
+          $result="Nomal weight";
+        } elseif ($bmi>=24.9 && $bmi<=29.9) {
+          $result="Overweight";
+        }else{
+          $result="Obese";
+        }
 
 /*นำน้ำหนักมาคำนวณหาพลังงานและสารอาหารโดยใช้สูตรFAOแบ่งตามอายุ ตัวเลขที่ได้จะเป็นพลังงานที่ใช้ในขณะพักผ่อน*/
-                  if ($age>=10 && $age<18) {
-                    $cal=(13.384*$weight)+692.6;
-                  }elseif ($age>18 && $age<31) {
-                    $cal=(14.818*$weight)+486.6;
-                  }else{
-                    $cal=(8.126*$weight)+845.6;
-                  }
+        if ($age>=10 && $age<18) {
+          $cal=(13.384*$weight)+692.6;
+        }elseif ($age>18 && $age<31) {
+          $cal=(14.818*$weight)+486.6;
+        }else{
+          $cal=(8.126*$weight)+845.6;
+        }
 /*กิจกรรมทางกาย*/
-                  if ($_msg=="หนัก"  ) {
-                    $total = $cal*2.0;
-                  }elseif($_msg=="ปานกลาง") {
-                    $total = $cal*1.7;
-                  }else{
-                    $total = $cal*1.4;
-                  }
-                $format = number_format($total);
+        if ($_msg=="หนัก"  ) {
+          $total = $cal*2.0;
+        }elseif($_msg=="ปานกลาง") {
+          $total = $cal*1.7;
+        }else{
+          $total = $cal*1.4;
+        }
+      $format = number_format($total);
                
 /*จำนวนแคลอรี่*/
                 if ($total < 1601) {
@@ -1336,7 +1338,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1344,7 +1346,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1367,7 +1369,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1375,7 +1377,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1430,20 +1432,24 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
-                                 [
+                                  [
                                     'type' => 'uri',
                                     'label' => 'ไปยังลิงค์',
                                     'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
                                   ],
-                                  [
-                                    'type' => 'message',
+                                                                    [
+                                    'type' => 'uri',
                                     'label' => 'Nutrition',
-                                    'text' => 'Nutrition'
+                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
                                     ]
                                 ]
                               ]
                             ];
         }
+        
+
+
+          
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
