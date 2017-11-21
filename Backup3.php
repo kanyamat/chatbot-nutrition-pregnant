@@ -1377,7 +1377,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'template' => [
                             'type' => 'buttons',
                             //'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
-                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format,
+                            'title' => 'จำนวนแคลอรี่ที่คุณต้องการต่อวันคือ '.$format2,
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
@@ -1386,10 +1386,10 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                     'label' => 'ไปยังลิงค์',
                                     'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
                                   ],
-                                                                    [
-                                    'type' => 'uri',
+                                  [
+                                    'type' => 'message',
                                     'label' => 'Nutrition',
-                                    'uri' => 'Nutrition'
+                                    'text' => 'Nutrition'
                                     ]
                                 ]
                               ]
