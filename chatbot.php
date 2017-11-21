@@ -2,9 +2,7 @@
 ################################## DATABASE ##################################
 $conn_string = "host=ec2-54-221-207-192.compute-1.amazonaws.com port=5432 dbname=ddarslmntab2u0 user=uuwabnobyyrnfe password=4d97f0b4150eb402dcfbd772910d388e127285bd85f3efea6184fe42da856142 ";
 $dbconn = pg_pconnect($conn_string);
-
-##############################################################################
-
+//
 $access_token = 'eBp/ZVsDsV2fMTqSBYGq4pgOvc+sgaPxxJFeT/rvpT/WTLiyw44BA2co2RBVROiLPVr8EEMrdiJ2I5cKWBe+j+GhNrHu6FUEHyol1dGf8DM/ZykdR84RgfTU2p+3U9NnhjqhWkDrN0tQT56rf23TxQdB04t89/1O/w1cDnyilFU=';
 
 $content = file_get_contents('php://input');
@@ -391,11 +389,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 ];
 
 
-
-
-
-//$q = pg_exec($dbconn, "UPDATE users_register SET user_weight = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
-$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0015','','0016','0',NOW(),NOW())") or die(pg_errormessage());
+// $q = pg_exec($dbconn, "UPDATE users_register SET user_weight = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+//$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0015','','0016','0',NOW(),NOW())") or die(pg_errormessage());
 
  // $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_week, preg_weight,updated_at )VALUES('{$user_id}',$p_week,$answer ,  NOW()) ") or die(pg_errormessage());  
 
@@ -725,9 +720,8 @@ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseq
     // $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
 
 
+
 ###############################################################################################################################
-
-
  }elseif ($event['message']['text'] == "อายุครรภ์ถูกต้อง"  ) {
     $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at ,answer FROM sequentsteps  WHERE sender_id = '{$user_id}' order by updated_at desc limit 1  ");
                 while ($row = pg_fetch_row($check_q)) {
@@ -747,13 +741,13 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
  $check_q = pg_query($dbconn,"SELECT user_weight FROM users_register  WHERE user_id  = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
             
-                  echo $p_week = $row[0];  
+                  echo $p_weight = $row[0];  
                 } 
- $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_week, preg_weight,updated_at )VALUES('{$user_id}',$p_week,$answer ,  NOW()) ") or die(pg_errormessage());  
+ $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_weight, preg_week,updated_at )VALUES('{$user_id}', $p_weight , $answer ,  NOW()) ") or die(pg_errormessage());  
 
 ###########################################################################################################
 
-}elseif (is_numeric($_msg) !== false && $seqcode == "0017"){
+}elseif (is_numeric($_msg) == 10 && $seqcode == "0017"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1 ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
@@ -1063,7 +1057,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                   $messages = [
                                         'type'=> 'image',
                                         'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg',
-                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg'
+                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise.jpg'
                                     ];
                                   $messages2 = [
                                         'type'=> 'image',
@@ -1183,7 +1177,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                       $messages2 = [
                           'type' => 'text',
-                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่ recommend ด้านล่างได้เลยนะคะ"
+                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ"
                       ];
 
 
@@ -1230,29 +1224,6 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                           'text' => $des
                       ];
 
-                    // $messages2 = [
-                    //     'type' => 'text',
-                    //     'text' =>  $des
-                    //   ];
-                
-
-         //  $url = 'https://api.line.me/v2/bot/message/reply';
-         // $data = [
-         //  'replyToken' => $replyToken,
-         //  'messages' => [$messages,$messages2],
-         // ];
-         // error_log(json_encode($data));
-         // $post = json_encode($data);
-         // $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-         // $ch = curl_init($url);
-         // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-         // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         // curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-         // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-         // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-         // $result = curl_exec($ch);
-         // curl_close($ch);
-         // echo $result . "\r\n";   
 
 ########################################################################################################################################################
 
@@ -1299,33 +1270,33 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   $bmi = $weight/($height1*$height1);
                   $bmi = number_format($bmi, 2, '.', '');
 
-        if ($bmi<18.5) {
-          $result="Underweight";
-        } elseif ($bmi>=18.5 && $bmi<24.9) {
-          $result="Nomal weight";
-        } elseif ($bmi>=24.9 && $bmi<=29.9) {
-          $result="Overweight";
-        }else{
-          $result="Obese";
-        }
+                  if ($bmi<18.5) {
+                    $result="Underweight";
+                  } elseif ($bmi>=18.5 && $bmi<24.9) {
+                    $result="Nomal weight";
+                  } elseif ($bmi>=24.9 && $bmi<=29.9) {
+                    $result="Overweight";
+                  }else{
+                    $result="Obese";
+                  }
 
 /*นำน้ำหนักมาคำนวณหาพลังงานและสารอาหารโดยใช้สูตรFAOแบ่งตามอายุ ตัวเลขที่ได้จะเป็นพลังงานที่ใช้ในขณะพักผ่อน*/
-        if ($age>=10 && $age<18) {
-          $cal=(13.384*$weight)+692.6;
-        }elseif ($age>18 && $age<31) {
-          $cal=(14.818*$weight)+486.6;
-        }else{
-          $cal=(8.126*$weight)+845.6;
-        }
+                  if ($age>=10 && $age<18) {
+                    $cal=(13.384*$weight)+692.6;
+                  }elseif ($age>18 && $age<31) {
+                    $cal=(14.818*$weight)+486.6;
+                  }else{
+                    $cal=(8.126*$weight)+845.6;
+                  }
 /*กิจกรรมทางกาย*/
-        if ($_msg=="หนัก"  ) {
-          $total = $cal*2.0;
-        }elseif($_msg=="ปานกลาง") {
-          $total = $cal*1.7;
-        }else{
-          $total = $cal*1.4;
-        }
-      $format = number_format($total);
+                  if ($_msg=="หนัก"  ) {
+                    $total = $cal*2.0;
+                  }elseif($_msg=="ปานกลาง") {
+                    $total = $cal*1.7;
+                  }else{
+                    $total = $cal*1.4;
+                  }
+                $format = number_format($total);
                
 /*จำนวนแคลอรี่*/
                 if ($total < 1601) {
@@ -1365,7 +1336,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1373,7 +1344,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1396,7 +1367,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1404,7 +1375,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1418,7 +1389,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                     }
                       
 /*ตั้งครรภ์ในช่วงไตรมาสที่ 2 และ 3 ให้บวกจำนวณแคลเพิ่มอีก300    */               
-
+                 
                 if ($preg_week >=13 && $preg_week<=40) {
                   $a = $total+300;
                   $format2 = number_format($a);    
@@ -1459,15 +1430,15 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                             'text' =>  'รายละเอียดการรับประทานอาหารสามารถกดปุ่มด้านล่างได้เลยค่ะ',
                             'actions' => [
 
-                                  [
+                                 [
                                     'type' => 'uri',
                                     'label' => 'ไปยังลิงค์',
                                     'uri' => 'http://www.raipoong.com/content/detail.php?section=12&category=26&id=467'
                                   ],
-                                                                    [
-                                    'type' => 'uri',
+                                  [
+                                    'type' => 'message',
                                     'label' => 'Nutrition',
-                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'text' => 'Nutrition'
                                     ]
                                 ]
                               ]
@@ -1476,18 +1447,18 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
         
 
 
-
+          
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages/*,$messages2*/,$messages3],
+          'messages' => [$messages,$messages2,$messages3],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
          $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
          $ch = curl_init($url);
-         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch,s CURLOPT_CUSTOMREQUEST, "POST");
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
          curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
