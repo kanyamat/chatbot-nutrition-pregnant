@@ -1444,10 +1444,6 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                               ]
                             ];
         }
-        
-
-
-          
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
