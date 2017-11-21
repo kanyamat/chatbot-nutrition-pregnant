@@ -527,9 +527,9 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
          echo $result . "\r\n";
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','1015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
 
-
 ########################################################################################################################################################
 
+    
 //  }elseif ($event['message']['text'] == "กำหนดการคลอด" ) {
 //                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
 //                 while ($row = pg_fetch_row($result)) {
@@ -1120,7 +1120,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                       $messages2 = [
                           'type' => 'text',
-                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ"
+                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่ recommend ด้านล่างได้เลยนะคะ"
                       ];
 
 
