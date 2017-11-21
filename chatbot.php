@@ -419,23 +419,23 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
  
 ########################################################################################################################################################
 
-// }elseif ($event['message']['text'] == "กำหนดการคลอด"/* && $seqcode == "0015"*/) {
-//                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-//                 while ($row = pg_fetch_row($result)) {
-//                   echo $answer = $row[0]; 
-//                 }   
+}elseif ($event['message']['text'] == "กำหนดการคลอด"/* && $seqcode == "0015"*/) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }   
 
-//                  $u = pg_escape_string($answer);
-//  $q = pg_exec($dbconn, "UPDATE users_register SET user_weight = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+                 $u = pg_escape_string($answer);
+ $q = pg_exec($dbconn, "UPDATE users_register SET user_weight = $answer WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
-//                  $replyToken = $event['replyToken'];
-//                  $messages = [
-//                         'type' => 'text',
-//                         'text' => 'ขอทราบกำหนดการคลอดของคุณหน่อยค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
-//                       ];
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ขอทราบกำหนดการคลอดของคุณหน่อยค่ะ (กรุณาตอบวันที่และเดือนเป็นตัวเลขนะคะ เช่น 17 04 คือ วันที่ 17 เมษายน)'
+                      ];
 
 
-// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2015','','0016','0',NOW(),NOW())") or die(pg_errormessage());
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2015','','0016','0',NOW(),NOW())") or die(pg_errormessage());
 
 ########################################################################################################################################################
 
@@ -745,7 +745,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
             
                   echo $p_weight = $row[0];  
                 } 
- $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_weight, preg_week ,updated_at )VALUES('{$user_id}', $p_weight , $answer ,  NOW()) ") or die(pg_errormessage());  
+ $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_weight, preg_week,updated_at )VALUES('{$user_id}', $p_weight , $answer ,  NOW()) ") or die(pg_errormessage());  
 
 ###########################################################################################################
 
@@ -1391,7 +1391,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                     }
                       
 /*ตั้งครรภ์ในช่วงไตรมาสที่ 2 และ 3 ให้บวกจำนวณแคลเพิ่มอีก300    */               
-                 
+                $replyToken = $event['replyToken'];
                 if ($preg_week >=13 && $preg_week<=40) {
                   $a = $total+300;
                   $format2 = number_format($a);    
@@ -1449,7 +1449,12 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
         
 
 
-          
+              
+
+
+
+
+
 
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
@@ -1460,7 +1465,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
          $post = json_encode($data);
          $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
          $ch = curl_init($url);
-         curl_setopt($ch,s CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
          curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
