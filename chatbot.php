@@ -745,7 +745,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
             
                   echo $p_weight = $row[0];  
                 } 
- $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_weight, preg_week,updated_at )VALUES('{$user_id}', $p_weight , $answer ,  NOW()) ") or die(pg_errormessage());  
+ $q2 = pg_exec($dbconn, "INSERT INTO recordofpregnancy(user_id, preg_weight, preg_week ,updated_at )VALUES('{$user_id}', $p_weight , $answer ,  NOW()) ") or die(pg_errormessage());  
 
 ###########################################################################################################
 
