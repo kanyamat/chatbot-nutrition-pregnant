@@ -1389,7 +1389,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                                                     [
                                     'type' => 'uri',
                                     'label' => 'Nutrition',
-                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'Nutrition'
                                     ]
                                 ]
                               ]
