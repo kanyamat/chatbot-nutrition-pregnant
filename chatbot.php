@@ -1015,18 +1015,18 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                                   $messages = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat1.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat1.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat1.jpg'
                                     ];
                                   $messages2 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat2.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat2.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat2.jpg'
                                     ];
                                   $messages3 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat3.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/eat3.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/eat3.jpg'
                                     ];
   
 
@@ -1058,18 +1058,18 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                                   $messages = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise.jpg'
                                     ];
                                   $messages2 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise2.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise2.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise2.jpg'
                                     ];
                                   $messages3 = [
                                         'type'=> 'image',
-                                        'originalContentUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise3.jpg',
-                                        'previewImageUrl'=> 'https://backup-bot.herokuapp.com/Manual/exercise3.jpg'
+                                        'originalContentUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg',
+                                        'previewImageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Manual/exercise3.jpg'
                                     ];
                 
 
@@ -1485,7 +1485,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1493,7 +1493,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
@@ -1516,7 +1516,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                         'altText' => 'template',
                         'template' => [
                             'type' => 'buttons',
-                            'thumbnailImageUrl' => 'https://backup-bot.herokuapp.com/week/'.$preg_week .'.jpg',
+                            'thumbnailImageUrl' => 'https://chatbot-nutrition-pregnant.herokuapp.com/week/'.$preg_week .'.jpg',
                             'title' => 'ขณะนี้คุณมีอายุครรภ์'.$preg_week.'สัปดาห์',
                             'text' =>  'ค่าดัชนีมวลกายของคุณคือ '.$bmi. ' อยู่ในเกณฑ์ '.$result,
                             'actions' => [
@@ -1524,7 +1524,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                    [
                                     'type' => 'uri',
                                     'label' => 'กราฟ',
-                                    'uri' => 'https://backup-bot.herokuapp.com/chart_bot.php?data='.$user_id
+                                    'uri' => 'https://chatbot-nutrition-pregnant.herokuapp.com/chart_bot.php?data='.$user_id
                                     ],
                                   [
                                     'type' => 'message',
