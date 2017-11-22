@@ -1095,14 +1095,34 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
 
  }elseif ($event['message']['text'] == "Nutrition" ) {
-    $check_q3 = pg_query($dbconn,"SELECT user_weight,user_age,preg_week  FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q3)) {
+        $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($check_q2)) {
             
                   echo $weight = $row[0]; 
-                  echo $age = $row[1];
+                  echo $height = $row[1]; 
                   echo $preg_week = $row[2];
+                  echo $age = $row[3]; 
                 } 
 
+
+
+
+ /*คำนวณ BMI และบอกว่าอยู่ในเกณฑ์ไหน*/               
+          $height1 =$height*0.01;
+                  $bmi = $weight/($height1*$height1);
+                  $bmi = number_format($bmi, 2, '.', '');
+
+        if ($bmi<18.5) {
+          $result="Underweight";
+        } elseif ($bmi>=18.5 && $bmi<24.9) {
+          $result="Nomal weight";
+        } elseif ($bmi>=24.9 && $bmi<=29.9) {
+          $result="Overweight";
+        }else{
+          $result="Obese";
+        }
+
+/*นำน้ำหนักมาคำนวณหาพลังงานและสารอาหารโดยใช้สูตรFAOแบ่งตามอายุ ตัวเลขที่ได้จะเป็นพลังงานที่ใช้ในขณะพักผ่อน*/
         if ($age>=10 && $age<18) {
           $cal=(13.384*$weight)+692.6;
         }elseif ($age>18 && $age<31) {
@@ -1110,7 +1130,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
         }else{
           $cal=(8.126*$weight)+845.6;
         }
-
+/*กิจกรรมทางกาย*/
         if ($_msg=="หนัก"  ) {
           $total = $cal*2.0;
         }elseif($_msg=="ปานกลาง") {
@@ -1120,8 +1140,14 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
         }
       $format = number_format($total);
                
+       if ($preg_week >=13 && $preg_week<=40) {
+                $format = $total+300;
+               // $format = number_format($semester);
+       }else{
+               $format = $total;
+       }
 
-  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
+/*  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <= $total");
                 while ($row = pg_fetch_row($check_q4)) {
             
           //echo $caloric = $row[0]; 
@@ -1138,50 +1164,142 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                 } 
 
-                  $bbb =  "พลังงานที่ต้องการในแต่ละวันคือ". "\n".
+
+                  $Nutrition =  "พลังงานที่ต้องการในแต่ละวันคือ". "\n".
                           "-ข้าววันละ". $starches ."ทัพพี". "\n".
                           "-ผักวันละ". $vegetables. "ทัพพี"."\n".
                           "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
                           "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
                           "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
                           "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
-
-                if ($total < 1601) {
-                  $aaa=$bbb;
+/*จำนวนแคลอรี่*/
+/*                if ($total < 1601) {
+                  $aaa=$Nutrition;
                 } elseif ($total > 1600 && $total<1701) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total >1700 && $total<1801) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total >1800 && $total<1901) {
-                 $aaa=$bbb;
+                 $aaa=$Nutrition;
                 }elseif ($total >1900 && $total<2001) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total >2000 && $total<2101 ) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total > 2100 && $total<2201) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total > 2200 && $total <2301) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total > 2300 && $total <2401) {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
                 }elseif ($total > 2400 && $total <2501) {
-                 $aaa=$bbb;
+                 $aaa=$Nutrition;
                 }else {
-                  $aaa=$bbb;
+                  $aaa=$Nutrition;
+                }*/          
+            if ($format < 1601) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 8 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 2 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 5 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 6 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                } elseif ($format > 1600 && $format <1701) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 9 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 2 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 5 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 6 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                }elseif ($format >1700 && $format <1801) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 9 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 6 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 6 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                }elseif ($format >1800 && $format<1901) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 9 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 6 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 8 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                }elseif ($format >1900 && $format<2001) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 10 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 8 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                }elseif ($format >2000 && $format<2101 ) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 11 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 8 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 2 แก้ว';
+                }elseif ($format > 2100 && $format<2201) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 11 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 8 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 3 แก้ว';
+                }elseif ($format > 2200 && $format < 2301) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 11 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 9 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 3 แก้ว';
+                }elseif ($format > 2300 && $format <2401) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 12 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 3 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 7 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 10 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 3 แก้ว';
+                }elseif ($format > 2400 && $format <2501) {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 12 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 4 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 8 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 10 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 3 แก้ว';
+                }else {
+                        $Nutrition =  'พลังงานที่ต้องการในแต่ละวันคือ'. "\n".
+                                      '-ข้าววันละ 12 ทัพพี'. "\n".
+                                      '-ผักวันละ 3 ทัพพี'."\n".
+                                      '-ผลไม้วันละ 4 ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)'."\n".
+                                      '-เนื้อวันละ 9 ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)'."\n".
+                                      '-ไขมันวันละ 11 ช้อนชา'."\n".
+                                      '-นมไขมันต่ำวันละ 3 แก้ว';
                 }
-                
+
+
+
+     
                 $replyToken = $event['replyToken'];
                 
                       $messages = [
                           'type' => 'text',
-                          'text' => $bbb
+                          'text' => $Nutrition
                       ];
 
                       $messages2 = [
                           'type' => 'text',
                           'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ"
                       ];
-
 
 
 
@@ -1278,7 +1396,7 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
       $format = number_format($total);
                
 
-  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <=$total");
+  $check_q4 = pg_query($dbconn,"SELECT starches ,vegetables, fruits, meats, fats, lf_milk, c, p, f, g_protein  FROM meal_planing WHERE caloric_level <= $total");
                 while ($row = pg_fetch_row($check_q4)) {
             
           //echo $caloric = $row[0]; 
@@ -1294,41 +1412,9 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
           echo $g_protein  = $row[9];
 
                 } 
+              
 
-
-                  $Nutrition =  "พลังงานที่ต้องการในแต่ละวันคือ". "\n".
-                          "-ข้าววันละ". $starches ."ทัพพี". "\n".
-                          "-ผักวันละ". $vegetables. "ทัพพี"."\n".
-                          "-ผลไม้วันละ".$fruits."ส่วน (1 ส่วนคือปริมาณผลไม้ที่จัดใส่จานรองกาแฟเล็ก ๆ ได้ 1 จานพอดี)"."\n".
-                          "-เนื้อวันละ" .$meats. "ส่วน (1 ส่วนคือ 2 ช้อนโต๊ะ)"."\n".
-                          "-ไขมันวันละ" .$fats. "ช้อนชา"."\n".
-                          "-นมไขมันต่ำวันละ" .$lf_milk. "แก้ว";
-/*จำนวนแคลอรี่*/
-                if ($total < 1601) {
-                  $aaa=$Nutrition;
-                } elseif ($total > 1600 && $total<1701) {
-                  $aaa=$Nutrition;
-                }elseif ($total >1700 && $total<1801) {
-                  $aaa=$Nutrition;
-                }elseif ($total >1800 && $total<1901) {
-                 $aaa=$Nutrition;
-                }elseif ($total >1900 && $total<2001) {
-                  $aaa=$Nutrition;
-                }elseif ($total >2000 && $total<2101 ) {
-                  $aaa=$Nutrition;
-                }elseif ($total > 2100 && $total<2201) {
-                  $aaa=$Nutrition;
-                }elseif ($total > 2200 && $total <2301) {
-                  $aaa=$Nutrition;
-                }elseif ($total > 2300 && $total <2401) {
-                  $aaa=$Nutrition;
-                }elseif ($total > 2400 && $total <2501) {
-                 $aaa=$Nutrition;
-                }else {
-                  $aaa=$Nutrition;
-                }                
-
-                 $ccc =  "น้ำหนักจองคุณเกินเกณฑ์ ลองปรับการรับประทานอาหารหรือออกกำลังกายดูไหมคะ". "\n".
+                 $ccc =  "น้ำหนักของคุณเกินเกณฑ์ ลองปรับการรับประทานอาหารหรือออกกำลังกายดูไหมคะ". "\n".
                           "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีหรือออกกำลังกายแบบไหนดีสามารถกดที่เมนู recommend ด้านล่างได้เลยนะคะ";
                  $rec = "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีหรือออกกำลังกายแบบไหนดีสามารถกดที่เมนู recommend ด้านล่างได้เลยนะคะ";
                   $replyToken = $event['replyToken'];
@@ -1454,11 +1540,6 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                       ];
                     }
                       
-
-        
-
-
-
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
