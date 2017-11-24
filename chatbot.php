@@ -1094,7 +1094,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 ########################################################################################################################################################
 
 
- }elseif ($event['message']['text'] == "Nutrition" ) {
+ }elseif ($event['message']['text'] == "ข้อมูลโภชนาการ" ) {
         $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q2)) {
             
@@ -1442,8 +1442,8 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                   ],
                                   [
                                     'type' => 'message',
-                                    'label' => 'Nutrition',
-                                    'text' => 'Nutrition'
+                                    'label' => 'ข้อมูลโภชนาการ',
+                                    'text' => 'ข้อมูลโภชนาการ'
                                     ]
                                 ]
                               ]
@@ -1468,8 +1468,8 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                                   ],
                                   [
                                     'type' => 'message',
-                                    'label' => 'Nutrition',
-                                    'text' => 'Nutrition'
+                                    'label' => 'ข้อมูลโภชนาการ',
+                                    'text' => 'ข้อมูลโภชนาการ'
                                     ]
                                 ]
                               ]
