@@ -1298,7 +1298,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
 
                       $messages2 = [
                           'type' => 'text',
-                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนูกิจกรรมด้านล่างได้เลยนะคะ"
+                          'text' => "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีสามารถกดที่เมนู recommend ด้านล่างได้เลยนะคะ"
                       ];
 
 
