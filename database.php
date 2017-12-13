@@ -71,18 +71,18 @@ if (!$dbconn) {
 // pg_exec($dbconn, $sql3) or die(pg_errormessage());
 
 
-$sql4="CREATE TABLE RecordOfPregnancy(
-id SERIAL,
-user_id  varchar(50),
-preg_weight varchar(3),
-preg_week  integer,
-updated_at timestamp,
--- his_preg_wc varchar(225)
- PRIMARY KEY(id)
- -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
- -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
- )";   
-pg_exec($dbconn, $sql4) or die(pg_errormessage());
+// $sql4="CREATE TABLE RecordOfPregnancy(
+// id SERIAL,
+// user_id  varchar(50),
+// preg_weight varchar(3),
+// preg_week  integer,
+// updated_at timestamp,
+// -- his_preg_wc varchar(225)
+//  PRIMARY KEY(id)
+//  -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
+//  -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
+//  )";   
+// pg_exec($dbconn, $sql4) or die(pg_errormessage());
 
 
 
@@ -107,7 +107,19 @@ pg_exec($dbconn, $sql4) or die(pg_errormessage());
 // pg_exec($dbconn, $sql) or die(pg_errormessage());
 
 
-
+$sql5="CREATE TABLE tracker(
+id SERIAL,
+user_id  varchar(50),
+food varchar(255),
+exercise varchar(255),
+vitamin varchar(100),
+updated_at timestamp,
+-- his_preg_wc varchar(225)
+ PRIMARY KEY(id)
+ -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
+ -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
+ )";   
+pg_exec($dbconn, $sql5) or die(pg_errormessage());
 ##################################### INSERT ###########################################
 
 //////////////////////////////// insert pregnants //////////////////////////
