@@ -66,6 +66,19 @@ if (!is_null($events['events'])) {
  $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0004','','0005','0',NOW(),NOW())") or die(pg_errormessage());
 
                    
+########################################################################################################### 
+}elseif($event['message']['text'] == "Clear" ){
+      $replyToken = $event['replyToken'];
+      $text = "cleared!";
+      $messages = [
+          'type' => 'text',
+          'text' => $text
+        ]; 
+    $sql =pg_exec($dbconn,"DELETE FROM users_register WHERE user_id = '{$user_id}' ");
+    $sql1 =pg_exec($dbconn,"DELETE FROM recordofpregnancy WHERE user_id = '{$user_id}' ");
+    $sql2 =pg_exec($dbconn,"DELETE FROM sequentsteps WHERE sender_id = '{$user_id}' ");
+    $sql3 =pg_exec($dbconn,"DELETE FROM tracker WHERE user_id = '{$user_id}' ");
+    $sql4 =pg_exec($dbconn,"DELETE FROM auto_reply WHERE sender_id = '{$user_id}' ");
 
 #################################### ผู้ใช้เลือกสนใจ #################################### 
   }elseif ($event['message']['text'] == "สนใจ" && $seqcode == "0004"  ) {
@@ -90,14 +103,14 @@ if (!is_null($events['events'])) {
                         'type' => 'text',
                         'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ:) หากคุณสนใจในภายหลังให้พิมพ์ว่า"ต้องการผู้ช่วย"'
                       ];          
-  
+########################################################################################################### 
   }elseif ($event['message']['text'] == "ไม่ถูกต้อง" ) {
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
                         'text' => 'กรุณาพิมพ์ใหม่นะคะ'
                       ];  
-                    
+###########################################################################################################                    
 }elseif ($event['message']['text'] == "ชื่อถูกต้อง"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -541,7 +554,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
   $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','1015', $week_preg ,'0017','0',NOW(),NOW())") or die(pg_errormessage());
 
 
-
 ########################################################################################################################################################
  }elseif (strlen($_msg) == 5 && $seqcode == "2015") {
                 
@@ -962,8 +974,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-########################################################################################################################################################
-
 
  }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
@@ -1344,8 +1354,69 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                           'text' => $des
                       ];
 
+#########################################################################################################################################################
+}elseif ($event['message']['text'] == "ไม่ยืนยัน"  ) {
+               // $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+               //  while ($row = pg_fetch_row($result)) {
+               //    echo $answer = $row[0]; 
+               //  }   
+
+
+                  // $u2 = pg_escape_string($surname);
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ^^'
+                      ];
+                 $messages2 = [
+                        'type' => 'text',
+                        'text' => 'หากคุณต้องการรับข้อความในภายหลัง สามารถพิมพ์คำว่า "ยืนยัน" ได้เลยนะคะ'
+                      ];
+
+$q = pg_exec($dbconn, "UPDATE users_register SET status = '0' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+//$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0025','','0027','0',NOW(),NOW())") or die(pg_errormessage());
+
+    $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+
+#########################################################################################################################################################
+}elseif ($event['message']['text'] == "ยืนยัน"  ) {
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }   
+
+
+                  // $u2 = pg_escape_string($surname);
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ขอบคุณที่ให้เราได้เป็นผู้ช่วยนะคะ^^'
+                      ];
+
+
+$q = pg_exec($dbconn, "UPDATE users_register SET status = '1' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO auto_reply(user_id,auto_week,auto_day,created_at,updated_at )VALUES('{$user_id}','1','1',NOW(),NOW())") or die(pg_errormessage());
+
 
 ########################################################################################################################################################
+
+
 
 }elseif ($event['message']['text'] == "หนัก" || $event['message']['text'] == "ปานกลาง" || $event['message']['text'] == "เบา" ) {
                  
@@ -1417,7 +1488,9 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                  $ccc =  "น้ำหนักของคุณเกินเกณฑ์ ลองปรับการรับประทานอาหารหรือออกกำลังกายดูไหมคะ". "\n".
                           "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีหรือออกกำลังกายแบบไหนดีสามารถกดที่เมนู recommend ด้านล่างได้เลยนะคะ";
                  $rec = "หากคุณแม่ไม่ทราบว่าจะทานอะไรดีหรือออกกำลังกายแบบไหนดีสามารถกดที่เมนู recommend ด้านล่างได้เลยนะคะ";
-                  $replyToken = $event['replyToken'];
+                 $Q_send = "ต่อจากนี้ทางเราจะมีการส่งข้อความมาเพื่อสอบถามข้อมูลและแนะนำทุกวัน เวลา 19:00 น. และบอกความคืบหน้าของทารกในครรภ์ในทุกวันจันทร์ หากคุณต้องการรับข้อมูลกรุณากดยืนยันด้วยค่ะ";
+                 
+                 $replyToken = $event['replyToken'];
   
 /*ตั้งครรภ์ในช่วงไตรมาสที่ 2 และ 3 ให้บวกจำนวณแคลเพิ่มอีก300    */               
            
@@ -1539,11 +1612,33 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                             'text' => $rec
                       ];
                     }
-                      
+
+                    $messages4 = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' => $Q_send ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ยืนยัน',
+                                  'text' => 'ยืนยัน'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ยืนยัน',
+                                  'text' => 'ไม่ยืนยัน'
+                              ],
+                          ]
+                      ]
+                  ]; 
+
+
     $url = 'https://api.line.me/v2/bot/message/reply';
          $data = [
           'replyToken' => $replyToken,
-          'messages' => [$messages,$messages2,$messages3],
+          'messages' => [$messages,$messages2,$messages3,$messages4],
          ];
          error_log(json_encode($data));
          $post = json_encode($data);
@@ -1563,8 +1658,6 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
 
 
 #########################################################################################################################################################
-
-
 }elseif ($event['message']['text'] == "แพ้ยา"  ) {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
@@ -1714,8 +1807,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 $q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0026','{$u}','0027','0',NOW(),NOW())") or die(pg_errormessage());
-
-########################################################################################################### 
+####################################################################################### 
 }elseif ($event['message']['text'] == "น้ำหนักถูกต้อง" && $seqcode ='1003') {
     $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at ,answer FROM sequentsteps  WHERE sender_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q)) {
@@ -1755,7 +1847,104 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                   ]
                               ]; 
 
+                              $messages2 = [
+                                      'type' => 'text',
+                                      'text' => 'หากคุณไม่ต้องการรับข้อความในทุกวันจันทร์ ให้พิมพ์คำว่า "งดรับข้อความ" ได้เลยค่ะ '
+                                  ];        
+         $url = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n"; 
+########################################################################################################### 
+}elseif ($event['message']['text'] == "งดรับข้อความ" && $seqcode ='1003') {
 
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ หากต้องการกลับมารับข้อความอีกครั้งให้พิมพ์คำว่า"รับข้อความรายสัปดาห์"ได้เลยค่ะ'
+                      ]; 
+// //$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// // //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+$q = pg_exec($dbconn, "UPDATE users_register SET  status ='0' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+
+########################################################################################################### 
+}elseif ($event['message']['text'] == "รับข้อความรายสัปดาห์" && $seqcode ='1003') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ขอบคุณที่ให้เราได้เป็นผู้ช่วยของคุณนะคะ'
+                      ]; 
+// //$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// // //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+$q = pg_exec($dbconn, "UPDATE users_register SET  status ='1' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+
+########################################################################################################### 
+########################################################################################################### 
+}elseif ($event['message']['text'] == "ยกเลิกข้อความ" && $seqcode ='2003') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ไว้โอกาสหน้าให้เราได้เป็นผู้ช่วยของคุณนะคะ หากต้องการกลับมารับข้อความอีกครั้งให้พิมพ์คำว่า"รับข้อความ"ได้เลยค่ะ'
+                      ]; 
+// //$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// // //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+
+$q = pg_exec($dbconn, "UPDATE auto_reply SET auto_day ='0' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+########################################################################################################### 
+}elseif ($event['message']['text'] == "รับข้อความ" && $seqcode ='2003') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'ขอบคุณที่ให้เราได้เป็นผู้ช่วยของคุณนะคะ'
+                      ]; 
+// //$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// // //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+
+$q = pg_exec($dbconn, "UPDATE auto_reply SET auto_day ='1' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 ########################################################################################################################################################
 
 
@@ -1785,18 +1974,273 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                              ];   
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','1003', $weight,'','0',NOW(),NOW())") or die(pg_errormessage()); 
 
-########################################################################################################### 
 
-}elseif($event['message']['text'] == "Clear" ){
-      $replyToken = $event['replyToken'];
-      $text = "cleared!";
-      $messages = [
-          'type' => 'text',
-          'text' => $text
-        ]; 
-    $sql =pg_exec($dbconn,"DELETE FROM users_register WHERE user_id = '{$user_id}' ");
-    $sql1 =pg_exec($dbconn,"DELETE FROM recordofpregnancy WHERE user_id = '{$user_id}' ");
-  $sql2 =pg_exec($dbconn,"DELETE FROM sequentsteps WHERE sender_id = '{$user_id}' ");
+########################################################################################################### 
+}elseif ($event['message']['text'] == "ยังไม่ได้ทาน" && $seqcode ='2002') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'อย่าลืมทานวิตามินเพื่อทารกในครรภ์นะคะ:)'
+                      ]; 
+
+
+                 $messages2 = [
+                                'type' => 'template',
+                                'altText' => 'this is a confirm template',
+                                'template' => [
+                                    'type' => 'confirm',
+                                    'text' =>  'วันนี้คุณออกกำลังกายไหมคะ?' ,
+                                    'actions' => [
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ออก',
+                                            'text' => 'ออกกำลังกาย'
+                                        ],
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ไม่ออก',
+                                            'text' => 'ไม่ได้ออกกำลังกาย'
+                                        ]
+                                    ]
+                                 ]     
+                             ];       
+//$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2002', '' ,'2003','0',NOW(),NOW())") or die(pg_errormessage());
+
+         $url = 'https://api.line.me/v2/bot/message/reply';
+         // $url2 = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         // $ch2 = curl_init($url2);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+
+
+########################################################################################################### 
+}elseif ($event['message']['text'] == "ทานแล้ว" && $seqcode ='2002') {
+
+               // $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+               //  while ($row = pg_fetch_row($result)) {
+               //    echo $answer_food = $row[0]; 
+               //  }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+
+                 $messages = [
+                                'type' => 'template',
+                                'altText' => 'this is a confirm template',
+                                'template' => [
+                                    'type' => 'confirm',
+                                    'text' =>  'วันนี้คุณออกกำลังกายไหมคะ?' ,
+                                    'actions' => [
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ออก',
+                                            'text' => 'ออกกำลังกาย'
+                                        ],
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ไม่ออก',
+                                            'text' => 'ไม่ได้ออกกำลังกาย'
+                                        ]
+                                    ]
+                                 ]     
+                             ];  
+// $q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','{$u}','','',  NOW()) ") or die(pg_errormessage());  
+// //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2002', '' ,'2003','0',NOW(),NOW())") or die(pg_errormessage());
+
+########################################################################################################################################################
+
+
+  }elseif (strpos($_msg) !== false && $seqcode == "2001"  )  {
+                 $food =  $_msg;
+                 $food_mes = 'ในวันนี้คุณได้ทาน'.$food.'ไปนะคะ';
+                 $u = pg_escape_string($_msg); 
+
+                 $vitamin = 'วันนี้คุณทานวิตามินไปหรือยังคะ?';
+                 $replyToken = $event['replyToken'];
+
+                 $messages = [
+                        'type' => 'text',
+                        'text' => $food_mes
+                      ];
+
+                 $messages2 = [
+                                'type' => 'template',
+                                'altText' => 'this is a confirm template',
+                                'template' => [
+                                    'type' => 'confirm',
+                                    'text' =>  $vitamin ,
+                                    'actions' => [
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ทานแล้ว',
+                                            'text' => 'ทานแล้ว'
+                                        ],
+                                        [
+                                            'type' => 'message',
+                                            'label' => 'ยังไม่ได้ทาน',
+                                            'text' => 'ยังไม่ได้ทาน'
+                                        ]
+                                    ]
+                                 ]     
+                             ];  
+
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2001','{$u}','2002','0',NOW(),NOW())") or die(pg_errormessage()); 
+$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','{$u}','','',  NOW()) ") or die(pg_errormessage());  
+//$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+// $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2001', '' ,'2002','0',NOW(),NOW())") or die(pg_errormessage());
+
+         $url = 'https://api.line.me/v2/bot/message/reply';
+         // $url2 = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         // $ch2 = curl_init($url2);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+########################################################################################################### 
+}elseif ($event['message']['text'] == "ไม่ได้ออกกำลังกาย" && $seqcode ='2003') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'แนะนำคุณแม่ออกกำลังกายให้ได้อย่างน้อย150นาที ต่อ 1 สัปดาห์เพื่อสุขภาพของคุณแม่ค่ะ^^'
+                      ];
+
+
+                 $messages2 = [
+                        'type' => 'text',
+                        'text' => 'หากต้องการให้ทางเรายกเลิกการส่งข้อความทุกเย็น ให้คุณพิมพ์ว่า "ยกเลิกข้อความ" ได้เลยนะคะ'
+                      ]; 
+
+//$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+
+         $url = 'https://api.line.me/v2/bot/message/reply';
+         // $url2 = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         // $ch2 = curl_init($url2);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+
+########################################################################################################### 
+}elseif ($event['message']['text'] == "ออกกำลังกาย" && $seqcode ='2003') {
+
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer_food = $row[0]; 
+                }  
+               //   $u = pg_escape_string($_msg); 
+                 $replyToken = $event['replyToken'];
+ 
+                 $messages = [
+                        'type' => 'text',
+                        'text' => 'คุณออกกำลังกายอะไรบ้างคะ'
+                      ]; 
+//$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage());  
+// //$q = pg_exec($dbconn, "UPDATE users_register SET  history_medicine ='{$u}' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
+$q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
+
+#########################################################################################################################################################
+
+}elseif (strpos($_msg) !== false && $seqcode == "2003"  )  {
+                 $food =  $_msg;
+                 $exer = 'ในวันนี้คุณออกกำลังกายโดย'.$food.'ไปนะคะ';
+                 $u = pg_escape_string($_msg); 
+
+                 
+                 $replyToken = $event['replyToken'];
+
+                 $messages = [
+                        'type' => 'text',
+                        'text' =>  $exer
+                      ];
+
+                  $messages2 = [
+                        'type' => 'text',
+                        'text' => 'หากต้องการให้ทางเรายกเลิกการส่งข้อความทุกเย็น ให้คุณพิมพ์ว่า "ยกเลิกข้อความ" ได้เลยนะคะ'
+                      ];    
+
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003','{$u}','2004','0',NOW(),NOW())") or die(pg_errormessage()); 
+ 
+$q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updated_at )VALUES('{$user_id}','','{$u}','',  NOW()) ") or die(pg_errormessage()); 
+
+         $url = 'https://api.line.me/v2/bot/message/reply';
+         // $url2 = 'https://api.line.me/v2/bot/message/reply';
+         $data = [
+          'replyToken' => $replyToken,
+          'messages' => [$messages,$messages2],
+         ];
+         error_log(json_encode($data));
+         $post = json_encode($data);
+         $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+         $ch = curl_init($url);
+         // $ch2 = curl_init($url2);
+         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         echo $result . "\r\n";
+
+
+
+########################################################################################################### 
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
     
      $replyToken = $event['replyToken'];
@@ -1805,9 +2249,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           'type' => 'text',
           'text' => $text
         ]; 
-
-
-
 ########################################################################################################################################################
 
   }else {
