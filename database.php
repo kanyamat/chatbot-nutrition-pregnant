@@ -107,19 +107,30 @@ if (!$dbconn) {
 // pg_exec($dbconn, $sql) or die(pg_errormessage());
 
 
-$sql5="CREATE TABLE tracker(
+// $sql5="CREATE TABLE tracker(
+// id SERIAL,
+// user_id  varchar(50),
+// food varchar(255),
+// exercise varchar(255),
+// vitamin varchar(100),
+// updated_at timestamp,
+// -- his_preg_wc varchar(225)
+//  PRIMARY KEY(id)
+//  -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
+//  -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
+//  )";   
+// pg_exec($dbconn, $sql5) or die(pg_errormessage());
+
+$sql="CREATE TABLE auto_reply(
 id SERIAL,
 user_id  varchar(50),
-food varchar(255),
-exercise varchar(255),
-vitamin varchar(100),
+auto_week integer,
+auto_day integer,
+created_at timestamp,
 updated_at timestamp,
--- his_preg_wc varchar(225)
- PRIMARY KEY(id)
- -- FOREIGN KEY (his_preg_week) REFERENCES Pregnancy_week_data(week_preg),
- -- FOREIGN KEY (user_id) REFERENCES users_data(user_id)
- )";   
-pg_exec($dbconn, $sql5) or die(pg_errormessage());
+PRIMARY KEY(id)
+)";   
+pg_exec($dbconn, $sql) or die(pg_errormessage());
 ##################################### INSERT ###########################################
 
 //////////////////////////////// insert pregnants //////////////////////////
