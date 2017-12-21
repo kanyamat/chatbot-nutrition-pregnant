@@ -1120,6 +1120,82 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                     ];
 ########################################################################################################################################################
 
+ }elseif ($event['message']['text'] == "เชื่อมต่อกับ ulife.info" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณเคยลงทะเบียนกับ ulife.info หรือไม่?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'เคย',
+                                  'text' => 'เคยลงทะเบียน'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่เคย',
+                                  'text' => 'ไม่เคยลงทะเบียน'
+                              ],
+                          ]
+                      ]
+                  ];        
+########################################################################################################################################################
+ }elseif ($event['message']['text'] == "เคยลงทะเบียน" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณต้องการเชื่อมต่อไปยัง ulife.info หรือไม่?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ต้องการ',
+                                  'text' => 'ต้องการ'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ต้องการ',
+                                  'text' => 'ไม่ต้องการ'
+                              ],
+                          ]
+                      ]
+                  ];        
+
+                                  
+########################################################################################################################################################
+ }elseif ($event['message']['text'] == "ไม่เคยลงทะเบียน" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณต้องการเชื่อมต่อไปยัง ulife.info หรือไม่?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ต้องการ',
+                                  'text' => 'ต้องการ'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ต้องการ',
+                                  'text' => 'ไม่ต้องการ'
+                              ],
+                          ]
+                      ]
+                  ]; 
+
+########################################################################################################################################################
+                  
  }elseif ($event['message']['text'] == "ข้อมูลโภชนาการ" ) {
         $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q2)) {
