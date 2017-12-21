@@ -1168,7 +1168,15 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                       ]
                   ];        
 
-                                  
+ ########################################################################################################################################################
+ }elseif ($event['message']['text'] == "ต้องการ" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'text',
+                      'text' => 'ทางเราขอ E-mail ที่ลงทะเบียนกับ ulife.info ด้วยค่ะ'
+                      
+                  ];                                  
 ########################################################################################################################################################
  }elseif ($event['message']['text'] == "ไม่เคยลงทะเบียน" ) {
                
@@ -1178,24 +1186,24 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                       'altText' => 'this is a confirm template',
                       'template' => [
                           'type' => 'confirm',
-                          'text' =>'คุณต้องการเชื่อมต่อไปยัง ulife.info หรือไม่?' ,
+                          'text' =>'คุณสามารถลงทะเบียนกับ ulife.info เพื่อเชื่อมโยงข้อมูลสุขภาพของคุณได้นะคะ' ,
                           'actions' => [
                               [
                                   'type' => 'message',
-                                  'label' => 'ต้องการ',
-                                  'text' => 'ต้องการ'
+                                  'label' => 'ลงทะเบียน',
+                                  'text' => 'ลงทะเบียน'
                               ],
                               [
                                   'type' => 'message',
-                                  'label' => 'ไม่ต้องการ',
-                                  'text' => 'ไม่ต้องการ'
+                                  'label' => 'ไม่ลงทะเบียน',
+                                  'text' => 'ไม่ลงทะเบียน'
                               ],
                           ]
                       ]
                   ]; 
 
 ########################################################################################################################################################
-                  
+
  }elseif ($event['message']['text'] == "ข้อมูลโภชนาการ" ) {
         $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($check_q2)) {
