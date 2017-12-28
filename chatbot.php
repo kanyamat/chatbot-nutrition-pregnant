@@ -1,11 +1,14 @@
 <?php
 ################################## DATABASE ##################################
-$conn_string = "host=ec2-54-221-207-192.compute-1.amazonaws.com port=5432 dbname=ddarslmntab2u0 user=uuwabnobyyrnfe password=4d97f0b4150eb402dcfbd772910d388e127285bd85f3efea6184fe42da856142 ";
+$conn_string = "host=ec2-54-221-207-192.compute-1.amazonaws.com port=5432 dbname=ddarslmntab2u0 user=uuwabnobyyrnfe password=4d97f0b4150eb402dcfbd772910d388e127285bd85f3efea6184fe42da856142";
 $dbconn = pg_pconnect($conn_string);
-
+if (!$dbconn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 ##############################################################################
 
 $access_token = 'eBp/ZVsDsV2fMTqSBYGq4pgOvc+sgaPxxJFeT/rvpT/WTLiyw44BA2co2RBVROiLPVr8EEMrdiJ2I5cKWBe+j+GhNrHu6FUEHyol1dGf8DM/ZykdR84RgfTU2p+3U9NnhjqhWkDrN0tQT56rf23TxQdB04t89/1O/w1cDnyilFU=';
+
 
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -761,7 +764,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 ###########################################################################################################
 
-}elseif (is_numeric($_msg) == 10 && $seqcode == "0017"){
+}elseif ((/*is_numeric($_msg)*/strlen($_msg) == 10 || /*is_numeric($_msg)*/strlen($_msg) == 9) && $seqcode == "0017"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1 ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
@@ -871,7 +874,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 ########################################################################################################################################################   
 
 
-}elseif (strpos($_msg) !== false && $seqcode == "0019"){
+}elseif ((strpos($_msg, '@') !== false && strpos($_msg, '.') !== false) && $seqcode == "0019"){
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
                 while ($row = pg_fetch_row($result)) {
                   echo $answer = $row[0]; 
@@ -971,9 +974,6 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
     $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0023',$_msg,'0025','0',NOW(),NOW())") or die(pg_errormessage());
 
 ########################################################################################################################################################
-
-
-
 
  }elseif ($event['message']['text'] == "เลขประจำตัวผู้ป่วยของถูกต้อง") {
                $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
@@ -1119,7 +1119,6 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                                         'text'=> $manual
                                     ];
 ########################################################################################################################################################
-
  }elseif ($event['message']['text'] == "เชื่อมต่อกับ ulife.info" ) {
                
                 $replyToken = $event['replyToken'];
@@ -1233,7 +1232,7 @@ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseq
                       $url ='http://128.199.147.57/api/v1/peat/register';
                       $postData = array(
                                'email' => $_msg,
-                               'line_id' => 'test5'
+                               'line_id' => 'test4'
                             );
 
                       $ch = curl_init();
@@ -1288,7 +1287,7 @@ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseq
                       $url ='http://128.199.147.57/api/v1/peat/verify';
                       $Data = array(
                                'token' => $_msg,
-                               'line_id' => 'test5'
+                               'line_id' => 'test4'
                             );
                       $ch = curl_init();
                       //set the url, number of POST vars, POST data
@@ -1329,7 +1328,10 @@ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseq
                                   
                       }
 
+
+
 ########################################################################################################################################################
+
 
  }elseif ($event['message']['text'] == "ข้อมูลโภชนาการ" ) {
         $check_q2 = pg_query($dbconn,"SELECT user_weight, user_height, preg_week,user_age FROM users_register WHERE user_id = '{$user_id}' order by updated_at desc limit 1   ");
@@ -1340,8 +1342,6 @@ $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseq
                   echo $preg_week = $row[2];
                   echo $age = $row[3]; 
                 } 
-
-
 
  /*คำนวณ BMI และบอกว่าอยู่ในเกณฑ์ไหน*/               
           $height1 =$height*0.01;
@@ -2011,7 +2011,11 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                                       'title' => 'ลูกน้อยของคุณ',
                                       'text' =>  'อายุ'.$p_week .'สัปดาห์',
                                       'actions' => [
-
+                                          // [
+                                          //     'type' => 'postback',
+                                          //     'label' => 'good',
+                                          //     'data' => 'value'
+                                          // ],
                                           [
                                               'type' => 'uri',
                                               'label' => 'กราฟ',
@@ -2080,6 +2084,7 @@ $q = pg_exec($dbconn, "UPDATE users_register SET  status ='0' WHERE user_id = '{
 // $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','2003', '' ,'2004','0',NOW(),NOW())") or die(pg_errormessage());
 $q = pg_exec($dbconn, "UPDATE users_register SET  status ='1' WHERE user_id = '{$user_id}' ") or die(pg_errormessage()); 
 
+########################################################################################################### 
 ########################################################################################################### 
 }elseif ($event['message']['text'] == "ยกเลิกข้อความ" && $seqcode ='2003') {
 
