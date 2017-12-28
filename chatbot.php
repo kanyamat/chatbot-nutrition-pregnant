@@ -1142,9 +1142,37 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                               ],
                           ]
                       ]
-                  ];        
+                  ];  
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3001','','3002','0',NOW(),NOW())") or die(pg_errormessage());
+
 ########################################################################################################################################################
  }elseif ($event['message']['text'] == "เคยลงทะเบียน" ) {
+                
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                      'type' => 'template',
+                      'altText' => 'this is a confirm template',
+                      'template' => [
+                          'type' => 'confirm',
+                          'text' =>'คุณต้องการเชื่อมต่อไปยัง ulife.info หรือไม่?' ,
+                          'actions' => [
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ต้องการ',
+                                  'text' => 'ต้องการเชื่อมข้อมูล'
+                              ],
+                              [
+                                  'type' => 'message',
+                                  'label' => 'ไม่ต้องการ',
+                                  'text' => 'ไม่ต้องการการเชื่อมข้อมูล'
+                              ],
+                          ]
+                      ]
+                  ];        
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3002','','3003','0',NOW(),NOW())") or die(pg_errormessage());
+                                  
+########################################################################################################################################################
+ }elseif ($event['message']['text'] == "ไม่เคยลงทะเบียน" ) {
                
                 $replyToken = $event['replyToken'];
                   $messages = [
@@ -1157,50 +1185,149 @@ $q = pg_exec($dbconn, "UPDATE users_register SET hospital_number = $answer WHERE
                               [
                                   'type' => 'message',
                                   'label' => 'ต้องการ',
-                                  'text' => 'ต้องการ'
+                                  'text' => 'ต้องการเชื่อมข้อมูล'
                               ],
                               [
                                   'type' => 'message',
                                   'label' => 'ไม่ต้องการ',
-                                  'text' => 'ไม่ต้องการ'
-                              ],
-                          ]
-                      ]
-                  ];        
-
- ########################################################################################################################################################
- }elseif ($event['message']['text'] == "ต้องการ" ) {
-               
-                $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'text',
-                      'text' => 'ทางเราขอ E-mail ที่ลงทะเบียนกับ ulife.info ด้วยค่ะ'
-                      
-                  ];                                  
-########################################################################################################################################################
- }elseif ($event['message']['text'] == "ไม่เคยลงทะเบียน" ) {
-               
-                $replyToken = $event['replyToken'];
-                  $messages = [
-                      'type' => 'template',
-                      'altText' => 'this is a confirm template',
-                      'template' => [
-                          'type' => 'confirm',
-                          'text' =>'คุณสามารถลงทะเบียนกับ ulife.info เพื่อเชื่อมโยงข้อมูลสุขภาพของคุณได้นะคะ' ,
-                          'actions' => [
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ลงทะเบียน',
-                                  'text' => 'ลงทะเบียน'
-                              ],
-                              [
-                                  'type' => 'message',
-                                  'label' => 'ไม่ลงทะเบียน',
-                                  'text' => 'ไม่ลงทะเบียน'
+                                  'text' => 'ไม่ต้องการเชื่อมข้อมูล'
                               ],
                           ]
                       ]
                   ]; 
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3002','ไม่เคย','3003','0',NOW(),NOW())") or die(pg_errormessage()); 
+
+########################################################################################################################################################
+ }elseif ($event['message']['text'] == "ไม่ต้องการเชื่อมข้อมูล" && $seqcode == "3002" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                          'type' => 'text',
+                          'text' =>'หากคุณต้องการเชื่อมข้อมูลกับ ulife.info ให้กดที่ recommend ด้านล่างได้เลยนะคะ' ,
+
+                  ]; 
+    $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3002','ไม่ต้องการเชื่อมข้อมูล','3003','0',NOW(),NOW())") or die(pg_errormessage());  
+
+// ########################################################################################################################################################
+ }elseif ($event['message']['text'] == "ต้องการเชื่อมข้อมูล" && $seqcode == "3002" ) {
+               
+                $replyToken = $event['replyToken'];
+                  $messages = [
+                          'type' => 'text',
+                          'text' =>'ขออีเมลที่ลงทะเบียนกับ Ulife.info หน่อยคะ' ,
+
+                  ]; 
+$q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3003','','0000','0',NOW(),NOW())") or die(pg_errormessage());  
+########################################################################################################################################################
+
+/*}elseif (strpos($_msg, '@') !== false && $seqcode == "3003" ) {*/
+}elseif (strpos($_msg,'@') !== false && $seqcode == "3003"){
+               $result = pg_query($dbconn,"SELECT answer FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                }   
+
+                  $u = pg_escape_string($_msg);                 
+                $replyToken = $event['replyToken'];
+                      // $case = 1;
+                      $url ='http://128.199.147.57/api/v1/peat/register';
+                      $postData = array(
+                               'email' => $_msg,
+                               'line_id' => 'test4'
+                            );
+
+                      $ch = curl_init();
+
+                      //set the url, number of POST vars, POST data
+                      curl_setopt($ch,CURLOPT_URL, $url);
+                      curl_setopt($ch,CURLOPT_POSTFIELDS, $postData);
+                      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                      //execute post
+                      $result = curl_exec($ch);
+
+                      //close connection
+                      curl_close($ch);
+                      $re = json_decode($result,true);
+                    
+                      if(strpos($result, 'errors') !== false ){
+                          $messages = [
+                                  'type' => 'text',
+                                  'text' =>'ต้องเป็นemailเท่านั้น' ,
+
+                          ]; 
+                   
+                      }else{    
+                                  $code = $re['code'];
+                                  if ($code == '200'){
+                                     
+                                    $messages = [
+                                            'type' => 'text',
+                                            'text' =>'ไปยังอีเมลเพื่อรับรหัส เมื่อรับรหัสแล้วโปรดกรอกเพื่อยืนยัน' ,
+
+                                    ]; 
+                                    
+                                      //$sequentsteps_insert =  $this->sequentsteps_update($user,$seqcode,$nextseqcode);
+                                      $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','3004','','0000','0',NOW(),NOW())") or die(pg_errormessage());  
+                                  }else{
+                                    $messages = [
+                                            'type' => 'text',
+                                            'text' =>'ไม่สามารถลงทะเบียนได้เนื่องจาก lind id หรือ email ได้ลงทะเบียนแล้ว' ,
+
+                                    ]; 
+                                     
+                                  }
+
+                      }
+
+
+
+########################################################################################################################################################
+ }elseif (is_numeric($_msg) !== false &&  $seqcode == "3004"  ) {
+                      $replyToken = $event['replyToken'];
+                      $url ='http://128.199.147.57/api/v1/peat/verify';
+                      $Data = array(
+                               'token' => $_msg,
+                               'line_id' => 'test4'
+                            );
+                      $ch = curl_init();
+                      //set the url, number of POST vars, POST data
+                      curl_setopt($ch,CURLOPT_URL, $url);
+                      curl_setopt($ch,CURLOPT_POSTFIELDS, $Data);
+                      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                      //execute post
+                      $result = curl_exec($ch);
+
+                      //close connection
+                      curl_close($ch);
+                      $re = json_decode($result,true);
+                       
+                       if(strpos($result, 'errors') !== false ){
+                          $messages = [
+                                  'type' => 'text',
+                                  'text' =>'รหัสผิดพลาด' 
+
+                          ]; 
+                        
+                      }else{    
+                                $code = $re['code'];
+                                 if ($code=='200'){
+
+                                    $messages = [
+                                            'type' => 'text',
+                                            'text' =>'ทำการเชื่อมต่อแล้ว' 
+                                    ]; 
+                                  $q = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextseqcode,status,created_at,updated_at )VALUES('{$user_id}','0000','','0000','0',NOW(),NOW())") or die(pg_errormessage());  
+                                }else{
+                                    $userMessage  = $re['message'];
+                                      $messages = [
+                                            'type' => 'text',
+                                            'text' => $userMessage ,
+                                    ]; 
+                                }
+                                  
+                      }
 
 ########################################################################################################################################################
 
