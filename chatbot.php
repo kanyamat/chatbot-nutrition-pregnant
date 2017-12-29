@@ -455,15 +455,60 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 ########################################################################################################################################################
 
-  }elseif (strlen($_msg) == 5 && $seqcode == "1015") {
-    // $birth_years =  str_replace("วันที่","", $_msg);
-    $pieces = explode(" ", $_msg);
-    $date = str_replace("","",$pieces[0]);
-    $month  = str_replace("","",$pieces[1]);
-   
+  }elseif (strpos($_msg) !== false && $seqcode == "1015") {
+
+    if (strpos($_msg,' ')!== false) {
+          $pieces = explode(" ", $_msg);
+          $date = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,'-')!== false) {
+          $pieces = explode("-", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,'/')!== false) {
+          $pieces = explode("/", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,':')!== false) {
+          $pieces = explode(":", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }
+     else {
+      $n = "ดูเหมือนคุณจะพิมพ์ไม่ถูกต้อง กรุณาพิมพ์ใหม่นะคะ";
+    }
+    
             $today_years= date("Y") ;
             $today_month= date("m") ;
             $today_day  = date("d") ;
+
+    if ($month == "มกราคม" || $month == "ม.ค." || $month == "มค" || $month == "มกรา") {
+      $month = '01';
+    }elseif ($month == "กุมภาพันธ์" || $month == "ก.พ." || $month == "กพ"|| $month == "กุมภา") {
+      $month = '02';
+    }elseif ($month == "มีนาคม" || $month == "มี.ค."|| $month == "มีค"|| $month == "มีนา") {
+      $month = '03';
+    }elseif ($month == "เมษายน" || $month == "เม.ย."|| $month == "เมย"|| $month == "เมษา") {
+      $month = '04';
+    }elseif ($month == "พฤษภาคม" || $month == "พ.ค."|| $month == "พค"|| $month == "พฤษภา") {
+      $month = '05';
+    }elseif ($month == "มิถุนายน" || $month == "มิ.ย."|| $month == "มิย"|| $month == "มิถุนา") {
+      $month = '06';
+    }elseif ($month == "กรกฎาคม" || $month == "ก.ค."|| $month == "กค"|| $month == "กรกฎา") {
+      $month = '07';
+    }elseif ($month == "สิงหาคม" || $month == "ส.ค."|| $month == "สค"|| $month == "สิงหา") {
+      $month = '08';
+    }elseif ($month == "กันยายน" || $month == "ก.ย."|| $month == "กย"|| $month == "กันยา") {
+      $month = '09';
+    }elseif ($month == "ตุลาคม"|| $month == "ต.ค."|| $month == "ตค"|| $month == "ตุลา") {
+      $month = '10';
+    }elseif ($month == "พฤศจิกายน" || $month == "พ.ย."|| $month == "พย"|| $month == "พฤศจิกา") {
+      $month = '11';
+    }elseif ($month == "ธันวาคม" || $month == "ธ.ค."|| $month == "ธค"|| $month == "ธันวา") {
+      $month = '12';
+    }else {
+      # code...
+    }
           
             if(($month>$today_month&& $month<=12 && $date<=31) || ($month==$today_month && $date>$today_day)  ){
                 $years = $today_years-1;
@@ -558,14 +603,64 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 ########################################################################################################################################################
- }elseif (strlen($_msg) == 5 && $seqcode == "2015") {
-                
-                 $pieces = explode(" ", $_msg);
-                 $date   = str_replace("","",$pieces[0]);
-                 $month  = str_replace("","",$pieces[1]);
-                 $today_years= date("Y") ;
-                 $today_month= date("m") ;
-                 $today_day  = date("d") ;
+ }elseif (strpos($_msg) !== false && $seqcode == "2015") {
+
+    if (strpos($_msg,' ')!== false) {
+          $pieces = explode(" ", $_msg);
+          $date = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,'-')!== false) {
+          $pieces = explode("-", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,'/')!== false) {
+          $pieces = explode("/", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }elseif (strpos($_msg,':')!== false) {
+          $pieces = explode(":", $_msg);
+          $date   = str_replace("","",$pieces[0]);
+          $month  = str_replace("","",$pieces[1]);
+    }
+     else {
+      $n = "ดูเหมือนคุณจะพิมพ์ไม่ถูกต้อง กรุณาพิมพ์ใหม่นะคะ";
+    }
+    
+    // $pieces = explode(" ", $_msg);
+    // $date = str_replace("","",$pieces[0]);
+    // $month  = str_replace("","",$pieces[1]);
+   
+            $today_years= date("Y") ;
+            $today_month= date("m") ;
+            $today_day  = date("d") ;
+
+    if ($month == "มกราคม" || $month == "ม.ค." || $month == "มค" || $month == "มกรา") {
+      $month = '01';
+    }elseif ($month == "กุมภาพันธ์" || $month == "ก.พ." || $month == "กพ"|| $month == "กุมภา") {
+      $month = '02';
+    }elseif ($month == "มีนาคม" || $month == "มี.ค."|| $month == "มีค"|| $month == "มีนา") {
+      $month = '03';
+    }elseif ($month == "เมษายน" || $month == "เม.ย."|| $month == "เมย"|| $month == "เมษา") {
+      $month = '04';
+    }elseif ($month == "พฤษภาคม" || $month == "พ.ค."|| $month == "พค"|| $month == "พฤษภา") {
+      $month = '05';
+    }elseif ($month == "มิถุนายน" || $month == "มิ.ย."|| $month == "มิย"|| $month == "มิถุนา") {
+      $month = '06';
+    }elseif ($month == "กรกฎาคม" || $month == "ก.ค."|| $month == "กค"|| $month == "กรกฎา") {
+      $month = '07';
+    }elseif ($month == "สิงหาคม" || $month == "ส.ค."|| $month == "สค"|| $month == "สิงหา") {
+      $month = '08';
+    }elseif ($month == "กันยายน" || $month == "ก.ย."|| $month == "กย"|| $month == "กันยา") {
+      $month = '09';
+    }elseif ($month == "ตุลาคม"|| $month == "ต.ค."|| $month == "ตค"|| $month == "ตุลา") {
+      $month = '10';
+    }elseif ($month == "พฤศจิกายน" || $month == "พ.ย."|| $month == "พย"|| $month == "พฤศจิกา") {
+      $month = '11';
+    }elseif ($month == "ธันวาคม" || $month == "ธ.ค."|| $month == "ธค"|| $month == "ธันวา") {
+      $month = '12';
+    }else {
+      # code...
+    }
 
                  if( $month < $today_month && $month<=12 && $date<=31){
                  $years = $today_years+1;
