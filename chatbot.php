@@ -2511,8 +2511,57 @@ $q2 = pg_exec($dbconn, "INSERT INTO tracker(user_id,food, exercise,vitamin,updat
          curl_close($ch);
          echo $result . "\r\n";
 
+ 
+ }elseif ($event['message']['text'] == "flex") {
+     
+//                       $messages = [
+//                         'type' => 'text',
+//                         'text' =>  $exer
+//                       ];
 
+             $messages = [
+                'type'=> 'bubble',
+                'direction'=> 'ltr',
+                'styles'=> {
+                    'header'=> {
+                        'backgroundColor'=> '#ffaaaa',
+                    },
+                    'body'=> {
+                        'backgroundColor'=> '#aaffaa',
+                        'separator'=> true,
+                        'separatorColor'=> '#efefef'
+                    },
+                    'footer'=> {
+                        'backgroundColor'=> '#aaaaff'
+                    }
+                },
+                'header'=> {},
+                'hero'=> {},
+                'body'=> {},
+                'footer'=> {}
+             ];
 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 ########################################################################################################### 
 }elseif ($event['type'] == 'message' && $event['message']['type'] == 'text'){
     
