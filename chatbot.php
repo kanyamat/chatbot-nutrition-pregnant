@@ -1,9 +1,6 @@
 <?php
 ################################## DATABASE ##################################
-$conn_string = "host=ec2-54-221-207-192.compute-1.amazonaws.com port=5432 dbname=ddarslmntab2u0 user=uuwabnobyyrnfe password=4d97f0b4150eb402dcfbd772910d388e127285bd85f3efea6184fe42da856142";
-$dbconn = pg_pconnect($conn_string);
-if (!$dbconn) {
-    die("Connection failed: " . mysqli_connect_error());
+
 }
 ##############################################################################
 
@@ -19,11 +16,7 @@ $_msg = $events['events'][0]['message']['text'];
 $user = $events['events'][0]['source']['userId'];
 $user_id = pg_escape_string($user);
 $u = pg_escape_string($_msg);  
-$check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at  FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
-                while ($row = pg_fetch_row($check_q)) {
-                  echo $seqcode =  $row[0];
-                  echo $sender = $row[2]; 
-                } 
+
 // $check_user = pg_query($dbconn,"SELECT*FROM users  WHERE $user_id  = '{$user_id}' ");
 //****************ทดสอบ
        // $d = date("D");
