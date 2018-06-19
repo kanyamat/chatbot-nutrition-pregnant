@@ -1806,7 +1806,32 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           'text' => $text
         ]; 
 
+ 
+ }elseif ($event['message']['text'] == "flex") {
+     
+             $messages = [
+                'type'=> 'bubble',
+                'direction'=> 'ltr',
+                'styles'=> {
+                    'header'=> {
+                        'backgroundColor'=> '#ffaaaa',
+                    },
+                    'body'=> {
+                        'backgroundColor'=> '#aaffaa',
+                        'separator'=> true
+                        'separatorColor'=> '#efefef'
+                    },
+                    'footer'=> {
+                        'backgroundColor'=> '#aaaaff'
+                    }
+                },
+                'header'=> {},
+                'hero'=> {},
+                'body'=> {},
+                'footer'=> {}
+             ];
 
+     
 
 ########################################################################################################################################################
 
@@ -1864,32 +1889,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 ?>
 
 
- 
-//  }elseif ($event['message']['text'] == "flex") {
-     
-//              $messages = [
-//                 'type'=> 'bubble',
-//                 'direction'=> 'ltr',
-//                 'styles'=> {
-//                     'header'=> {
-//                         'backgroundColor'=> '#ffaaaa',
-//                     },
-//                     'body'=> {
-//                         'backgroundColor'=> '#aaffaa',
-//                         'separator'=> true
-//                         'separatorColor'=> '#efefef'
-//                     },
-//                     'footer'=> {
-//                         'backgroundColor'=> '#aaaaff'
-//                     }
-//                 },
-//                 'header'=> {},
-//                 'hero'=> {},
-//                 'body'=> {},
-//                 'footer'=> {}
-//              ];
 
-     
      
      
      
