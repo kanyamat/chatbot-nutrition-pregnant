@@ -14,6 +14,8 @@ $curr_years = date("Y");
 $curr_y = ($curr_years+ 543);
 $_msg = $events['events'][0]['message']['text'];
 $user = $events['events'][0]['source']['userId'];
+$user = $events['events'][0]['message']['image'];
+// $img = $events['messages'][0]['type'] = "image";
 $user_id = pg_escape_string($user);
 $u = pg_escape_string($_msg);  
 $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at  FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
