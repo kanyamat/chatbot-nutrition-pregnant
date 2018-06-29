@@ -14,6 +14,9 @@ $curr_years = date("Y");
 $curr_y = ($curr_years+ 543);
 $_msg = $events['events'][0]['message']['text'];
 $user = $events['events'][0]['source']['userId'];
+$img = $events['events'][0]['message']['image'];
+
+
 $user_id = pg_escape_string($user);
 $u = pg_escape_string($_msg);  
 $check_q = pg_query($dbconn,"SELECT seqcode, sender_id ,updated_at  FROM sequentsteps  WHERE sender_id = '{$user_id}'  order by updated_at desc limit 1   ");
@@ -1831,7 +1834,55 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
                 'footer'=> {}
              ];
 
-     
+// }elseif ($event['message']['type'] == "image" ) {
+// //$arrayPostData['messages'][0]['type'] = "image";
+// $strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
+
+// $arrHeader = array();
+// $arrHeader[] = "Content-Type: application/json";
+
+
+// $objImgData = file_get_contents($img);
+// $objImgBase64 =  base64_encode($objImgData);
+
+// $arrPostData = array();
+// $arrPostData['requests'][0]['image']['content'] = $objImgBase64;
+
+// $arrPostData['requests'][0]['features'][0]['type'] = "LABEL_DETECTION";
+// $arrPostData['requests'][0]['features'][0]['maxResults'] = "5";
+
+// $arrPostData['requests'][0]['features'][1]['type'] = "FACE_DETECTION";
+// $arrPostData['requests'][0]['features'][1]['maxResults'] = "5";
+
+// $arrPostData['requests'][0]['features'][2]['type'] = "TEXT_DETECTION";
+// $arrPostData['requests'][0]['features'][2]['maxResults'] = "5";
+
+// $arrPostData['requests'][0]['features'][3]['type'] = "LANDMARK_DETECTION";
+// $arrPostData['requests'][0]['features'][3]['maxResults'] = "5";
+
+// $arrPostData['requests'][0]['features'][4]['type'] = "LOGO_DETECTION";
+// $arrPostData['requests'][0]['features'][4]['maxResults'] = "5";
+
+// $arrPostData['requests'][0]['features'][5]['type'] = "IMAGE_PROPERTIES";
+// $arrPostData['requests'][0]['features'][5]['maxResults'] = "5";
+
+
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL,$strUrl);
+// curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+// curl_setopt($ch, CURLOPT_HEADER, false);
+// curl_setopt($ch, CURLOPT_POST, true);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+// $result = curl_exec($ch);
+// curl_close ($ch);
+
+//                  $replyToken = $event['replyToken'];
+//                  $messages = [
+//                         'type' => 'text',
+//                         'text' => $result
+//                       ];       
 
 ########################################################################################################################################################
 
