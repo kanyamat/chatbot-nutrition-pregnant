@@ -1808,7 +1808,8 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           'text' => $text
         ]; 
 
-}elseif ($event['message']['image'] == "image" ) {
+}elseif ($event['message']['image'] ) {
+//$img = $events['events'][0]['message']['image'];
 //$arrayPostData['messages'][0]['type'] = "image";
 $strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
 
