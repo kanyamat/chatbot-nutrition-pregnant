@@ -1823,22 +1823,22 @@ $arrPostData = array();
 $arrPostData['requests'][0]['image']['content'] = $objImgBase64;
 
 $arrPostData['requests'][0]['features'][0]['type'] = "LABEL_DETECTION";
-$arrPostData['requests'][0]['features'][0]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][0]['maxResults'] = "2";
 
 $arrPostData['requests'][0]['features'][1]['type'] = "FACE_DETECTION";
-$arrPostData['requests'][0]['features'][1]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][1]['maxResults'] = "2";
 
 $arrPostData['requests'][0]['features'][2]['type'] = "TEXT_DETECTION";
-$arrPostData['requests'][0]['features'][2]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][2]['maxResults'] = "2";
 
 $arrPostData['requests'][0]['features'][3]['type'] = "LANDMARK_DETECTION";
-$arrPostData['requests'][0]['features'][3]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][3]['maxResults'] = "2";
 
 $arrPostData['requests'][0]['features'][4]['type'] = "LOGO_DETECTION";
-$arrPostData['requests'][0]['features'][4]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][4]['maxResults'] = "2";
 
 $arrPostData['requests'][0]['features'][5]['type'] = "IMAGE_PROPERTIES";
-$arrPostData['requests'][0]['features'][5]['maxResults'] = "5";
+$arrPostData['requests'][0]['features'][5]['maxResults'] = "2";
 
 
 $ch = curl_init();
