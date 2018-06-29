@@ -1806,7 +1806,55 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
           'text' => $text
         ]; 
 
+}elseif ($event['message']['type'] == "image" ) {
+//$arrayPostData['messages'][0]['type'] = "image";
+$strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
 
+$arrHeader = array();
+$arrHeader[] = "Content-Type: application/json";
+
+
+$objImgData = file_get_contents($img);
+$objImgBase64 =  base64_encode($objImgData);
+
+$arrPostData = array();
+$arrPostData['requests'][0]['image']['content'] = $objImgBase64;
+
+$arrPostData['requests'][0]['features'][0]['type'] = "LABEL_DETECTION";
+$arrPostData['requests'][0]['features'][0]['maxResults'] = "5";
+
+$arrPostData['requests'][0]['features'][1]['type'] = "FACE_DETECTION";
+$arrPostData['requests'][0]['features'][1]['maxResults'] = "5";
+
+$arrPostData['requests'][0]['features'][2]['type'] = "TEXT_DETECTION";
+$arrPostData['requests'][0]['features'][2]['maxResults'] = "5";
+
+$arrPostData['requests'][0]['features'][3]['type'] = "LANDMARK_DETECTION";
+$arrPostData['requests'][0]['features'][3]['maxResults'] = "5";
+
+$arrPostData['requests'][0]['features'][4]['type'] = "LOGO_DETECTION";
+$arrPostData['requests'][0]['features'][4]['maxResults'] = "5";
+
+$arrPostData['requests'][0]['features'][5]['type'] = "IMAGE_PROPERTIES";
+$arrPostData['requests'][0]['features'][5]['maxResults'] = "5";
+
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,$strUrl);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+curl_setopt($ch, CURLOPT_HEADER, false);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+$result = curl_exec($ch);
+curl_close ($ch);
+
+                 $replyToken = $event['replyToken'];
+                 $messages = [
+                        'type' => 'text',
+                        'text' => $result
+                      ];    
 
 ########################################################################################################################################################
 
@@ -1865,55 +1913,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 
 
 
-<!-- // }elseif ($event['message']['type'] == "image" ) {
-// //$arrayPostData['messages'][0]['type'] = "image";
-// $strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
-
-// $arrHeader = array();
-// $arrHeader[] = "Content-Type: application/json";
-
-
-// $objImgData = file_get_contents($img);
-// $objImgBase64 =  base64_encode($objImgData);
-
-// $arrPostData = array();
-// $arrPostData['requests'][0]['image']['content'] = $objImgBase64;
-
-// $arrPostData['requests'][0]['features'][0]['type'] = "LABEL_DETECTION";
-// $arrPostData['requests'][0]['features'][0]['maxResults'] = "5";
-
-// $arrPostData['requests'][0]['features'][1]['type'] = "FACE_DETECTION";
-// $arrPostData['requests'][0]['features'][1]['maxResults'] = "5";
-
-// $arrPostData['requests'][0]['features'][2]['type'] = "TEXT_DETECTION";
-// $arrPostData['requests'][0]['features'][2]['maxResults'] = "5";
-
-// $arrPostData['requests'][0]['features'][3]['type'] = "LANDMARK_DETECTION";
-// $arrPostData['requests'][0]['features'][3]['maxResults'] = "5";
-
-// $arrPostData['requests'][0]['features'][4]['type'] = "LOGO_DETECTION";
-// $arrPostData['requests'][0]['features'][4]['maxResults'] = "5";
-
-// $arrPostData['requests'][0]['features'][5]['type'] = "IMAGE_PROPERTIES";
-// $arrPostData['requests'][0]['features'][5]['maxResults'] = "5";
-
-
-// $ch = curl_init();
-// curl_setopt($ch, CURLOPT_URL,$strUrl);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-// curl_setopt($ch, CURLOPT_HEADER, false);
-// curl_setopt($ch, CURLOPT_POST, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-// $result = curl_exec($ch);
-// curl_close ($ch);
-
-//                  $replyToken = $event['replyToken'];
-//                  $messages = [
-//                         'type' => 'text',
-//                         'text' => $result
-//                       ];  -->      
+   
 
 
 
