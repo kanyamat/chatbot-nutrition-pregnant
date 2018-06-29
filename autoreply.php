@@ -98,5 +98,4 @@ for($x = 0; $x <= $arrlength ; $x++) {
                  echo $result . "\r\n";
         }
 }
- 
 ?>
