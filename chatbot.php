@@ -1852,13 +1852,13 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
-$result = $result['responses']['landmarkAnnotations']['description'];
+$result = $result['responses']['description'];
 
 
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => '5555'
+                        'text' => $result
                       ];    
 
 ########################################################################################################################################################
