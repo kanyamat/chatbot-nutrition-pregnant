@@ -1852,7 +1852,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
-$obj = json_encode($result);
+//$obj = json_encode($result);
+$json = json_encode($result);
 //$result2 = $result['description'];
 
 
