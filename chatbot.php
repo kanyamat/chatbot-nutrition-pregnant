@@ -1854,10 +1854,11 @@ $result = curl_exec($ch);
 curl_close ($ch);
 $result = $result['responses']['landmarkAnnotations']['description'];
 
+
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => $result
+                        'text' => '5555'
                       ];    
 
 ########################################################################################################################################################
