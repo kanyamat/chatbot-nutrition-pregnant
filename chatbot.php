@@ -1816,7 +1816,7 @@ $img = $events['events'][0]['message']['type'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 
-
+//$objImgData = file_get_contents("Siberian.jpg");
 $objImgData = file_get_contents($img);
 $objImgBase64 =  base64_encode($objImgData);
 
@@ -1852,6 +1852,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
+print($result)
 //$obj = json_encode($result);
 $json = json_decode($result,true);
 //$result2 = $result['description'];
@@ -1860,7 +1861,7 @@ $json = json_decode($result,true);
                  $replyToken = $event['replyToken'];
                  $messages = [
                         'type' => 'text',
-                        'text' => $json
+                        'text' => $arrPostData
                       ];    
 
 ########################################################################################################################################################
