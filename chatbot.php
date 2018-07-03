@@ -1812,7 +1812,7 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
 //$img = $events['events'][0]['message']['image'];
 //$arrayPostData['messages'][0]['type'] = "image";
 $strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
-$img = $events['events'][0]['message']['type'];
+//$img = $events['events'][0]['message']['type'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 
@@ -1852,7 +1852,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
-print($result)
+//print($result)
 //$obj = json_encode($result);
 $json = json_decode($result,true);
 //$result2 = $result['description'];
