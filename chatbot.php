@@ -1809,15 +1809,16 @@ $q1 = pg_exec($dbconn, "INSERT INTO sequentsteps(sender_id,seqcode,answer,nextse
         ]; 
 //}elseif ( $event['message']['text'] == "555" ) {
 }elseif ($event['message']['type'] == "image" ) {
-  $img = $events['events'][0]['message']['image'];
+  
+//$img = $events['events'][0]['message']['image'];
 //$arrayPostData['messages'][0]['type'] = "image";
 $strUrl = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuEbIaO2Ogj_aK1bqmkcJxhwQ9s-Lbc4M";
 //$img = $events['events'][0]['message']['type'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 
-$objImgData = file_get_contents("Siberian.jpg");
-//$objImgData = file_get_contents($img);
+//$objImgData = file_get_contents("Siberian.jpg");
+$objImgData = file_get_contents($img);
 $objImgBase64 =  base64_encode($objImgData);
 
 $arrPostData = array();
