@@ -1853,7 +1853,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
 //$obj = json_encode($result);
-$json = json_decode($result);
+$json = json_decode($result,true);
 //$result2 = $result['description'];
 
 
