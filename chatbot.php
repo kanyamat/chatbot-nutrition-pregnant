@@ -1378,14 +1378,14 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   'label'=> 'Location'
                 ]
               ],
-              [
-                'type'=> 'action',
-                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Siberian.jpg',
-                'action'=> [
-                  'type'=> 'message',
-                  'label'=> 'Message',
-                  'text'=> 'Hello World!'
-                ]
+              // [
+              //   'type'=> 'action',
+              //   'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Siberian.jpg',
+              //   'action'=> [
+              //     'type'=> 'message',
+              //     'label'=> 'Message',
+              //     'text'=> 'Hello World!'
+              //   ]
                 ],
               [
                 'type'=> 'action',
@@ -1396,19 +1396,19 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   'displayText'=> 'Buy'
                 ]
                 ],
-              [
-                'type'=> 'action',
-                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Siberian.jpg',
-                'action'=> [
-                  'type'=> 'datetimepicker',
-                  'label'=> 'Datetime Picker',
-                  'data'=> 'storeId=12345',
-                  'mode'=> 'datetime',
-                  'initial'=> '2018-08-10t00:00',
-                  'max'=> '2018-12-31t23:59',
-                  'min'=> '2018-08-01t00:00'
-                ]
-              ]
+              // [
+              //   'type'=> 'action',
+              //   'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Siberian.jpg',
+              //   'action'=> [
+              //     'type'=> 'datetimepicker',
+              //     'label'=> 'Datetime Picker',
+              //     'data'=> 'storeId=12345',
+              //     'mode'=> 'datetime',
+              //     'initial'=> '2018-08-10t00:00',
+              //     'max'=> '2018-12-31t23:59',
+              //     'min'=> '2018-08-01t00:00'
+              //   ]
+              // ]
             ]
           ];
         
