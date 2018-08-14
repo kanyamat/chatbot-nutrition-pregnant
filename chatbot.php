@@ -1350,7 +1350,8 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
 }elseif ($event['message']['text'] == "Hello Quick Reply!" ) {
 
    $replyToken = $event['replyToken'];
-
+      
+      'to'=> 'Ub840b452d253f3db490dd59507ab78d1',
       $messages = [
         
           // 'type'=> 'text',
