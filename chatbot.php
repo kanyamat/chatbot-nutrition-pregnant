@@ -1349,10 +1349,15 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
 ########################################################################################################################################################
 }elseif ($event['message']['text'] == "Hello Quick Reply!" ) {
 
+               $result = pg_query($dbconn,"SELECT user_id FROM sequentsteps ");
+                while ($row = pg_fetch_row($result)) {
+                  echo $answer = $row[0]; 
+                } 
+
    $replyToken = $event['replyToken'];
 
     [
-      'to'=> 'Ub840b452d253f3db490dd59507ab78d1',
+      'to'=> $row /*'Ub840b452d253f3db490dd59507ab78d1'*/,
       $messages = [
         
           'type'=> 'text',
