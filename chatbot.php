@@ -1379,14 +1379,14 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
                   'label'=> 'Location'
                 ]
               ],
-              // [
-              //   'type'=> 'action',
-              //   'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/Siberian.jpg',
-              //   'action'=> [
-              //     'type'=> 'message',
-              //     'label'=> 'Message',
-              //     'text'=> 'Hello World!'
-              //   ]
+              [
+                'type'=> 'action',
+                'imageUrl'=> 'https://chatbot-nutrition-pregnant.herokuapp.com/images.png',
+                'action'=> [
+                  'type'=> 'message',
+                  'label'=> 'Message',
+                  'text'=> 'Hello World!'
+                ]
                 ],
               [
                 'type'=> 'action',
