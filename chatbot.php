@@ -1354,8 +1354,8 @@ $des_preg = pg_query($dbconn,"SELECT  descript,img FROM pregnants WHERE  week = 
       'to'=> 'Ub840b452d253f3db490dd59507ab78d1',
       $messages = [
         
-          // 'type'=> 'text',
-          // 'text'=> 'Hello Quick Reply!',
+          'type'=> 'text',
+          'text'=> 'Hello Quick Reply!',
           'quickReply'=> [
             'items'=> [
               [
